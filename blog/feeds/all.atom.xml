@@ -368,6 +368,9 @@ document["get_ver_and_kw"].bind("click", get_ver_and_kw)
 &lt;p&gt;&lt;img src="./../data/jansen_solvespace_1.png" width="560" /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src="./../data/jansen_solvespace_2.png" width="560" /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src="./../data/jansen_solvespace_3.png" width="560" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="./../data/eight_bar_solvespace_vrep_1.png" width="560" /&gt;&lt;/p&gt;
 &lt;iframe width="560" height="315" src="https://www.youtube.com/embed/kKSDgIhc8GI" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;
 
-&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/4Pj-WLAVL7M" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;</summary><category term="syllabus"></category><category term="w1"></category></entry></feed>
+&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/4Pj-WLAVL7M" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/spacether/pycalculix"&gt;https://github.com/spacether/pycalculix&lt;/a&gt;&lt;/p&gt;</summary><category term="syllabus"></category><category term="w1"></category></entry></feed>

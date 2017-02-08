@@ -369,6 +369,10 @@ document["get_ver_and_kw"].bind("click", get_ver_and_kw)
 &lt;p&gt;&lt;img src="./../data/jansen_solvespace_2.png" width="560" /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src="./../data/jansen_solvespace_3.png" width="560" /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src="./../data/eight_bar_solvespace_vrep_1.png" width="560" /&gt;&lt;/p&gt;
+&lt;iframe src="https://player.vimeo.com/video/203155380" width="560" height="315" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;p&gt;&lt;a href="https://vimeo.com/203155380"&gt;機械設計工程系-協同產品設計實習課程: cd v-rep 8bar simulation&lt;/a&gt; from &lt;a href="https://vimeo.com/user24079973"&gt;虎尾科大機械設計工程&lt;/a&gt; on &lt;a href="https://vimeo.com"&gt;Vimeo&lt;/a&gt;.&lt;/p&gt;
+
 &lt;iframe width="560" height="315" src="https://www.youtube.com/embed/kKSDgIhc8GI" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;
 
 &lt;iframe width="560" height="315" src="https://www.youtube.com/embed/4Pj-WLAVL7M" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;

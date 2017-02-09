@@ -52,12 +52,13 @@
 </v>
 <v t="yen.20170108171733.71" a="E"><vh>@path content</vh>
 <v t="yen.20170123225841.1"><vh>@edit 20170108.md</vh></v>
-<v t="yen.20170207091131.1" a="E"><vh>@clean 20170207.md</vh>
+<v t="yen.20170207091131.1"><vh>@clean 20170207.md</vh>
 <v t="yen.20170207091131.2"><vh>ex1 - for 迴圈</vh></v>
 <v t="yen.20170207091131.3"><vh>ex2 - input 與單位換算</vh></v>
 <v t="yen.20170207091131.4"><vh>filereader</vh></v>
 </v>
-<v t="yen.20170108171733.81" a="E"><vh>@path pages</vh>
+<v t="yen.20170209092319.1"><vh>@edit 20170209.md</vh></v>
+<v t="yen.20170108171733.81"><vh>@path pages</vh>
 <v t="yen.20170108171733.82"><vh>@edit pages_1.md</vh></v>
 </v>
 </v>
@@ -65,7 +66,7 @@
 </v>
 <v t="yen.20170108171930.1"><vh>@button https server</vh></v>
 <v t="yen.20170108171939.1"><vh>@button ipv6 https server</vh></v>
-<v t="yen.20170120212350.1" a="E"><vh>programs</vh>
+<v t="yen.20170120212350.1"><vh>programs</vh>
 <v t="yen.20170120212354.1"><vh>calendar ex1</vh></v>
 <v t="yen.20170120212520.1"><vh>calendar ex2</vh></v>
 <v t="yen.20170120232548.1"><vh>calendar example</vh></v>
@@ -75,6 +76,7 @@
 <v t="yen.20170124102433.1"><vh>index.html</vh></v>
 </v>
 </v>
+<v t="yen.20170209024032.1"><vh>reference</vh></v>
 </vnodes>
 <tnodes>
 <t tx="yen.20170108171605.1"></t>
@@ -1635,5 +1637,10 @@ Onshape featurescript
 ### 利用伺服器執行 Python3 程式
 
 Jupyterhub: &lt;a href="https://8888.kmol.info:9443"&gt;https://8888.kmol.info:9443&lt;/a&gt;</t>
+<t tx="yen.20170209024032.1">https://studywolf.wordpress.com/
+
+https://github.com/studywolf/blog/tree/master/VREP
+
+https://www.youtube.com/channel/UCiK0J5wtnyX2jP-AiGbdhjg</t>
 </tnodes>
 </leo_file>

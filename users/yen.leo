@@ -67,7 +67,13 @@
 <v t="yen.20170108171930.1"><vh>@button https server</vh></v>
 <v t="yen.20170108171939.1"><vh>@button ipv6 https server</vh></v>
 <v t="yen.20170120212350.1" a="E"><vh>programs</vh>
-<v t="yen.20170210153828.1"><vh>v-rep rempte api</vh></v>
+<v t="yen.20170210153828.1" a="E"><vh>v-rep rempte api</vh>
+<v t="yen.20170210202015.1"><vh>Python remote API</vh></v>
+<v t="yen.20170210170248.1"><vh>line tracer</vh></v>
+<v t="yen.20170210222733.1"><vh>line tracer2</vh></v>
+<v t="yen.20170210172100.1"><vh>three-link robot</vh></v>
+<v t="yen.20170210221519.1"><vh>bubble</vh></v>
+</v>
 <v t="yen.20170120212354.1"><vh>calendar ex1</vh></v>
 <v t="yen.20170120212520.1"><vh>calendar ex2</vh></v>
 <v t="yen.20170120232548.1"><vh>calendar example</vh></v>
@@ -1642,7 +1648,11 @@ Jupyterhub: &lt;a href="https://8888.kmol.info:9443"&gt;https://8888.kmol.info:9
 
 https://github.com/studywolf/blog/tree/master/VREP
 
-https://www.youtube.com/channel/UCiK0J5wtnyX2jP-AiGbdhjg</t>
+https://www.youtube.com/channel/UCiK0J5wtnyX2jP-AiGbdhjg
+
+V-rep
+
+http://www.cnblogs.com/21207-iHome/tag/V-rep/</t>
 <t tx="yen.20170210153828.1">根據 http://www.coppeliarobotics.com/helpFiles/en/remoteApiServerSide.htm 中的說明.
 
 V-rep 啟動時, 會根據系統目錄下的 remoteApiConnections.txt 檔案中的設定, 啟動  rempte api 功能:
@@ -1711,6 +1721,378 @@ while True:
 
 
 
+</t>
+<t tx="yen.20170210170248.1"># -*- coding: utf-8 -*-
+try:
+    import vrep
+except:
+    print ('--------------------------------------------------------------')
+    print ('"vrep.py" could not be imported. This means very probably that')
+    print ('either "vrep.py" or the remoteApi library could not be found.')
+    print ('Make sure both are in the same folder as this file,')
+    print ('or appropriately adjust the file "vrep.py"')
+    print ('--------------------------------------------------------------')
+    print ('')
+
+import time
+import sys
+import ctypes
+
+print ('Program started')
+vrep.simxFinish(-1)
+clientID=vrep.simxStart('127.0.0.1',19999,True,True,5000,5)
+
+if clientID!=-1:
+    print ('Connected to remote API server')
+else:
+    print ('Failed connecting to remote API server')
+    sys.exit('Program Ended')
+
+    
+nominalLinearVelocity = 0.3
+wheelRadius           = 0.027
+interWheelDistance    = 0.119
+    
+res,objs=vrep.simxGetObjects(clientID, vrep.sim_handle_all,vrep.simx_opmode_blocking)
+if res==vrep.simx_return_ok:
+    print ('Number of objects in the scene: ',len(objs))
+else:
+    print ('Remote API function call returned with error code: ',res)
+
+time.sleep(2)
+
+startTime=time.time()
+vrep.simxGetIntegerParameter(clientID,vrep.sim_intparam_mouse_x,vrep.simx_opmode_streaming)
+
+res, display     = vrep.simxGetUIHandle(clientID, "sensorDisplay", vrep.simx_opmode_blocking)
+res, leftSensor  = vrep.simxGetObjectHandle(clientID, "LeftSensor", vrep.simx_opmode_blocking)
+res, middleSensor= vrep.simxGetObjectHandle(clientID, "MiddleSensor", vrep.simx_opmode_blocking)
+res, rightSensor = vrep.simxGetObjectHandle(clientID, "RightSensor", vrep.simx_opmode_blocking)
+res, leftJointDynamic  = vrep.simxGetObjectHandle(clientID, "DynamicLeftJoint" , vrep.simx_opmode_blocking)
+res, rightJointDynamic = vrep.simxGetObjectHandle(clientID, "DynamicRightJoint", vrep.simx_opmode_blocking)
+
+if res != vrep.simx_return_ok:
+    print ('Failed to get sensor Handler')
+    vrep.simxFinish(clientID)
+    sys.exit('Program ended')
+
+def setLeds(elHandle, left, middle, right):
+    vrep.simxSetUIButtonProperty(clientID, elHandle,  8, 
+        vrep.sim_buttonproperty_staydown, vrep.simx_opmode_oneshot)
+    vrep.simxSetUIButtonProperty(clientID, elHandle, 16, 
+        vrep.sim_buttonproperty_staydown, vrep.simx_opmode_oneshot)
+    vrep.simxSetUIButtonProperty(clientID, elHandle, 24, 
+        vrep.sim_buttonproperty_staydown, vrep.simx_opmode_oneshot)
+    if left:
+        vrep.simxSetUIButtonProperty(clientID, elHandle, 8, 
+            vrep.sim_buttonproperty_staydown + vrep.sim_buttonproperty_isdown, vrep.simx_opmode_oneshot)
+    if middle:
+        vrep.simxSetUIButtonProperty(clientID, elHandle,16, 
+            vrep.sim_buttonproperty_staydown + vrep.sim_buttonproperty_isdown, vrep.simx_opmode_oneshot)
+    if right:
+        vrep.simxSetUIButtonProperty(clientID, elHandle,24, 
+            vrep.sim_buttonproperty_staydown + vrep.sim_buttonproperty_isdown, vrep.simx_opmode_oneshot)
+
+sensorReading=[False, False, False]
+sensorReading[0]=(vrep.simxReadVisionSensor(clientID, leftSensor,   vrep.simx_opmode_streaming )==1)
+sensorReading[1]=(vrep.simxReadVisionSensor(clientID, middleSensor, vrep.simx_opmode_streaming )==1)
+sensorReading[2]=(vrep.simxReadVisionSensor(clientID, rightSensor,  vrep.simx_opmode_streaming )==1)
+
+while time.time() - startTime &lt; 50:
+    returnCode,data=vrep.simxGetIntegerParameter(clientID,vrep.sim_intparam_mouse_x,vrep.simx_opmode_buffer) # Try to retrieve the streamed data
+    
+    # Read the sensors:
+
+    sensorReading[0]=(vrep.simxReadVisionSensor(clientID, leftSensor,   vrep.simx_opmode_buffer)[1])
+    sensorReading[1]=(vrep.simxReadVisionSensor(clientID, middleSensor, vrep.simx_opmode_buffer)[1])
+    sensorReading[2]=(vrep.simxReadVisionSensor(clientID, rightSensor,  vrep.simx_opmode_buffer)[1])
+    
+    setLeds(display,sensorReading[0],sensorReading[1],sensorReading[2])
+
+    # Decide about left and right velocities:
+    s = 1.0
+    linearVelocityLeft  = nominalLinearVelocity * s
+    linearVelocityRight = nominalLinearVelocity * s
+
+    if not sensorReading[0]:
+        linearVelocityLeft  = linearVelocityLeft*0.3
+    if not sensorReading[2]:
+        linearVelocityRight = linearVelocityRight*0.3
+
+    vrep.simxSetJointTargetVelocity(clientID, leftJointDynamic, linearVelocityLeft/(s*wheelRadius), vrep.simx_opmode_oneshot)
+    vrep.simxSetJointTargetVelocity(clientID, rightJointDynamic,linearVelocityRight/(s*wheelRadius), vrep.simx_opmode_oneshot)
+    
+    time.sleep(0.005)</t>
+<t tx="yen.20170210172100.1"># -*- coding: utf-8 -*-
+# http://www.cnblogs.com/21207-iHome/p/5955535.html
+import vrep             # V-rep library
+import sys      
+import time
+import math  
+
+# This function will convert an angle to the equivalent rotation in the range [-pi,pi]
+def ConfineAngle(angle):
+    angle = angle % (2.0 * math.pi)
+    if( angle &lt; -math.pi ):
+        angle += (2.0 * math.pi)
+    if( angle &gt; math.pi ):
+        angle -= (2.0 * math.pi)
+    return angle
+
+
+def CalcIK():
+    id = linkNum - 1
+    while id &gt;= 0:
+        retcode, J_pos = vrep.simxGetObjectPosition(clientID,joint_handle[id],-1,vrep.simx_opmode_oneshot_wait)
+        retcode, tip = vrep.simxGetObjectPosition(clientID,tip_handle, -1, vrep.simx_opmode_oneshot_wait)
+        
+        # Get the vector from the current bone to the end effector position.
+        curToEndX = tip[0] - J_pos[0]
+        curToEndY = tip[1] - J_pos[1]
+        curToEndMag = math.sqrt( curToEndX*curToEndX + curToEndY*curToEndY )
+          
+        # Get the vector from the current bone to the target position.
+        curToTargetX = target[0] - J_pos[0];
+        curToTargetY = target[1] - J_pos[1];
+        curToTargetMag = math.sqrt(curToTargetX*curToTargetX+curToTargetY*curToTargetY)
+          
+        # Get rotation 
+        endTargetMag = curToEndMag*curToTargetMag
+        if endTargetMag &lt;= 0.0001:    # prevent division by small numbers
+            cosRotAng = 1
+            sinRotAng = 0
+        else:
+            cosRotAng = (curToEndX*curToTargetX + curToEndY*curToTargetY) / endTargetMag
+            sinRotAng = (curToEndX*curToTargetY - curToEndY*curToTargetX) / endTargetMag
+        
+        # Clamp the cosine into range when computing the angle(might be out of rangedue to floating point error)
+        rotAng = math.acos(max(-1, min(1,cosRotAng)))
+        if  sinRotAng &lt; 0.0:
+            rotAng = -rotAng
+                
+        q[id] = q[id] + rotAng
+        
+        # Rotate the current link
+        if(id == 0):
+            vrep.simxSetJointPosition(clientID,joint_handle[id], ConfineAngle(q[id])+math.pi/2, vrep.simx_opmode_oneshot)
+        else:
+            vrep.simxSetJointPosition(clientID,joint_handle[id], ConfineAngle(q[id]), vrep.simx_opmode_oneshot)
+        
+        # Check for termination
+        retcode, tip = vrep.simxGetObjectPosition(clientID,tip_handle, -1, vrep.simx_opmode_oneshot_wait)
+        endToTargetX = (target[0] - tip[0])
+        endToTargetY = (target[1] - tip[1])
+        error = math.sqrt(endToTargetX*endToTargetX + endToTargetY*endToTargetY)
+        if( error &lt;= stol ):
+            # We found a valid solution.
+            return 1, error
+        id = id - 1
+        
+    return 0, error  # cannot get to the target in this iteration
+    
+    
+        
+if __name__ == "__main__":
+    # Starts a communication thread with the server
+    clientID = vrep.simxStart('127.0.0.1', 20001, True, True, 5000, 5)
+    
+    # clientID: the client ID, or -1 if the connection to the server was not possible
+    if clientID != -1:  #check if client connection successful
+        print 'Connected to remote API server'
+    else:
+        print 'Connection not successful'
+        sys.exit('Could not connect')    # Exit from Python
+
+
+    # Retrieves an object handle based on its name.
+    errorCode,tip_handle = vrep.simxGetObjectHandle(clientID,'tip',vrep.simx_opmode_oneshot_wait)
+    errorCode,target_handle = vrep.simxGetObjectHandle(clientID,'target',vrep.simx_opmode_oneshot_wait)
+    errorCode,consoleHandle = vrep.simxAuxiliaryConsoleOpen(clientID,'info',4,1+4,None,None,None,None,vrep.simx_opmode_oneshot_wait)
+    joint_handle = [-1,-1,-1]    # store the joint handles
+    for i in range(3):
+        errorCode,joint_handle[i] = vrep.simxGetObjectHandle(clientID,'j'+str(i+1),vrep.simx_opmode_oneshot_wait)
+
+    ilimit = 100    # maximum iteration
+    stol = 1e-2     # tolerance
+    q = [0,0,0]     # initial joint value
+    linkNum = 3     # number of links
+    
+    retcode, target = vrep.simxGetObjectPosition(clientID,target_handle, -1, vrep.simx_opmode_oneshot_wait)
+    retcode, tip = vrep.simxGetObjectPosition(clientID,tip_handle, -1, vrep.simx_opmode_oneshot_wait)
+    
+    count = 0    
+    isOK = 0
+    while ( not isOK ):    
+        isOK,err = CalcIK()
+        
+        vrep.simxAuxiliaryConsolePrint(clientID,consoleHandle,None,vrep.simx_opmode_oneshot_wait) 
+        count = count + 1
+        vrep.simxAuxiliaryConsolePrint(clientID,consoleHandle,str(count)+' iterations err:'+str(err),vrep.simx_opmode_oneshot_wait)   
+        
+        if count &gt; ilimit:
+            vrep.simxAuxiliaryConsolePrint(clientID,consoleHandle,"Solution wouldn't converge\r\n",vrep.simx_opmode_oneshot_wait)
+            break
+        #time.sleep(0.1)
+    
+    # Ends the communication thread. This should be the very last remote API function called on the client side
+    vrep.simxFinish(clientID)</t>
+<t tx="yen.20170210202015.1">simxCloseScene
+simxCopyPasteObjects
+simxCreateDummy
+simxDisplayDialog
+simxEndDialog 
+simxEraseFile
+simxFinish
+simxGetArrayParameter
+</t>
+<t tx="yen.20170210221519.1">import vrep
+import sys
+import time
+
+print('Program started')
+
+portNb = 0
+leftMotorHandle = 0
+rightMotorHandle = 0
+sensorHandle = 0
+
+if len(sys.argv) &gt;= 5:
+    portNb = int(sys.argv[1])
+    leftMotorHandle = int(sys.argv[2])
+    rightMotorHandle = int(sys.argv[3])
+    sensorHandle = int(sys.argv[4])
+else:
+    print("Indicate following arguments: 'portNumber leftMotorHandle rightMotorHandle sensorHandle'")
+    time.sleep(5000.0 / 1000.0)
+    sys.exit(0)
+
+vrep.simxFinish(-1) # just in case, close all opened connections
+clientID = vrep.simxStart('127.0.0.1', portNb, True, True, 2000, 5)
+if clientID != -1:
+    print 'Connected to remote API server'
+    driveBackStartTime = -99000
+    motorSpeeds = [0, 0]
+
+    while vrep.simxGetConnectionId(clientID) != -1:
+        (errorCode, detectionState, detectedPoint, detectedObjectHandle, detectedSurfaceNormalVector) = vrep.simxReadProximitySensor(clientID, sensorHandle, vrep.simx_opmode_streaming)
+        if errorCode == vrep.simx_return_ok:
+            simulationTime = vrep.simxGetLastCmdTime(clientID)
+            if simulationTime - driveBackStartTime &lt; 3000:
+                motorSpeeds[0] = -3.1415 * 0.5
+                motorSpeeds[1] = -3.1415 * 0.25
+            else:
+                motorSpeeds[0] = 3.1415
+                motorSpeeds[1] = 3.1415
+                if detectionState:
+                    driveBackStartTime = simulationTime
+
+            errorCode = vrep.simxSetJointTargetVelocity(clientID, leftMotorHandle, motorSpeeds[0], vrep.simx_opmode_oneshot)
+            vrep.simxSetJointTargetVelocity(clientID, rightMotorHandle, motorSpeeds[1], vrep.simx_opmode_oneshot)
+            if errorCode != vrep.simx_return_ok:
+                print("SetJointTargetVelocity got error code: %s" % errorCode)
+
+        else:
+            print("ReadProximitySensor got error code: %s" % errorCode)
+
+        time.sleep(5.0 / 1000.0)
+
+    vrep.simxFinish(clientID)
+else:
+    print('Failed connecting to remote API server')
+print('Program ended')</t>
+<t tx="yen.20170210222733.1">##==============================================================#
+## SECTION: Imports                                             #
+##==============================================================#
+
+import vrep
+
+##==============================================================#
+## SECTION: Class Definitions                                   #
+##==============================================================#
+
+class Robot:
+    def __init__(self, client_id, opmode):
+        self.cid = client_id
+        self.op = opmode
+
+        # Setup wheel joints.
+        self.wj_locs = ["Left","Right"]
+        self.wjs = {}
+        for loc in self.wj_locs:
+            name = "Dynamic{0}Joint".format(loc)
+            _,h = vrep.simxGetObjectHandle(client_id, name, opmode)
+            self.wjs[loc] = h
+
+        # Setup vision sensors.
+        self.vs_locs = ["Left","Middle","Right"]
+        self.vss = {}
+        for loc in self.vs_locs:
+            name = "{0}Sensor".format(loc)
+            _,h = vrep.simxGetObjectHandle(client_id, name, opmode)
+            self.vss[loc] = h
+
+    def set_wheel_vel(self, left, right):
+        """Sets the wheel target velocities."""
+        vrep.simxSetJointTargetVelocity(self.cid, self.wjs['Left'], left, self.op)
+        vrep.simxSetJointTargetVelocity(self.cid, self.wjs['Right'], right, self.op)
+
+    def get_wheel_vel(self):
+        """Returns the wheel velocities as a list of (left,right)."""
+        vels = []
+        for loc in self.wj_locs:
+            _,vel = vrep.simxGetObjectFloatParameter(self.cid, self.wjs[loc], vrep.sim_jointfloatparam_velocity, self.op)
+            vels.append(vel)
+        return vels
+
+    def get_vis_sensors(self):
+        """Returns a list of lists containing the average red/green/blue value
+        from the left/middle/right vision sensor."""
+        aves = []
+        for loc in self.vs_locs:
+            h = self.vss[loc]
+            _,_,pkt = vrep.simxReadVisionSensor(client_id, h, opmode)
+            aves.append(pkt[0][11:14])
+        return aves
+
+##==============================================================#
+## SECTION: Function Definitions                                #
+##==============================================================#
+
+def is_green(a):
+    """Returns true if the reading from Robot.get_vis_sensors() is green."""
+    return (a[0] &lt; 0.4 and a[2] &lt; 0.4) and (a[1] &gt; 0.5)
+
+##==============================================================#
+## SECTION: Main Body                                           #
+##==============================================================#
+
+if __name__ == '__main__':
+    vrep.simxFinish(-1) # Stop any running simulation.
+    client_id = vrep.simxStart("127.0.0.1", 19997, True, True, 5000, 5)
+    if client_id == -1:
+        print("Failed to connect.")
+        exit()
+    print("Connected to V-REP.")
+    print("Running robot logic, will exit when simulation is ended...")
+    try:
+        opmode = vrep.simx_opmode_blocking
+        vrep.simxStartSimulation(client_id, opmode)
+        robot = Robot(client_id, opmode)
+        robot.set_wheel_vel(1.0, 1.0)
+        vrep.simxSynchronousTrigger(client_id)
+        while True:
+            # Very simple robot line following logic.
+            l,m,r = robot.get_vis_sensors()
+            if is_green(m):
+                robot.set_wheel_vel(1.0, 1.0)
+            elif is_green(l):
+                robot.set_wheel_vel(0.2, 1.0)
+            elif is_green(r):
+                robot.set_wheel_vel(1.0, 0.2)
+            vrep.simxSynchronousTrigger(client_id)
+    except:
+        vrep.simxFinish(client_id)
+        print("Simulation ended.")
 </t>
 </tnodes>
 </leo_file>

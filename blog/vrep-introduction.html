@@ -391,8 +391,80 @@ Object / model can transfer or accept DNA: when this feature is enabled for an o
 <p><a href="http://www.coppeliarobotics.com/helpFiles/en/apiFunctionListCategory.htm">http://www.coppeliarobotics.com/helpFiles/en/apiFunctionListCategory.htm</a></p>
 <p>V-rep 外部控制方法:</p>
 <p><a href="http://www.coppeliarobotics.com/helpFiles/en/externalControllerTutorial.htm">http://www.coppeliarobotics.com/helpFiles/en/externalControllerTutorial.htm</a></p>
+<h2>V-rep remote API 範例</h2>
+<p>根據 <a href="http://www.coppeliarobotics.com/helpFiles/en/remoteApiServerSide.htm">http://www.coppeliarobotics.com/helpFiles/en/remoteApiServerSide.htm</a> 中的說明.</p>
+<p>V-rep 啟動時, 會根據系統目錄下 remoteApiConnections.txt 檔案中的設定, 啟動  rempte api 功能.</p>
+<p>以下為 one-link robot 的 V-rep remote API 程式範例:</p>
+<pre class="brush: python">
+import vrep
+import sys
+# child threaded script: 
+# 內建使用 port 19997 若要加入其他 port, 在  serve 端程式納入
+#simExtRemoteApiStart(19999)
+
+vrep.simxFinish(-1)
+
+clientID = vrep.simxStart('127.0.0.1', 19997, True, True, 5000, 5)
+
+if clientID!= -1:
+    print("Connected to remote server")
+else:
+    print('Connection not successful')
+    sys.exit('Could not connect')
+
+errorCode,Revolute_joint_handle=vrep.simxGetObjectHandle(clientID,'Revolute_joint',vrep.simx_opmode_oneshot_wait)
+
+if errorCode == -1:
+    print('Can not find left or right motor')
+    sys.exit()
+
+errorCode=vrep.simxSetJointTargetVelocity(clientID,Revolute_joint_handle,2, vrep.simx_opmode_oneshot_wait)
+
+while True:
+    choice = input("(e to exit, p to pause and enter to exec)>")
+    if choice == "e":
+        print("exiting")
+        vrep.simxStopSimulation(clientID, vrep.simx_opmode_oneshot_wait)
+        break
+    elif choice == "p":
+        vrep.simxPauseSimulation(clientID, vrep.simx_opmode_oneshot_wait)
+    else:
+        vrep.simxStartSimulation(clientID, vrep.simx_opmode_oneshot_wait)
+</pre>
+
 <p>V-rep Remote API 函式列表:</p>
 <p><a href="http://www.coppeliarobotics.com/helpFiles/en/remoteApiFunctionListCategory.htm">http://www.coppeliarobotics.com/helpFiles/en/remoteApiFunctionListCategory.htm</a></p>
+<p>V-rep 的 remote API 是以 V-rep plugin (動態連結程式庫) 的方式完成, 程式專案位於 programming/v_repExtRemoteApi 目錄中.</p>
+<p>V-rep remote API 可以進一步在 embedded script 程式中利用 Lua 程式進行延伸:</p>
+<pre class="brush: python">
+myFunctionName=function(inInts,inFloats,inStrings,inBuffer)
+    -- inInts, inFloats and inStrings are tables
+    -- inBuffer is a string
+
+    -- Perform any type of operation here.
+
+    -- Always return 3 tables and a string, e.g.:
+    return {},{},{},''
+end
+</pre>
+
+<p>然後利用下列外部的 Python 程式進行呼叫:</p>
+<pre class="brush: python">
+inputInts=[1,2,3]
+inputFloats=[53.21,17.39]
+inputStrings=['Hello','world!']
+inputBuffer=bytearray()
+inputBuffer.append(78)
+inputBuffer.append(42)
+res,retInts,retFloats,retStrings,retBuffer=vrep.simxCallScriptFunction(clientID,'objectName',vrep.sim_scripttype_childscript,
+                'myFunctionName',inputInts,inputFloats,inputStrings,inputBuffer,vrep.simx_opmode_blocking)
+if res==vrep.simx_return_ok:
+    print (retInts)
+    print (retFloats)
+    print (retStrings)
+    print (retBuffer)
+</pre>
+
 <h2>Qt based custom UIs</h2>
 <p><a href="http://www.coppeliarobotics.com/helpFiles/en/customUIPlugin.htm">http://www.coppeliarobotics.com/helpFiles/en/customUIPlugin.htm</a></p>
 <h2>V-rep Tutorials:</h2>

@@ -66,7 +66,8 @@
 </v>
 <v t="yen.20170108171930.1"><vh>@button https server</vh></v>
 <v t="yen.20170108171939.1"><vh>@button ipv6 https server</vh></v>
-<v t="yen.20170120212350.1"><vh>programs</vh>
+<v t="yen.20170120212350.1" a="E"><vh>programs</vh>
+<v t="yen.20170210153828.1"><vh>v-rep rempte api</vh></v>
 <v t="yen.20170120212354.1"><vh>calendar ex1</vh></v>
 <v t="yen.20170120212520.1"><vh>calendar ex2</vh></v>
 <v t="yen.20170120232548.1"><vh>calendar example</vh></v>
@@ -1642,5 +1643,74 @@ Jupyterhub: &lt;a href="https://8888.kmol.info:9443"&gt;https://8888.kmol.info:9
 https://github.com/studywolf/blog/tree/master/VREP
 
 https://www.youtube.com/channel/UCiK0J5wtnyX2jP-AiGbdhjg</t>
+<t tx="yen.20170210153828.1">根據 http://www.coppeliarobotics.com/helpFiles/en/remoteApiServerSide.htm 中的說明.
+
+V-rep 啟動時, 會根據系統目錄下的 remoteApiConnections.txt 檔案中的設定, 啟動  rempte api 功能:
+
+// This file defines all the continuous remote API server services (started at remote API plugin initialization, i.e. V-REP start-up)
+//
+// Each remote API server service requires following 3 entries:
+//
+// portIndex@_port = xxxx               // where xxxx is the desired port number (below 19997 are preferred for server services starting at V-REP start-up)
+// portIndex@_debug = xxxx              // where xxxx is true or false
+// portIndex@_syncSimTrigger = xxxx     // where xxxx is true or false. When true, then the service will be pre-enabled for synchronous operation.
+//
+// In above strings, @ can be any number starting with 1. If more than one server service is required, then numbers need to be consecutive and starting with 1
+
+// Let's start a continuous remote API server service on port 19997:
+portIndex1_port             = 19997
+portIndex1_debug            = false
+portIndex1_syncSimTrigger   = true
+
+若要自行加入 rempte api 執行的 port 則在 server 的 child script 中設定:
+
+Server 端:
+
+simExtRemoteApiStart(19999)
+
+Client 端:
+
+clientID = vrep.simxStart('127.0.0.1', 19999, True, True, 5000, 5)
+
+import vrep
+import sys
+# child threaded script: 
+# 內建使用 port 19997 若要加入其他 port, 在  serve 端程式納入
+#simExtRemoteApiStart(19999)
+ 
+vrep.simxFinish(-1)
+ 
+clientID = vrep.simxStart('127.0.0.1', 19997, True, True, 5000, 5)
+ 
+if clientID!= -1:
+    print("Connected to remote server")
+else:
+    print('Connection not successful')
+    sys.exit('Could not connect')
+ 
+errorCode,Revolute_joint_handle=vrep.simxGetObjectHandle(clientID,'Revolute_joint',vrep.simx_opmode_oneshot_wait)
+ 
+if errorCode == -1:
+    print('Can not find left or right motor')
+    sys.exit()
+ 
+errorCode=vrep.simxSetJointTargetVelocity(clientID,Revolute_joint_handle,2, vrep.simx_opmode_oneshot_wait)
+
+while True:
+    choice = input("&gt;")
+    if choice == "e":
+        print("exiting")
+        vrep.simxStopSimulation(clientID, vrep.simx_opmode_oneshot_wait)
+        break
+    elif choice == "p":
+        vrep.simxPauseSimulation(clientID, vrep.simx_opmode_oneshot_wait)
+    else:
+        vrep.simxStartSimulation(clientID, vrep.simx_opmode_oneshot_wait)
+
+
+
+
+
+</t>
 </tnodes>
 </leo_file>

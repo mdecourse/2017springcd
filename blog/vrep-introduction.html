@@ -367,6 +367,127 @@ Object / model can transfer or accept DNA: when this feature is enabled for an o
 <p><a href="http://www.coppeliarobotics.com/helpFiles/en/jointDynamicsProperties.htm">http://www.coppeliarobotics.com/helpFiles/en/jointDynamicsProperties.htm</a></p>
 <p>Joint control callback functions:</p>
 <p><a href="http://www.coppeliarobotics.com/helpFiles/en/jointCtrlCallbackScripts.htm">http://www.coppeliarobotics.com/helpFiles/en/jointCtrlCallbackScripts.htm</a></p>
+<p>利用 Python remote API 設定 Joints 變數:</p>
+<p>For the simxSetJointPosition function to work, the joint should not be in force/torque mode. If the joint is in force/torque mode, the motor enabled, and the position control enabled, then use the simxSetJointTargetPosition instead. Also make sure the joint is dynamically enabled.</p>
+<p>參考程式:</p>
+<pre class="brush: python">
+try:
+    import vrep
+except:
+    print ('--------------------------------------------------------------')
+
+import time
+
+
+def connectVREP():
+  vrep.simxFinish(-1) # just in case, close all opened connections
+  clientID=vrep.simxStart('127.0.0.1',19999,True,True,5000,5) # Connect to V-REP
+  if clientID!=-1:
+    print ('Connected Remote Api')
+    vrep.simxStartSimulation(clientID,vrep.simx_opmode_oneshot_wait)
+
+    vrep.simxSynchronous(clientID,True)
+    return clientID
+  else:
+    print ('ERROR! Error connecting Remote Api')
+    sys.exit(0);
+
+def startSim(clientID):
+  vrep.simxStartSimulation(clientID,vrep.simx_opmode_oneshot)
+
+def stopSim(clientID):
+  vrep.simxStopSimulation(clientID,vrep.simx_opmode_oneshot_wait)
+
+def disconnectVREP(clientID):
+  # Now close the connection to V-REP:
+  vrep.simxFinish(clientID)
+  print('Connection finished')
+
+
+clientID=connectVREP()
+
+
+ret,joint1_handler = vrep.simxGetObjectHandle(\
+  clientID,"redundantRob_joint1",vrep.simx_opmode_oneshot_wait)
+ret,joint1 = vrep.simxGetJointPosition(\
+  clientID,joint1_handler,vrep.simx_opmode_streaming)
+
+ret,joint2_handler = vrep.simxGetObjectHandle(\
+  clientID,"redundantRob_joint2",vrep.simx_opmode_oneshot_wait)
+ret,joint2 = vrep.simxGetJointPosition(\
+  clientID,joint2_handler,vrep.simx_opmode_streaming)
+
+startSim(clientID)
+
+ret,joint1 = vrep.simxGetJointPosition(\
+  clientID,joint1_handler,vrep.simx_opmode_buffer)
+print joint1  #Get position joint 1
+ret,joint2 = vrep.simxGetJointPosition(\
+  clientID,joint2_handler,vrep.simx_opmode_buffer)
+print joint2 #Get position joint 2
+
+ret = vrep.simxSetJointPosition(\
+  clientID,joint1_handler,pi/2,vrep.simx_opmode_oneshot)  #Set pi/2 to joint 1
+
+time.sleep(2)
+
+stopSim(clientID)
+
+time.sleep(1)
+
+disconnectVREP(clientID)       
+</pre>
+
+<p>利用 remote API 執行緒程式設定 Joint 變數:</p>
+<pre class="brush: python">
+import threading
+import time
+import sys
+import traceback
+
+sys.path.insert(0, 'C:\\Program Files\\V-REP3\\V-REP_PRO_EDU\\programming\\Python')
+import vrep
+
+class Joint(threading.Thread):
+    def __init__(self, joint_name, port):
+        threading.Thread.__init__(self)
+        self.client_id = -1
+        self.port = port
+        self.joint_name = joint_name
+
+    def run(self):
+        try:
+            # connect to V-REP server
+            self.client_id = vrep.simxStart("127.0.0.1", self.port, False, True, 5000, 5)
+            if self.client_id == -1:
+                raise Exception('Failed to connect V-REP remote API server.')
+
+            # get handle
+            res, p = vrep.simxGetObjectHandle(self.client_id, self.joint_name.encode(), vrep.simx_opmode_oneshot_wait)
+            if res == vrep.simx_error_noerror:
+                print('[Joint %s] handle= %s' % (self.joint_name, p))
+            else:
+                raise Exception('Error in getting joint handles.')
+
+        except Exception as e:
+            print('[Joint %s] %s' % (self.joint_name, e.args[0]))
+            traceback.print_exc()
+
+        finally:
+            # disconnect with V-REP server
+            vrep.simxFinish(self.client_id)
+
+if __name__ == "__main__":
+    joints = [Joint("joint1", 19999), Joint("joint2", 19998)]
+    for joint in joints:
+        joint.start()
+        time.sleep(0.1)
+    time.sleep(1)
+    for joint in joints:
+        joint.join()
+    print("Done")
+</pre>
+
 <p>Dummy properties:</p>
 <p><a href="http://www.coppeliarobotics.com/helpFiles/en/dummyPropertiesDialog.htm">http://www.coppeliarobotics.com/helpFiles/en/dummyPropertiesDialog.htm</a></p>
 <p>Dummy functions:</p>
@@ -873,6 +994,12 @@ end
 
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="./theme/js/bootstrap.min.js"></script>
+
+<!-- for https://github.com/jsor/lity lightbox video popup -->
+
+<link href="./theme/css/lity.css" rel="stylesheet">
+
+<script src="./theme/js/lity.js"></script>
 
 <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
 <script src="./theme/js/respond.min.js"></script>

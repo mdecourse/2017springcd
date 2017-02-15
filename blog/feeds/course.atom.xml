@@ -51,6 +51,127 @@ Object / model can transfer or accept DNA: when this feature is enabled for an o
 &lt;p&gt;&lt;a href="http://www.coppeliarobotics.com/helpFiles/en/jointDynamicsProperties.htm"&gt;http://www.coppeliarobotics.com/helpFiles/en/jointDynamicsProperties.htm&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Joint control callback functions:&lt;/p&gt;
 &lt;p&gt;&lt;a href="http://www.coppeliarobotics.com/helpFiles/en/jointCtrlCallbackScripts.htm"&gt;http://www.coppeliarobotics.com/helpFiles/en/jointCtrlCallbackScripts.htm&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;利用 Python remote API 設定 Joints 變數:&lt;/p&gt;
+&lt;p&gt;For the simxSetJointPosition function to work, the joint should not be in force/torque mode. If the joint is in force/torque mode, the motor enabled, and the position control enabled, then use the simxSetJointTargetPosition instead. Also make sure the joint is dynamically enabled.&lt;/p&gt;
+&lt;p&gt;參考程式:&lt;/p&gt;
+&lt;pre class="brush: python"&gt;
+try:
+    import vrep
+except:
+    print ('--------------------------------------------------------------')
+
+import time
+
+
+def connectVREP():
+  vrep.simxFinish(-1) # just in case, close all opened connections
+  clientID=vrep.simxStart('127.0.0.1',19999,True,True,5000,5) # Connect to V-REP
+  if clientID!=-1:
+    print ('Connected Remote Api')
+    vrep.simxStartSimulation(clientID,vrep.simx_opmode_oneshot_wait)
+
+    vrep.simxSynchronous(clientID,True)
+    return clientID
+  else:
+    print ('ERROR! Error connecting Remote Api')
+    sys.exit(0);
+
+def startSim(clientID):
+  vrep.simxStartSimulation(clientID,vrep.simx_opmode_oneshot)
+
+def stopSim(clientID):
+  vrep.simxStopSimulation(clientID,vrep.simx_opmode_oneshot_wait)
+
+def disconnectVREP(clientID):
+  # Now close the connection to V-REP:
+  vrep.simxFinish(clientID)
+  print('Connection finished')
+
+
+clientID=connectVREP()
+
+
+ret,joint1_handler = vrep.simxGetObjectHandle(\
+  clientID,"redundantRob_joint1",vrep.simx_opmode_oneshot_wait)
+ret,joint1 = vrep.simxGetJointPosition(\
+  clientID,joint1_handler,vrep.simx_opmode_streaming)
+
+ret,joint2_handler = vrep.simxGetObjectHandle(\
+  clientID,"redundantRob_joint2",vrep.simx_opmode_oneshot_wait)
+ret,joint2 = vrep.simxGetJointPosition(\
+  clientID,joint2_handler,vrep.simx_opmode_streaming)
+
+startSim(clientID)
+
+ret,joint1 = vrep.simxGetJointPosition(\
+  clientID,joint1_handler,vrep.simx_opmode_buffer)
+print joint1  #Get position joint 1
+ret,joint2 = vrep.simxGetJointPosition(\
+  clientID,joint2_handler,vrep.simx_opmode_buffer)
+print joint2 #Get position joint 2
+
+ret = vrep.simxSetJointPosition(\
+  clientID,joint1_handler,pi/2,vrep.simx_opmode_oneshot)  #Set pi/2 to joint 1
+
+time.sleep(2)
+
+stopSim(clientID)
+
+time.sleep(1)
+
+disconnectVREP(clientID)       
+&lt;/pre&gt;
+
+&lt;p&gt;利用 remote API 執行緒程式設定 Joint 變數:&lt;/p&gt;
+&lt;pre class="brush: python"&gt;
+import threading
+import time
+import sys
+import traceback
+
+sys.path.insert(0, 'C:\\Program Files\\V-REP3\\V-REP_PRO_EDU\\programming\\Python')
+import vrep
+
+class Joint(threading.Thread):
+    def __init__(self, joint_name, port):
+        threading.Thread.__init__(self)
+        self.client_id = -1
+        self.port = port
+        self.joint_name = joint_name
+
+    def run(self):
+        try:
+            # connect to V-REP server
+            self.client_id = vrep.simxStart("127.0.0.1", self.port, False, True, 5000, 5)
+            if self.client_id == -1:
+                raise Exception('Failed to connect V-REP remote API server.')
+
+            # get handle
+            res, p = vrep.simxGetObjectHandle(self.client_id, self.joint_name.encode(), vrep.simx_opmode_oneshot_wait)
+            if res == vrep.simx_error_noerror:
+                print('[Joint %s] handle= %s' % (self.joint_name, p))
+            else:
+                raise Exception('Error in getting joint handles.')
+
+        except Exception as e:
+            print('[Joint %s] %s' % (self.joint_name, e.args[0]))
+            traceback.print_exc()
+
+        finally:
+            # disconnect with V-REP server
+            vrep.simxFinish(self.client_id)
+
+if __name__ == "__main__":
+    joints = [Joint("joint1", 19999), Joint("joint2", 19998)]
+    for joint in joints:
+        joint.start()
+        time.sleep(0.1)
+    time.sleep(1)
+    for joint in joints:
+        joint.join()
+    print("Done")
+&lt;/pre&gt;
+
 &lt;p&gt;Dummy properties:&lt;/p&gt;
 &lt;p&gt;&lt;a href="http://www.coppeliarobotics.com/helpFiles/en/dummyPropertiesDialog.htm"&gt;http://www.coppeliarobotics.com/helpFiles/en/dummyPropertiesDialog.htm&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Dummy functions:&lt;/p&gt;
@@ -814,9 +935,9 @@ document["get_ver_and_kw"].bind("click", get_ver_and_kw)
 &lt;p&gt;&lt;span style="background-color: #ffff00"&gt;w1&lt;/span&gt;-2/22 2b (三) &amp;amp; 2/23 2a (四) - 請每人準備一個隨身碟, &lt;span style="background-color: #55ff55"&gt;&lt;a href="http://service.mde.tw/download/?type=files&amp;filename=tiny2017_30MB.7z"&gt;下載&lt;/a&gt;&lt;/span&gt;可攜程式系統 (30MB) (或從倉儲中&lt;span style="background-color: #55ff55"&gt;&lt;a href="./../data/tiny2017.7z"&gt;下載&lt;/a&gt;&lt;/span&gt;). 接著請&lt;span style="background-color: #55ff55"&gt;&lt;a href="https://service.mde.tw/download/?type=files&amp;filename=Onshape_help.pdf"&gt;下載&lt;/a&gt;&lt;/span&gt; Onshape_help.pdf (17.2 MB), 了解如何利用 &lt;a href="http://solvespace.com"&gt;Solvespace&lt;/a&gt; 與 &lt;a href="https://www.onshape.com/"&gt;Onshape&lt;/a&gt; 組立單軸旋轉連桿系統、四連桿系統與&lt;a href="http://solvespace.com/linkage.pl"&gt;多連桿系統&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;span style="background-color: #ffff00"&gt;w2&lt;/span&gt;-3/1 2b (三) &amp;amp; 3/2 2a (四) - 每班分為八組, 每四組分配一台 8GB Ram/500GB HD 電腦作為 IPv4/IPv6 伺服器, 了解如何利用 IPv4 與 IPv6 網路連線傳輸設計檔案. 各組 CMSimfly 區域網站的應用. 各組以協同模式完成&lt;a href="http://solvespace.com"&gt;Solvespace&lt;/a&gt; 與 &lt;a href="https://www.onshape.com/"&gt;Onshape&lt;/a&gt; 單軸旋轉連桿系統與四連桿系統.&lt;/p&gt;
 &lt;p&gt;&lt;span style="background-color: #ffff00"&gt;w3&lt;/span&gt;-3/8 2b (三) &amp;amp; 3/9 2a (四) - 各組以協同模式完成 &lt;a href="http://solvespace.com"&gt;Solvespace&lt;/a&gt; 與 &lt;a href="https://www.onshape.com/"&gt;Onshape&lt;/a&gt; 之 &lt;a href="http://solvespace.com/linkage.pl"&gt;多連桿系統&lt;/a&gt;組立. 各組完成廣域網路與 &lt;a href="https://pages.github.com/"&gt;Github Pages&lt;/a&gt; 網頁與簡報呈現各組學員與分組協同工作流程細節.&lt;/p&gt;
-&lt;p&gt;&lt;span style="background-color: #ffff00"&gt;w4&lt;/span&gt;-3/15 2b (三) &amp;amp; 3/14 2a (四) - 單連桿與四連桿機構轉入 V-rep 進行運動模擬&lt;/p&gt;
+&lt;p&gt;&lt;span style="background-color: #ffff00"&gt;w4&lt;/span&gt;-3/15 2b (三) &amp;amp; 3/14 2a (四) - 單連桿與四連桿機構轉入 V-rep 進行運動模擬 &lt;button onClick="lity('https://player.vimeo.com/video/203463280')"&gt;&lt;span class="glyphicon glyphicon-facetime-video"&gt;&lt;/span&gt; 單連桿&lt;/button&gt;&lt;/p&gt;
 &lt;p&gt;&lt;span style="background-color: #ffff00"&gt;w5&lt;/span&gt;-3/22 2b (三) &amp;amp; 3/23 2a (四) - 單連桿與四連桿機構轉入 V-rep 進行運動模擬&lt;/p&gt;
-&lt;p&gt;&lt;span style="background-color: #ffff00"&gt;w6&lt;/span&gt;-3/29 2b (三) &amp;amp; 3/30 2a (四) - 多連桿機構轉入 V-rep 進行運動模擬&lt;/p&gt;
+&lt;p&gt;&lt;span style="background-color: #ffff00"&gt;w6&lt;/span&gt;-3/29 2b (三) &amp;amp; 3/30 2a (四) - 多連桿機構轉入 V-rep 進行運動模擬 &lt;button onClick="lity('https://player.vimeo.com/video/203155380')"&gt;&lt;span class="glyphicon glyphicon-facetime-video"&gt;&lt;/span&gt; 多連桿&lt;/button&gt;&lt;/p&gt;
 &lt;p&gt;&lt;span style="background-color: #ffff00"&gt;w7&lt;/span&gt;-4/5 2b (三) &amp;amp; 4/6 2a (四) - 多連桿機構轉入 V-rep 進行運動模擬&lt;/p&gt;
 &lt;p&gt;&lt;span style="background-color: #ffff00"&gt;w8&lt;/span&gt;-4/12 2b (三) &amp;amp; 4/13 2a (四) - 各組期中簡報 (含影片拍攝與上傳) 與評分&lt;/p&gt;
 &lt;p&gt;&lt;span style="background-color: #ffff00"&gt;w9&lt;/span&gt;-4/19 2b (三) &amp;amp; 4/20 2a (四) - V-rep remote API 運動控制&lt;/p&gt;

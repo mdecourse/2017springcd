@@ -1,5 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>2017Spring 協同產品設計實習 (虎尾科大MDE)</title><link href="./" rel="alternate"></link><link href="./feeds/course.atom.xml" rel="self"></link><id>./</id><updated>2017-02-09T11:00:00+08:00</updated><entry><title>V-rep 簡介</title><link href="./vrep-introduction.html" rel="alternate"></link><published>2017-02-09T11:00:00+08:00</published><updated>2017-02-09T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-02-09:./vrep-introduction.html</id><summary type="html">&lt;p&gt;V-rep (Virtual robot experimentation platform)&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>2017Spring 協同產品設計實習 (虎尾科大MDE)</title><link href="./" rel="alternate"></link><link href="./feeds/course.atom.xml" rel="self"></link><id>./</id><updated>2017-02-17T11:00:00+08:00</updated><entry><title>Fossil SCM 簡介</title><link href="./intro-fossil-scm.html" rel="alternate"></link><published>2017-02-17T11:00:00+08:00</published><updated>2017-02-17T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-02-17:./intro-fossil-scm.html</id><summary type="html">&lt;p&gt;Fossil SCM 是一套分散式版次管理系統 (DVCS), 在協同產品設計實習課程中, 我們除了使用 git、github 與 bitbucket 之外, 將要在區域網路與系上主幹上, 將 Fossil SCM 配置在每班兩台的實習電腦主機中.&lt;/p&gt;
+
+
+&lt;h2&gt;Fossil SCM&lt;/h2&gt;
+&lt;p&gt;建立新倉儲&lt;/p&gt;
+&lt;p&gt;可以使用 &lt;a href="http://fossil-scm.org/index.html/help?cmd=new"&gt;fossil new&lt;/a&gt; 或 &lt;a href="http://fossil-scm.org/index.html/help?cmd=init"&gt;fossil init&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;fossil new foo.fossil&lt;/p&gt;
+&lt;p&gt;or &lt;/p&gt;
+&lt;p&gt;fossil init foo.fossil&lt;/p&gt;
+&lt;p&gt;表示建立一個新的倉儲專案, 且倉儲檔案名稱為 foo.fossil, 在 fossil SCM 中建立新專案時, 登入用戶名稱會成為內定的倉儲管理者, 若要指定管理者名稱, 可以附加 -A USERNAME 或 --admin-user USERNAME, 新增的倉儲就會以 USERNAME 作為管理者名稱, 且指定對應的密碼 (有關 &lt;a href="http://fossil-scm.org/xfer/doc/trunk/www/password.wiki"&gt;fossil 密碼管理&lt;/a&gt;), 當使用者在近端以網際模式啟動該倉儲時 (以 &lt;a href="http://fossil-scm.org/index.html/help?cmd=ui"&gt;fossil ui&lt;/a&gt; 指令) fossil SCM 會直接以管理者身份登入, 無需輸入管理者密碼.&lt;/p&gt;
+&lt;p&gt;由於 fossil SCM 的倉儲格式為 Sqlite3 資料庫檔案, 因此利用 fossil init foo.fossil 建立倉儲後, 可以利用 sqlite3 工具查驗資料庫中的欄位資料.&lt;/p&gt;
+&lt;p&gt;首先以 sqlite3 工具指令開啟 foo.fossil 資料庫檔案, 進入 sql 指令環境:&lt;/p&gt;
+&lt;p&gt;sqlite3 foo.fossil&lt;/p&gt;
+&lt;p&gt;接著以 .schema user 查詢 user 資料表的欄位名稱, 然後直接讀取資料表中 login, pw 與 info 欄位中的資料:&lt;/p&gt;
+&lt;pre class="brush: jscript"&gt;
+.schema user
+select login, pw, info from user;
+&lt;/pre&gt;
+
+&lt;p&gt;其中可以發現 fossil SCM 已經使用 SHA1 hash 編碼使用者帳號對應的登入密碼, 但是當使用者 &lt;a href="http://fossil-scm.org/index.html/help?cmd=clone"&gt;fossil clone&lt;/a&gt; 遠端倉儲到近端時, fossil SCM 會自動以明碼設定倉儲原管理者對應的管理密碼, 且在 fossil clone 結束後, 直接顯示在命令列視窗中 .&lt;/p&gt;
+&lt;h3&gt;clone&lt;/h3&gt;
+&lt;pre class="brush: jscript"&gt;
+$ fossil clone http://your_domain_name ~/fossils/yourdb.fossil
+$ fossil open ~/fossils/foo.fossil
+&lt;/pre&gt;
+
+&lt;h3&gt;add a file&lt;/h3&gt;
+&lt;pre class="brush: jscript"&gt;
+$ fossil add yourfile.txt
+&lt;/pre&gt;
+
+&lt;p&gt;git 分支流程模型&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://nvie.com/posts/a-successful-git-branching-model/"&gt;http://nvie.com/posts/a-successful-git-branching-model/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Fossil SCM concept&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://www.fossil-scm.org/xfer/doc/tip/www/concepts.wiki"&gt;https://www.fossil-scm.org/xfer/doc/tip/www/concepts.wiki&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Why Fossil SCM?&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;單一檔案工具與單一檔案倉儲上的簡單便捷&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;版本倉儲 (repository) 可以不在工作目錄 (working directory) 中, 因此使用者可以從同一個版本倉儲, 在不同目錄中, 簽出多個版本的工作空間, 因此具有伺服器版本控制系統 (server vcs) 與分散式版次控制系統 (dvcs) 的彈性與優點.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;開發歷程不可變更 (因為不提供 rebase 功能), 是優點, 也是許多人認為的缺點.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;小團隊更適合使用 Fossil SCM&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;內建網際伺服器支援團隊間的協同合作, 不僅內建提供 wiki, blog, issue tracking, 而且可以在近端修改這些工具所管理的內容後, 提交推送到遠端.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;缺乏 submodule (而是採 nested path 呈現), rebase 與 code review 整合功能&lt;/p&gt;
+&lt;h3&gt;git to fossil:&lt;/h3&gt;
+&lt;pre class="brush: jscript"&gt;
+cd git-repo
+git fast-export --all | fossil import --git new-repo.fossil
+&lt;/pre&gt;
+
+&lt;h3&gt;fossil to git:&lt;/h3&gt;
+&lt;pre class="brush: jscript"&gt;
+git init new-repo
+cd new-repo
+fossil export --git ../repo.fossil | git fast-import
+&lt;/pre&gt;
+
+&lt;h3&gt;fossil 與 git 雙向同步:&lt;/h3&gt;
+&lt;p&gt;Bidirectional Synchronization&lt;/p&gt;
+&lt;p&gt;Fossil also has the ability to synchronize with a Git repository via repeated imports and/or exports. To do this, it uses marks files to store a record of artifacts which are known by both Git and Fossil to exist at a given point in time.&lt;/p&gt;
+&lt;p&gt;To illustrate, consider the example of a remote Fossil repository that a user wants to import into a local Git repository. First, the user would clone the remote repository and import it into a new Git repository:&lt;/p&gt;
+&lt;pre class="brush: jscript"&gt;
+fossil clone /path/to/remote/repo.fossil repo.fossil
+mkdir repo
+cd repo
+fossil open ../repo.fossil
+mkdir ../repo.git
+cd ../repo.git
+git init .
+fossil export --git --export-marks ../repo/fossil.marks  \
+       ../repo.fossil | git fast-import                  \
+       --export-marks=../repo/git.marks
+&lt;/pre&gt;
+
+&lt;p&gt;Once the import has completed, the user would need to git checkout trunk. At any point after this, new changes can be imported from the remote Fossil repository:&lt;/p&gt;
+&lt;pre class="brush: jscript"&gt;
+cd ../repo
+fossil pull
+cd ../repo.git
+fossil export --git --import-marks ../repo/fossil.marks  \
+       --export-marks ../repo/fossil.marks               \
+       ../repo.fossil | git fast-import                  \
+       --import-marks=../repo/git.marks                  \
+       --export-marks=../repo/git.marks
+&lt;/pre&gt;
+
+&lt;p&gt;Changes in the Git repository can be exported to the Fossil repository and then pushed to the remote:&lt;/p&gt;
+&lt;pre class="brush: jscript"&gt;
+git fast-export --import-marks=../repo/git.marks                  \
+    --export-marks=../repo/git.marks --all | fossil import --git  \
+    --incremental --import-marks ../repo/fossil.marks             \
+    --export-marks ../repo/fossil.marks ../repo.fossil
+cd ../repo
+fossil push
+&lt;/pre&gt;
+
+&lt;h2&gt;Fossil SCM 一般操作&lt;/h2&gt;
+&lt;p&gt;&lt;a href="http://www.gaia-gis.it/gaia-sins/about-fossil.html"&gt;http://www.gaia-gis.it/gaia-sins/about-fossil.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;fossil clone https://www.gaia-gis.it/fossil/librasterlite \
+    librasterlite.fossil&lt;/p&gt;
+&lt;p&gt;或者 &lt;/p&gt;
+&lt;p&gt;fossil clone https://user:password@www.gaia-gis.it/fossil/librasterlite \
+    librasterlite.fossil&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;將倉儲內容開啟, 放入工作目錄中&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class="brush: jscript"&gt;
+$ mkdir librasterlite
+$ cd librasterlite
+$ fossil open ../librasterlite.fossil
+&lt;/pre&gt;
+
+&lt;ol&gt;
+&lt;li&gt;對工作目錄中的檔案改版後, 查詢改版情形&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;fossil status&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;選擇編輯器, 提交版本至遠端倉儲後關閉&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class="brush: jscript"&gt;
+$ export "EDITOR=vi"
+$ fossil commit
+$ fossil close
+&lt;/pre&gt;
+
+&lt;ol&gt;
+&lt;li&gt;其他 Fossil SCM 指令: &lt;a href="http://fossil-scm.org/index.html/help"&gt;http://fossil-scm.org/index.html/help&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Fossil SCM 特色:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Integrated Bug Tracking, Wiki, and Technotes&lt;/li&gt;
+&lt;li&gt;Built-In Web Interface&lt;/li&gt;
+&lt;li&gt;Self-Contained&lt;/li&gt;
+&lt;li&gt;Simple Networking&lt;/li&gt;
+&lt;li&gt;CGI/SCGI Enabled&lt;/li&gt;
+&lt;li&gt;Autosync&lt;/li&gt;
+&lt;li&gt;Robust &amp;amp; Reliable&lt;/li&gt;
+&lt;li&gt;Free and Open-Source&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Fossil (4 MB) 只需要 zlib 與 stunnel (4MB), 就可以充分使用, 但是 git 則需要許多程式庫與套件才能執行 (200 MB)&lt;/p&gt;</summary><category term="fossil-scm"></category><category term="w2"></category></entry><entry><title>V-rep 簡介</title><link href="./vrep-introduction.html" rel="alternate"></link><published>2017-02-09T11:00:00+08:00</published><updated>2017-02-09T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-02-09:./vrep-introduction.html</id><summary type="html">&lt;p&gt;V-rep (Virtual robot experimentation platform)&lt;/p&gt;
 
 
 &lt;h2&gt;V-rep Overview&lt;/h2&gt;

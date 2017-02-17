@@ -315,10 +315,13 @@ init_mathjax();
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <p>Fossil SCM 是一套軟體配置管理 (Software Configuration Management) 系統, 其中包含分散式版次控管 (DVC, Distributed Version Control) 、Wiki 、Bug Tracking 與  Technote 等功能, 可以用來控制及追蹤軟體開發專案, 並且紀錄專案開發歷程, 在協同產品設計實習課程中, 我們除了使用 git、github 與 bitbucket 之外, 將要在區域網路與系上主幹中, 配置每班兩台的 Fossil SCM 實習主機.</p>
+                <p>Fossil SCM 是一套軟體配置管理 (Software Configuration Management) 系統, 其中包含分散式版次控管 (DVC, Distributed Version Control) 、<a href="http://fossil-scm.org/xfer/doc/trunk/www/wikitheory.wiki">Wiki</a> 、<a href="http://fossil-scm.org/xfer/doc/trunk/www/bugtheory.wiki">Bug Tracking</a> 與 <a href="http://fossil-scm.org/xfer/doc/trunk/www/event.wiki">Technote</a> 等功能, 可以用來控制及追蹤軟體開發專案, 並且紀錄專案開發歷程, 在協同產品設計實習課程中, 我們除了使用 git、github 與 bitbucket 之外, 將要在區域網路與系上主幹中, 配置每班兩台的 Fossil SCM 實習主機.</p>
 
 
 <h2>Fossil SCM</h2>
+<h3>Fossil Concepts</h3>
+<p>check-in - 簽入版本: 對所開發的軟體進行改版後, 簽入倉儲的版本, 稱為簽入版本.</p>
+<p>repository - 倉儲: 包含開發專案歷程中, 所有簽入版本檔案的資料庫, 稱為倉儲.</p>
 <p>建立新倉儲</p>
 <p>可以使用 <a href="http://fossil-scm.org/index.html/help?cmd=new">fossil new</a> 或 <a href="http://fossil-scm.org/index.html/help?cmd=init">fossil init</a></p>
 <p>fossil new foo.fossil</p>
@@ -465,6 +468,8 @@ $ fossil close
 <li>Free and Open-Source</li>
 </ol>
 <p>Fossil (4 MB) 只需要 zlib 與 stunnel (4MB), 就可以充分使用, 但是 git 則需要許多程式庫與套件才能執行 (200 MB)</p>
+<h2>參考資料</h2>
+<p><a href="http://www.fredshack.com/docs/fossil.html">http://www.fredshack.com/docs/fossil.html</a></p>
             </div>
             <!-- /.entry-content -->
         </article>

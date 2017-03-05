@@ -355,7 +355,7 @@ When the second restore() statement is called, the original state (the one we se
 &lt;p&gt;另外, 以 A 點為起點的主動旋轉桿長為 d1, BC 連桿長為 d2, CD 桿長度為 d3, AD 桿長為 d4, BC 連桿上與旋轉路徑目標點 E 對應的點為 F, 與 B 點的距離為 d5, 與 E 點垂直距離為 d6, 主動旋轉軸的逆時鐘旋轉角度則為 t.&lt;/p&gt;
 &lt;p&gt;此一平面四連桿的輸入為 x1, y1, x4, y4, d1, d2, d3, d5, d6, 以及 t, 輸出則為 E 點的運動路徑.&lt;/p&gt;
 &lt;p&gt;&lt;img src="./../data/planar_fourbar_triangle.png" width="800" /&gt;&lt;/p&gt;
-&lt;p&gt;利用 sympy 求解:&lt;/p&gt;
+&lt;p&gt;利用 &lt;a href="http://www.sympy.org/"&gt;Sympy&lt;/a&gt; 求解:&lt;/p&gt;
 &lt;pre class="brush: python"&gt;
 from sympy import *
 '''
@@ -424,6 +424,66 @@ if pos == 1:
 else:
     bdc = solve(-d2**2+d3**2+bd**2-2*d3*bd*cos(bdc), bdc)[1]
 print(t3)
+&lt;/pre&gt;
+
+&lt;h3&gt;PLAP 三角形符號運算&lt;/h3&gt;
+&lt;p&gt;已知 Point a, Lengeh ac, Angle cab, Point b, 求 c 點座標.&lt;/p&gt;
+&lt;p&gt;利用 &lt;a href="http://solvespace.com/"&gt;Solvespace&lt;/a&gt; 繪製 2D 圖:&lt;/p&gt;
+&lt;p&gt;&lt;img src="./../data/fourbar_plap_solvespace.png" width="800" /&gt;&lt;/p&gt;
+&lt;p&gt;利用 &lt;a href="https://github.com/jupyterhub/jupyterhub"&gt;Jupyterhub&lt;/a&gt; 執行網際符號 (Symbolic) 與數值 (Numerical) 分析運算:&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://fossies.org/linux/misc/sympy-docs-pdf-1.0.pdf"&gt;Sympy 1.0 手冊.pdf&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="./../data/fourbar_plap_sympy.png" width="800" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.sympy.org/"&gt;Sympy&lt;/a&gt; 符號運算程式碼:&lt;/p&gt;
+&lt;pre class="brush: python"&gt;
+from sympy import *
+
+# inputs
+ax, ay, bx, by, cab, ac = symbols('ax ay bx by cab ac')
+# intermediate variables
+d, bad, degree= symbols('d bad degree')
+ad, bd = symbols('ad bd')
+# outputs
+cx, cy = symbols('cx cy')
+# 從 a, b 點座標求 d, ad 與 bd
+d = sqrt((ax-bx)**2+(ay-by)**2)
+ad = bx-ax
+bd = by-ay
+#ac = sqrt((ax-cx)**2+(ay-cy)**2)
+# 從兩組解中擇一
+pos = 1
+if pos == 0:
+    bad = solve(-bd**2+ad**2+d**2-2*ad*d*cos(bad), bad)[0]
+else:
+    bad = solve(-bd**2+ad**2+d**2-2*ad*d*cos(bad), bad)[1]
+#print(bad)
+
+cx = ac*cos(cab+bad)
+cy = ac*sin(cab+bad)
+print("cx=", cx, "cy=", cy)
+&lt;/pre&gt;
+
+&lt;p&gt;數值分析運算程式碼:&lt;/p&gt;
+&lt;pre class="brush: python"&gt;
+from math import *
+
+def bad(ax, ay, bx, by, pos):
+    if pos == 0:
+        return -acos(-(ax - bx)/sqrt(ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2)) + 2*pi
+    else:
+        return acos((-ax + bx)/sqrt(ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2))
+
+radian = 180/pi
+degree = pi/180
+
+def cpoint(ax, ay, bx, by, cab, ac):
+    cx = ac*cos(cab + acos((-ax + bx)/sqrt(ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2)))
+    cy = ac*sin(cab + acos((-ax + bx)/sqrt(ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2)))
+    return cx, cy
+
+#print("bad 角度為", bad(0, 0, 100, 56, 1)*radian, "度")
+
+cx, cy = cpoint(0, 0, 100, 56, 30*degree, 30)
+print("cx=", cx, "cy=", cy)
 &lt;/pre&gt;</summary><category term="brython"></category><category term="w1"></category></entry><entry><title>Fossil SCM 簡介</title><link href="./intro-fossil-scm.html" rel="alternate"></link><published>2017-02-17T11:00:00+08:00</published><updated>2017-02-17T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-02-17:./intro-fossil-scm.html</id><summary type="html">&lt;p&gt;Fossil SCM 是一套軟體配置管理 (Software Configuration Management) 系統, 其中包含分散式版次控管 (DVC, Distributed Version Control) 、&lt;a href="http://fossil-scm.org/xfer/doc/trunk/www/wikitheory.wiki"&gt;Wiki&lt;/a&gt; 、&lt;a href="http://fossil-scm.org/xfer/doc/trunk/www/bugtheory.wiki"&gt;Bug Tracking&lt;/a&gt; 與 &lt;a href="http://fossil-scm.org/xfer/doc/trunk/www/event.wiki"&gt;Technote&lt;/a&gt; 等功能, 可以用來控制及追蹤軟體開發專案, 並且紀錄專案開發歷程, 在協同產品設計實習課程中, 我們除了使用 git、github 與 bitbucket 之外, 將要在區域網路與系上主幹中, 配置每班兩台的 Fossil SCM 實習主機.&lt;/p&gt;
 
 

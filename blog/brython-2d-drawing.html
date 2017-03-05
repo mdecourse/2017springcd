@@ -593,58 +593,114 @@ print(t3)
 <p>利用 <a href="https://github.com/jupyterhub/jupyterhub">Jupyterhub</a> 執行網際符號 (Symbolic) 與數值 (Numerical) 分析運算:</p>
 <p><a href="https://fossies.org/linux/misc/sympy-docs-pdf-1.0.pdf">Sympy 1.0 手冊.pdf</a></p>
 <p><img src="./../data/fourbar_plap_sympy.png" width="800" /></p>
+<h2>PLAP 方程式推導</h2>
+<p>已知 Point a, Length ac, Angle bac 與 Point b, 求 c 點座標.</p>
 <p><a href="http://www.sympy.org/">Sympy</a> 符號運算程式碼:</p>
 <pre class="brush: python">
-from sympy import *
+#PLAP
+from sympy import symbols, sqrt, solve, cos, sin, Abs
 
 # inputs
-ax, ay, bx, by, cab, ac = symbols('ax ay bx by cab ac')
+ax, ay, bx, by, bac, ac = symbols('ax ay bx by bac ac')
 # intermediate variables
-d, bad, degree= symbols('d bad degree')
+ab, dab = symbols('ab dab')
 ad, bd = symbols('ad bd')
 # outputs
 cx, cy = symbols('cx cy')
-# 從 a, b 點座標求 d, ad 與 bd
-d = sqrt((ax-bx)**2+(ay-by)**2)
-ad = bx-ax
-bd = by-ay
-#ac = sqrt((ax-cx)**2+(ay-cy)**2)
-# 從兩組解中擇一
-pos = 1
-if pos == 0:
-    bad = solve(-bd**2+ad**2+d**2-2*ad*d*cos(bad), bad)[0]
-else:
-    bad = solve(-bd**2+ad**2+d**2-2*ad*d*cos(bad), bad)[1]
-#print(bad)
-
-cx = ac*cos(cab+bad)
-cy = ac*sin(cab+bad)
+# 從 a, b 點座標求 ab, ad 與 bd
+ab = sqrt((ax-bx)**2+(ay-by)**2)
+ad = Abs(bx-ax)
+bd = Abs(by-ay)
+data = solve(-bd**2+ad**2+ab**2-2*ad*ab*cos(dab), dab)
+# 第1組解
+dab = data[0]
+cx = ax+ac*cos(dab+bac)
+cy = ay+ac*sin(dab+bac)
+print("cx=", cx, "cy=", cy)
+# 第二組解
+dab = data[1]
+cx = ax+ac*cos(dab+bac)
+cy = ay+ac*sin(dab+bac)
 print("cx=", cx, "cy=", cy)
 </pre>
 
-<p>數值分析運算程式碼:</p>
+<h2>PLLP 方程式推導</h2>
+<p>已知 Point a, Length ac, Length cb 與 Point b, 求 c 點座標.</p>
 <pre class="brush: python">
-from math import *
+#PLLP
+from sympy import symbols, sqrt, solve, cos, sin, Abs
 
-def bad(ax, ay, bx, by, pos):
-    if pos == 0:
-        return -acos(-(ax - bx)/sqrt(ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2)) + 2*pi
-    else:
-        return acos((-ax + bx)/sqrt(ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2))
+# inputs
+ax, ay, bx, by, ac, cb = symbols('ax ay bx by ac cb')
+# intermediate variables
+ab, dab, bac, degree= symbols('ab dab bac degree')
+ad, bd = symbols('ad bd')
+# outputs
+cx, cy = symbols('cx cy')
+# 從 a, b 點座標求 ab
+ab = sqrt((ax-bx)**2+(ay-by)**2)
+#從三角形已知三邊長, 求解 cx, cy
+data = solve([ac**2-((ax-cx)**2+(ay-cy)**2), cb**2-((cx-bx)**2+(cy-by)**2)], [cx, cy])
+# 第1組解
+print("cx = ", data[0][0])
+print("cy = ", data[0][1])
+# 第2組解
+print("cx = ", data[1][0])
+print("cy = ", data[1][1])
+</pre>
+
+<p>數值分析驗證程式碼:</p>
+<pre class="brush: python">
+from math import pi, cos, sin, sqrt, acos
 
 radian = 180/pi
 degree = pi/180
 
-def cpoint(ax, ay, bx, by, cab, ac):
-    cx = ac*cos(cab + acos((-ax + bx)/sqrt(ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2)))
-    cy = ac*sin(cab + acos((-ax + bx)/sqrt(ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2)))
+#PLAP
+def plap(ax, ay, ac, bac, bx, by, pos):
+    if pos == 0:
+        cx= ac*cos(bac - acos((ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2 + abs(ax - bx)**2 - abs(ay - by)**2)/(2*sqrt(ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2)*abs(ax - bx)))) + ax 
+        cy= ac*sin(bac - acos((ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2 + abs(ax - bx)**2 - abs(ay - by)**2)/(2*sqrt(ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2)*abs(ax - bx)))) + ay
+    else:
+        cx= ac*cos(bac + acos((ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2 + abs(ax - bx)**2 - abs(ay - by)**2)/(2*sqrt(ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2)*abs(ax - bx)))) + ax 
+        cy= ac*sin(bac + acos((ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2 + abs(ax - bx)**2 - abs(ay - by)**2)/(2*sqrt(ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2)*abs(ax - bx)))) + ay
     return cx, cy
 
-#print("bad 角度為", bad(0, 0, 100, 56, 1)*radian, "度")
+#PLLP
+def pllp(ax, ay, ac, cb, bx, by, pos):
+    if pos == 0:
+        cx =  -((ay - by)*(-ac**2*ay + ac**2*by + ax**2*ay + ax**2*by - 2*ax*ay*bx - 2*ax*bx*by + ay**3 - ay**2*by + ay*bx**2 - ay*by**2 + ay*cb**2 + bx**2*by + by**3 - by*cb**2 - sqrt((-ac**2 + 2*ac*cb + ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2 - cb**2)*(ac**2 + 2*ac*cb - ax**2 + 2*ax*bx - ay**2 + 2*ay*by - bx**2 - by**2 + cb**2))*(ax - bx)) + (ac**2 - ax**2 - ay**2 + bx**2 + by**2 - cb**2)*(ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2))/(2*(ax - bx)*(ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2))
+        cy =  (-ac**2*ay + ac**2*by + ax**2*ay + ax**2*by - 2*ax*ay*bx - 2*ax*bx*by + ay**3 - ay**2*by + ay*bx**2 - ay*by**2 + ay*cb**2 + bx**2*by + by**3 - by*cb**2 + sqrt((-ac**2 + 2*ac*cb + ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2 - cb**2)*(ac**2 + 2*ac*cb - ax**2 + 2*ax*bx - ay**2 + 2*ay*by - bx**2 - by**2 + cb**2))*(-ax + bx))/(2*(ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2))
+    else:
+        cx =  -((ay - by)*(-ac**2*ay + ac**2*by + ax**2*ay + ax**2*by - 2*ax*ay*bx - 2*ax*bx*by + ay**3 - ay**2*by + ay*bx**2 - ay*by**2 + ay*cb**2 + bx**2*by + by**3 - by*cb**2 + sqrt((-ac**2 + 2*ac*cb + ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2 - cb**2)*(ac**2 + 2*ac*cb - ax**2 + 2*ax*bx - ay**2 + 2*ay*by - bx**2 - by**2 + cb**2))*(ax - bx)) + (ac**2 - ax**2 - ay**2 + bx**2 + by**2 - cb**2)*(ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2))/(2*(ax - bx)*(ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2))
+        cy =  (-ac**2*ay + ac**2*by + ax**2*ay + ax**2*by - 2*ax*ay*bx - 2*ax*bx*by + ay**3 - ay**2*by + ay*bx**2 - ay*by**2 + ay*cb**2 + bx**2*by + by**3 - by*cb**2 + sqrt((-ac**2 + 2*ac*cb + ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2 - cb**2)*(ac**2 + 2*ac*cb - ax**2 + 2*ax*bx - ay**2 + 2*ay*by - bx**2 - by**2 + cb**2))*(ax - bx))/(2*(ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2))
+    return cx, cy
 
-cx, cy = cpoint(0, 0, 100, 56, 30*degree, 30)
+ax = -60
+ay = 0
+bx = 0
+by = 0
+bac = 50*degree
+ac = 30
+cd = 50
+db = 60
+ce = 50
+ed = 50
+cx, cy = plap(ax, ay, ac, bac, bx, by, 0)
 print("cx=", cx, "cy=", cy)
+dx, dy = pllp(cx, cy, cd, db, bx, by, 0)
+print("dx=", dx, "dy=", dy)
+ex, ey = pllp(cx, cy, ce, ed, dx, dy, 0)
+print("ex=", ex, "ey=", ey)
 </pre>
+
+<p>結果:</p>
+<p>cx= -40.716371709403816 cy= 22.98133329356934</p>
+<p>dx= -6.698073034033397 dy= 59.62495968661744</p>
+<p>ex= -55.44153371488418 ey= 70.76385733649067</p>
+<p>上述符號運算式推導之方程式, 透過數值分析運算與下列圖解法進行比對驗證:</p>
+<p><img src="./../data/fourbar_numerical.png" width="800" /></p>
+<p><a href="https://service.mde.tw/download/?type=files&filename=fourbar_solvespace_numerical.7z">數值分析對應之 Solvespace 圖檔.7z</a> (或 <a href="./../data/fourbar_numerical_solvespace.7z">fourbar_numerical_solvespace.7z</a>)</p>
             </div>
             <!-- /.entry-content -->
         </article>

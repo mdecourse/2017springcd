@@ -340,7 +340,8 @@ set HTTPS=on
 REM 指令搜尋路徑設定
 set path1=%PATH%;%Disk%:;%Disk%:\python-3.5.3-embed-amd64;%Disk%:\git\bin;%Disk%:\stunnel\bin;%Disk%:\sqlite-tools;%Disk%:\python-3.5.3-embed-amd64\Scripts;%Disk%:\portablegit\bin;
 set path2=c:\Windows\Microsoft.NET\Framework\v3.5;%Disk%:\python-3.5.3-embed-amd64\Lib\site-packages;
-path=%path%;%path1%;%path2%
+set path3="C:\Program Files (x86)\Google\Chrome\Application"
+path=%path%;%path1%;%path2%;%path3%
 start /MIN %Disk%:\wscite\SciTE.exe
 start /MIN cmd.exe
 start /MIN cmd.exe
@@ -348,7 +349,7 @@ start /MIN cmd.exe
 REM 啟動 Leo 編輯器
 REM %Disk%:\Miniconda3\python.exe %Disk%:\apps\launchLeo.py
 REM 啟動 stunnel
-start /MIN fossil.exe server -P 127.0.0.1:8080 %Disk%:\tmp\fossil_repo
+start /MIN fossil.exe server -P 127.0.0.1:8080 %Disk%:\tmp\fossil_repo\vcp.fossil
 REM 取得電腦 IP, 然後設定 %Disk%:/stunnel/config/stunnel.conf
 for /f "delims=[] tokens=2" %%a in ('ping -4 -n 1 %ComputerName% ^| findstr [') do set NetworkIP=%%a
 REM echo Network IP: %NetworkIP%
@@ -364,8 +365,39 @@ REM 附加資料
 @echo key = %Disk%:\stunnel\config\localhost.key >> %Disk%:\stunnel\config\stunnel.conf
 REM 啟動 stunnel
 start /MIN stunnel.exe
+REM 以 chrome 連線到 https://%NetworkIP%:443
+chrome https://%NetworkIP%
 Exit
 </pre>
+
+<h2>編譯 sqlite3</h2>
+<p>cc -O3 -DSQLITE_THREADSAFE=0 sqlite3.c shell.c -ldl -o sqlite3</p>
+<h2>fossil clone 指令</h2>
+<p>fossil clone https://userid@mde2a2.kmol.info/cdag1 cdag1.fossil</p>
+<p>接著輸入與 userid 對應的密碼</p>
+<p>If you already have a username and password on the remote repository, you may introduce it in the URL:</p>
+<p>$ fossil clone https://userid:password@mde2a2.kmol.info/cdag1  cdag1.fossil</p>
+<h2>fossil push 指令</h2>
+<p><a href="https://www.fossil-scm.org/xfer/help?cmd=remote-url">fossil remote-url off</a> 之後, 或 autosync</p>
+<p>fossil push https://userid@mde2a2.kmol.info/cdag1</p>
+<p>接著輸入與 userid 對應的密碼</p>
+<p><a href="http://brandon.invergo.net/news/2013-07-11-A-quick-introduction-to-version-control-with-Fossil.html">http://brandon.invergo.net/news/2013-07-11-A-quick-introduction-to-version-control-with-Fossil.html</a></p>
+<h2>實際利用 cmsimfly 倉儲操作</h2>
+<p>fossil clone https://mde2a2.kmol.info/cmsimfly/ cmsimfly.fossil</p>
+<p>cd wd</p>
+<p>fossil open ./../cmsimfly.fossil</p>
+<p>利用 Leo Editor, 進行內容改版.</p>
+<p>以遞迴方式納入全部的變更.</p>
+<p>fossil add .</p>
+<p>假如 fossil clone 後綁定 scrum1 以外的用戶帳號, 利用 fossil remote-url off 切斷此一綁定.</p>
+<p>fossil remote-url off</p>
+<p>以 fossil commit 進行提交, 並確認綁定 scrum1 帳號.</p>
+<p>fossil commit --user-override scrum1  -m "commit message" </p>
+<p>內容 fossil commit 將會同時 fossil push 版本到 remote url.</p>
+<p>假如 autosync 設為 off, 則以下列指令進行 fossil push.</p>
+<p>fossil push https://scrum1@mde2a2.kmol.info/cmsimfly</p>
+<p>輸入 scrum1 的對應密碼後完成版本推送.</p>
+<p>在 Fossil SCM 系統上的 <a href="https://mde2a2.kmol.info/cmsimfly/dir?ci=tip">CMSimfly 倉儲</a>.</p>
             </div>
             <!-- /.entry-content -->
         </article>

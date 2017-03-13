@@ -543,6 +543,11 @@ print("ex=", ex, "ey=", ey)
 &lt;p&gt;&lt;a href="https://service.mde.tw/download/?type=files&amp;filename=fourbar_solvespace_numerical.7z"&gt;數值分析對應之 Solvespace 圖檔.7z&lt;/a&gt; (或 &lt;a href="./../data/fourbar_numerical_solvespace.7z"&gt;fourbar_numerical_solvespace.7z&lt;/a&gt;)&lt;/p&gt;</summary><category term="brython"></category><category term="w1"></category></entry><entry><title>Fossil SCM 簡介</title><link href="./intro-fossil-scm.html" rel="alternate"></link><published>2017-02-17T11:00:00+08:00</published><updated>2017-02-17T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-02-17:./intro-fossil-scm.html</id><summary type="html">&lt;p&gt;Fossil SCM 是一套軟體配置管理 (Software Configuration Management) 系統, 其中包含分散式版次控管 (DVC, Distributed Version Control) 、&lt;a href="http://fossil-scm.org/xfer/doc/trunk/www/wikitheory.wiki"&gt;Wiki&lt;/a&gt; 、&lt;a href="http://fossil-scm.org/xfer/doc/trunk/www/bugtheory.wiki"&gt;Bug Tracking&lt;/a&gt; 與 &lt;a href="http://fossil-scm.org/xfer/doc/trunk/www/event.wiki"&gt;Technote&lt;/a&gt; 等功能, 可以用來控制及追蹤軟體開發專案, 並且紀錄專案開發歷程, 在協同產品設計實習課程中, 我們除了使用 git、github 與 bitbucket 之外, 將要在區域網路與系上主幹中, 配置每班兩台的 Fossil SCM 實習主機.&lt;/p&gt;
 
 
+&lt;h2&gt;採用 git, github, bitbucket 與 fossil 原因&lt;/h2&gt;
+&lt;p&gt;使用 git 原因 - git 是目前使用最廣泛的分散式版次管理工具.&lt;/p&gt;
+&lt;p&gt;使用 github 原因 - github 是目前主流 git 網際服務系統, 允許無協同人數限制的免費倉儲協同, 提供 github pages 可以伺服 html 與 javascript 網頁.&lt;/p&gt;
+&lt;p&gt;使用 bitbucket 原因 - bitbucket 允許使用者免費建立非公開型倉儲, 可採用 git 進行分散式版次管理.&lt;/p&gt;
+&lt;p&gt;使用 fossil scm 原因 - fossil 工具精簡, 適合用於小團隊分散式版次管理, 提供網際 wiki, ticket, technote 等實用功能.&lt;/p&gt;
 &lt;h2&gt;Fossil SCM&lt;/h2&gt;
 &lt;h3&gt;Fossil Concepts&lt;/h3&gt;
 &lt;p&gt;check-in - 簽入版本: 對所開發的軟體進行改版後, 簽入倉儲的版本, 稱為簽入版本.&lt;/p&gt;

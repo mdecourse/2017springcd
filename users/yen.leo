@@ -63,8 +63,14 @@
 <v t="yen.20170207091131.4"><vh>filereader</vh></v>
 </v>
 <v t="yen.20170209092319.1"><vh>@edit 20170209.md</vh></v>
-<v t="yen.20170217105706.1" a="M"><vh>@edit 20170217.md</vh></v>
+<v t="yen.20170314213339.1"><vh>@edit 20170217.md</vh></v>
 <v t="yen.20170221100209.1"><vh>@edit 20170222.md</vh></v>
+<v t="yen.20170314213424.1" a="E"><vh>@clean 20170314.md</vh>
+<v t="yen.20170314213424.2"><vh>ex1 - for 迴圈</vh></v>
+<v t="yen.20170314213424.3"><vh>ex2 - input 與單位換算</vh></v>
+<v t="yen.20170314214818.1"><vh>ex3 - jansen 多連桿機構</vh></v>
+<v t="yen.20170314213424.4"><vh>filereader</vh></v>
+</v>
 <v t="yen.20170108171733.81"><vh>@path pages</vh>
 <v t="yen.20170108171733.82"><vh>@edit pages_1.md</vh></v>
 </v>
@@ -742,8 +748,8 @@ Brython 程式環境可以用來練習許多 Python3 的簡單語法, 也可以�
 &lt;script type="text/javascript" src="./../ace/filereader.js"&gt;&lt;/script&gt;
 
 &lt;!-- 導入 Brython 標準程式庫 --&gt;
-&lt;!-- &lt;script type="text/javascript" src="https://cdn.rawgit.com/brython-dev/brython/master/www/src/brython_dist.js"&gt;
-&lt;/script&gt; --&gt;
+&lt;!--&lt;script type="text/javascript" src="https://cdn.rawgit.com/brython-dev/brython/master/www/src/brython_dist.js"&gt;
+&lt;/script&gt;--&gt;
 
 &lt;!-- 為了讓 import script1 可以正確運行, 停留在 Brython 3.2.9 版 --&gt;
 
@@ -2103,5 +2109,428 @@ if __name__ == '__main__':
 </t>
 <t tx="yen.20170215103217.1"></t>
 <t tx="yen.20170215103228.1"></t>
+<t tx="yen.20170314213424.1">@language md
+Title: 網際 Brython 3.3.1 程式執行環境 
+Date: 2017-03-14 11:00
+Category: Course
+Tags: brython, w1
+Slug: brython-editor-331
+Author: yen
+
+Brython 程式環境可以用來練習許多 Python3 的簡單語法, 也可以納入 Javascript 程式庫, 利用 Ajax 模式結合網際瀏覽器與伺服器上的資源解決協同產品設計流程上的問題.
+
+&lt;!-- PELICAN_END_SUMMARY --&gt;
+
+&lt;!-- 導入 FileSaver 與 filereader --&gt;
+&lt;script type="text/javascript" src="./../ace/FileSaver.min.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="./../ace/filereader.js"&gt;&lt;/script&gt;
+
+&lt;!-- 導入最新版的 Brython 標準程式庫 --&gt;
+&lt;script type="text/javascript" src="https://cdn.rawgit.com/brython-dev/brython/master/www/src/brython_dist.js"&gt;
+&lt;/script&gt;
+
+
+&lt;!-- 啟動 Brython 時, 設定 pythonpath 為 data/py, 並將 script1.py 放入, 以便取代 3.2.9 之前版本的 script id 導入 --&gt;
+&lt;script&gt;
+window.onload=function(){
+brython({debug:1, pythonpath:['./../data/py']});
+}
+&lt;/script&gt;
+
+&lt;!-- 以下執行 Brython 程式 --&gt;
+
+列出 2017 Spring 協同產品設計實習課程日期之 Python 程式碼如下:
+
+&lt;pre class="brush: python"&gt;
+&lt;div id="cal2"&gt;&lt;/div&gt;
+&lt;script type="text/python3"&gt;
+from browser import document, html
+import calendar
+import locale
+
+cal2 = document["cal2"]
+
+def getClassdate(year=2017, startM=2, startD=20, w=0, note=""):
+    # w=0 表示課程排在星期一
+    # startM 表示開學月份, startD 表示開學日
+    # note 為課程初始告示
+    # default calendar MONDAY is the first day of the week
+    # 每學期共有 18 週
+    totalW = 18
+    count = 0
+    # output = "2017 Spring 2bCD (三) 08:10-12:00 各週上課日期: "
+    output = note + html.BR()
+    # 若必須全年搜尋則 7 改為 12, 但是因為只有 18 週, 因此邏輯要修改讓程式較快結束
+    for month in range(startM, 7):
+        monthArray = calendar.monthcalendar(2017, month)
+        for week in range(len(monthArray)):
+            weekArray = monthArray[week]
+            # 只需要列出星期 (w+1)
+            if weekArray[w] != 0:
+                if month == startM:
+                    if weekArray[startM] &gt; startD:
+                        count += 1
+                        if count &lt;= totalW:
+                            if month == 3 and weekArray[w] == 31:
+                                output += "w"+str(count)+"-"+ str(month)+ "/" + str(weekArray[w]) + "(放假), "
+                            else:
+                                output += "w"+str(count)+"-"+ str(month)+ "/" + str(weekArray[w]) + ", "
+                else:
+                    count += 1
+                    if count &lt;=  totalW:
+                        if month == 3 and weekArray[w] == 31:
+                            output += "w"+str(count)+"-"+ str(month)+ "/" + str(weekArray[w]) + "(放假), "
+                        else:
+                            output += "w"+str(count)+"-"+ str(month)+ "/" + str(weekArray[w]) + ", "
+    cal2 &lt;= output
+
+# 2b 協同產品設計實習 (三 w=2)
+getClassdate(year=2017, startM=2, startD=20, w=2, note="2017 Spring 2bCD (三) 08:10-12:00 各週上課日期: ")
+cal2 &lt;= html.BR() + html.BR()
+# 2a 協同產品設計實習 (四 w=3)
+getClassdate(year=2017, startM=2, startD=20, w=3, note="2017 Spring 2aCD (四) 08:10-12:00 各週上課日期: ")
+cal2 &lt;= html.BR() + html.BR()
+# 1a 網際內容管理 (五 w=4)
+getClassdate(year=2017, startM=2, startD=20, w=4, note="2017 Spring 1aWCM (五) 13:20-16:10 各週上課日期: ")
+cal2 &lt;= html.BR() + html.BR()
+# VE1a 網際內容管理 (五 w=4)
+getClassdate(year=2017, startM=2, startD=20, w=4, note="2017 Spring VE1aCP (五) 18:30-20:00 各週上課日期: ")
+cal2 &lt;= html.BR() + html.BR()
+&lt;/script&gt;
+&lt;/pre&gt;
+
+### 利用伺服器執行 Python3 程式
+
+Jupyterhub: &lt;a href="https://8888.kmol.info:9443"&gt;https://8888.kmol.info:9443&lt;/a&gt;
+
+### 利用以下的編輯器執行 Python3 程式
+
+在 Firefox 中, 以 Preferences - General - Downloads 選擇"Always ask me where to save files"
+
+在 Chrome 中, 以 Settings - Advanced - Downloads 選擇 Ask where to save each file before downloading
+
+&lt;script src="./../ace/ace.js" type="text/javascript" charset="utf-8"&gt;&lt;/script&gt;
+&lt;script src="./../ace/ext-language_tools.js" type="text/javascript" charset="utf-8"&gt;&lt;/script&gt;
+&lt;script src="./../ace/mode-python3.js" type="text/javascript" charset="utf-8"&gt;&lt;/script&gt;
+&lt;script src="./../ace/snippets/python.js" type="text/javascript" charset="utf-8"&gt;&lt;/script&gt;
+&lt;!-- 請注意, 這裡使用 Javascript 將 localStorage["py_src"] 中存在近端瀏覽器的程式碼, 由使用者決定存檔名稱--&gt;
+&lt;script type="text/javascript"&gt;
+function doSave(){
+    var blob = new Blob([localStorage["py_src"]], {type: "text/plain;charset=utf-8"});
+    filename = document.getElementById('filename').value
+    saveAs(blob, filename+".py");
+}
+&lt;/script&gt;
+
+&lt;!-- 請注意 Brython 3.3.0 之後的版本, 已經不能使用 script id 模式導入, 改用 pythonpath 中的 script1.py 供後續導入 --&gt;
+
+&lt;script type="text/python3" id="script1"&gt;
+import sys
+import time
+import traceback
+import javascript
+
+from browser import document as doc, window, alert
+
+has_ace = True
+try:
+    editor = window.ace.edit("editor")
+    session = editor.getSession()
+    session.setMode("ace/mode/python")
+
+    editor.setOptions({
+     'enableLiveAutocompletion': True,
+     'enableSnippets': True,
+     'highlightActiveLine': False,
+     'highlightSelectedWord': True
+    })
+except:
+    from browser import html
+    editor = html.TEXTAREA(rows=20, cols=70)
+    doc["editor"] &lt;= editor
+    def get_value(): return editor.value
+    def set_value(x):editor.value = x
+    editor.getValue = get_value
+    editor.setValue = set_value
+    has_ace = False
+
+if hasattr(window, 'localStorage'):
+    from browser.local_storage import storage
+else:
+    storage = None
+
+def reset_src():
+    if storage is not None and "py_src" in storage:
+        editor.setValue(storage["py_src"])
+    else:
+        editor.setValue('for i in range(10):\n\tprint(i)')
+    editor.scrollToRow(0)
+    editor.gotoLine(0)
+
+def reset_src_area():
+    if storage and "py_src" in storage:
+        editor.value = storage["py_src"]
+    else:
+        editor.value = 'for i in range(10):\n\tprint(i)'
+
+class cOutput:
+
+    def __init__(self,target):
+        self.target = doc[target]
+    def write(self,data):
+        self.target.value += str(data)
+        
+
+#if "console" in doc:
+sys.stdout = cOutput("console")
+sys.stderr = cOutput("console")
+
+def to_str(xx):
+    return str(xx)
+
+info = sys.implementation.version
+doc['version'].text = 'Brython %s.%s.%s' % (info.major, info.minor, info.micro)
+
+output = ''
+
+def show_console(ev):
+    doc["console"].value = output
+    doc["console"].cols = 60
+    doc["console"].rows = 10
+
+# load a Python script
+def load_script(evt):
+    _name = evt.target.value + '?foo=%s' % time.time()
+    editor.setValue(open(_name).read())
+
+# run a script, in global namespace if in_globals is True
+def run(*args):
+    global output
+    doc["console"].value = ''
+    src = editor.getValue()
+    if storage is not None:
+       storage["py_src"] = src
+
+    t0 = time.perf_counter()
+    try:
+        #ns = {'__name__':'__main__'}
+        ns = {'__name__':'editor'}
+        exec(src, ns)
+        state = 1
+    except Exception as exc:
+        traceback.print_exc(file=sys.stderr)
+        state = 0
+    output = doc["console"].value
+
+    print('&lt;completed in %6.2f ms&gt;' % ((time.perf_counter() - t0) * 1000.0))
+    return state
+
+if has_ace:
+    reset_src()
+else:
+    reset_src_area()
+    
+def clear_console(ev):
+    doc["console"].value = ""
+
+doc['run'].bind('click',run)
+doc['show_console'].bind('click',show_console)
+doc['clear_console'].bind('click',clear_console)
+&lt;/script&gt;
+
+&lt;div id="version"&gt;&lt;/div&gt;
+&lt;div id="editor" style="width:600px;height:300px;"&gt;&lt;/div&gt;
+
+&lt;!-- 以下的表單與按鈕與前面的 Javascript doSave 函式以及 FileSaver.min.js 互相配合 --&gt;
+
+&lt;form&gt;
+    &lt;label&gt;Filename: &lt;input type="text" id="filename" placeholder="input file name"/&gt;.py&lt;/label&gt;
+    &lt;input type="submit" value="Save" onclick="doSave();"/&gt;
+&lt;/form&gt;
+&lt;button id="run"&gt;Run&lt;/button&gt;
+&lt;button id="show_console"&gt;Output&lt;/button&gt;
+&lt;button id="clear_console"&gt;清除&lt;/button&gt;
+&lt;div style="width:100%;height:100%;"&gt;
+&lt;textarea id="console" autocomplete="off"&gt;&lt;/textarea&gt;
+&lt;/div&gt;
+&lt;div id="common"&gt;&lt;/div&gt;
+@others</t>
+<t tx="yen.20170314213424.2">
+&lt;script type="text/python3"&gt;
+from browser import document as doc
+import script1
+
+def ex1(ev):
+    script1.editor.setValue('''#ex1 簡單的 for 迴圈範例
+    for i in range(10):
+        print(i)
+    ''')
+    script1.editor.scrollToRow(0)
+    script1.editor.gotoLine(0)
+doc['ex1'].bind('click',ex1)
+&lt;/script&gt;&lt;a id="ex1"&gt;ex1&lt;/a&gt;-for 迴圈
+</t>
+<t tx="yen.20170314213424.3">
+&lt;script type="text/python3"&gt;
+from browser import document as doc
+import script1
+
+def ex2(ev):
+    script1.editor.setValue('''#溫度轉換程式
+from browser import document as doc
+
+# 因為此函式與滑鼠互動, 需要 event 當作輸入
+def convTemp():
+    mystring = ""
+    cdegree = input("請輸入攝氏溫度:")
+    fdegree = float(cdegree)*9/5 + 32
+    output_string = "攝氏 " + str(cdegree) + "度=華氏 " + str(fdegree) + "度" 
+    # 利用 print() 將轉換結果送到 console 區
+    print(output_string)
+
+#直接呼叫 convTemp() 執行
+convTemp()
+    ''')
+    script1.editor.scrollToRow(0)
+    script1.editor.gotoLine(0)
+doc['ex2'].bind('click',ex2)
+&lt;/script&gt;&lt;a id="ex2"&gt;ex2&lt;/a&gt;-溫度換算</t>
+<t tx="yen.20170314213424.4">
+&lt;script type="text/python3"&gt;
+from browser import document
+import script1
+
+def get_file(e):
+    data = open("./../python_ex/for1.py").read()
+    script1.editor.setValue(data)
+    script1.editor.scrollToRow(0)
+    script1.editor.gotoLine(0)
+    
+document["get"].bind("click", get_file)
+&lt;/script&gt;
+
+&lt;script type="text/python3"&gt;
+from browser import document
+import script1
+
+def get_temp1(e):
+    data = open("./../python_ex/temp1.py").read()
+    script1.editor.setValue(data)
+    script1.editor.scrollToRow(0)
+    script1.editor.gotoLine(0)
+    
+document["get_temp1"].bind("click", get_temp1)
+&lt;/script&gt;
+
+&lt;script type="text/python3"&gt;
+from browser import document
+import script1
+
+def get_ver_and_kw(e):
+    data = open("./../python_ex/ver_and_kw.py").read()
+    script1.editor.setValue(data)
+    script1.editor.scrollToRow(0)
+    script1.editor.gotoLine(0)
+    
+document["get_ver_and_kw"].bind("click", get_ver_and_kw)
+&lt;/script&gt;
+
+&lt;script type="text/python3"&gt;
+from browser import document
+import script1
+
+def jansen(e):
+    data = open("./../python_ex/jansen.py").read()
+    script1.editor.setValue(data)
+    script1.editor.scrollToRow(0)
+    script1.editor.gotoLine(0)
+    
+document["jansen"].bind("click", jansen)
+&lt;/script&gt;
+
+&lt;button id="get"&gt;for1.py&lt;/button&gt;&lt;button id="get_temp1"&gt;temp1.py&lt;/button&gt;&lt;button id="get_ver_and_kw"&gt;ver_and_kw.py&lt;/button&gt;&lt;button id="jansen"&gt;jansen.py&lt;/button&gt;
+
+Jansen 多連桿機構尺寸圖:
+
+&lt;img src="./../data/jansen_sympy.png" width="800" /&gt;
+</t>
+<t tx="yen.20170314214818.1">
+&lt;script type="text/python3"&gt;
+from browser import document as doc
+import script1
+
+def ex3(ev):
+    script1.editor.setValue('''#jansen 多連桿機構驗算
+from math import pi, cos, sin, sqrt, acos
+
+radian = 180/pi
+degree = pi/180
+
+#PLAP
+def plap(ax, ay, ac, bac, bx, by, ccw):
+    if ccw == 1:
+        cx= ac*cos(bac - acos((ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2 + abs(ax - bx)**2 - abs(ay - by)**2)/(2*sqrt(ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2)*abs(ax - bx)))) + ax 
+        cy= ac*sin(bac - acos((ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2 + abs(ax - bx)**2 - abs(ay - by)**2)/(2*sqrt(ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2)*abs(ax - bx)))) + ay
+    else:
+        cx= ac*cos(bac + acos((ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2 + abs(ax - bx)**2 - abs(ay - by)**2)/(2*sqrt(ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2)*abs(ax - bx)))) + ax 
+        cy= ac*sin(bac + acos((ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2 + abs(ax - bx)**2 - abs(ay - by)**2)/(2*sqrt(ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2)*abs(ax - bx)))) + ay
+    return cx, cy
+
+#PLLP
+def pllp(ax, ay, ac, cb, bx, by, cw):
+    if cw == 1:
+        cx =  -((ay - by)*(-ac**2*ay + ac**2*by + ax**2*ay + ax**2*by - 2*ax*ay*bx - 2*ax*bx*by + ay**3 - ay**2*by + ay*bx**2 - ay*by**2 + ay*cb**2 + bx**2*by + by**3 - by*cb**2 - sqrt((-ac**2 + 2*ac*cb + ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2 - cb**2)*(ac**2 + 2*ac*cb - ax**2 + 2*ax*bx - ay**2 + 2*ay*by - bx**2 - by**2 + cb**2))*(ax - bx)) + (ac**2 - ax**2 - ay**2 + bx**2 + by**2 - cb**2)*(ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2))/(2*(ax - bx)*(ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2))
+        cy =  (-ac**2*ay + ac**2*by + ax**2*ay + ax**2*by - 2*ax*ay*bx - 2*ax*bx*by + ay**3 - ay**2*by + ay*bx**2 - ay*by**2 + ay*cb**2 + bx**2*by + by**3 - by*cb**2 + sqrt((-ac**2 + 2*ac*cb + ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2 - cb**2)*(ac**2 + 2*ac*cb - ax**2 + 2*ax*bx - ay**2 + 2*ay*by - bx**2 - by**2 + cb**2))*(-ax + bx))/(2*(ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2))
+    else:
+        cx =  -((ay - by)*(-ac**2*ay + ac**2*by + ax**2*ay + ax**2*by - 2*ax*ay*bx - 2*ax*bx*by + ay**3 - ay**2*by + ay*bx**2 - ay*by**2 + ay*cb**2 + bx**2*by + by**3 - by*cb**2 + sqrt((-ac**2 + 2*ac*cb + ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2 - cb**2)*(ac**2 + 2*ac*cb - ax**2 + 2*ax*bx - ay**2 + 2*ay*by - bx**2 - by**2 + cb**2))*(ax - bx)) + (ac**2 - ax**2 - ay**2 + bx**2 + by**2 - cb**2)*(ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2))/(2*(ax - bx)*(ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2))
+        cy =  (-ac**2*ay + ac**2*by + ax**2*ay + ax**2*by - 2*ax*ay*bx - 2*ax*bx*by + ay**3 - ay**2*by + ay*bx**2 - ay*by**2 + ay*cb**2 + bx**2*by + by**3 - by*cb**2 + sqrt((-ac**2 + 2*ac*cb + ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2 - cb**2)*(ac**2 + 2*ac*cb - ax**2 + 2*ax*bx - ay**2 + 2*ay*by - bx**2 - by**2 + cb**2))*(ax - bx))/(2*(ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2))
+    return cx, cy
+
+ax = -38
+ay = 0
+# b 為原點
+bx = 0
+by = 0
+cx = 0
+cy = 7.8
+# m 為配合 PLAP 新增固定點
+mx = 30
+my = 7.8
+# dcm ccw 方向角度
+dcm = 30*degree
+cd = 15
+# 三角形 dcm 為 ccw plap d=(a, cd, dcm, m)
+dx, dy = plap(cx, cy, cd, dcm, mx, my, ccw=1)
+print("dx=", dx, "dy=", dy)
+# 三角形 aed 為 cw pllp e=(a, ae, ed, d)
+ae = 41.5
+ed = 50
+ex, ey = pllp(ax, ay, ae, ed, dx, dy, cw=1)
+print("ex=", ex, "ey=", ey)
+# 三角形 afe 為 cw pllp f=(a, af, fe, e)
+af = 40.1
+fe = 55.8
+fx, fy = pllp(ax, ay, af, fe, ex, ey, cw=1)
+print("fx=", fx, "fy=", fy)
+# 三角形 dha 為 cw pllp h=(d, dh, ha, a)
+dh = 61.9
+ha = 39.3
+hx, hy = pllp(dx, dy, dh, ha, ax, ay, cw=1)
+print("hx=", hx, "hy=", hy)
+# 三角形 hgf 為 cw pllp g=(h, hg, gf, f)
+hg = 36.7
+gf = 39.4
+gx, gy = pllp(hx, hy, hg, gf, fx, fy, cw=1)
+print("gx=", gx, "gy=", gy)
+# 三角形 hkg 為 cw pllp k=(h, hk, kg, g)
+hk = 49
+kg = 65.7
+kx, ky = pllp(hx, hy, hk, kg, gx, gy, cw=1)
+print("kx=", kx, "ky=", ky)
+    ''')
+    script1.editor.scrollToRow(0)
+    script1.editor.gotoLine(0)
+doc['ex3'].bind('click',ex3)
+&lt;/script&gt;&lt;a id="ex3"&gt;ex3&lt;/a&gt;-多連桿機構</t>
 </tnodes>
 </leo_file>

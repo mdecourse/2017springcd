@@ -65,12 +65,13 @@
 <v t="yen.20170209092319.1"><vh>@edit 20170209.md</vh></v>
 <v t="yen.20170314213339.1"><vh>@edit 20170217.md</vh></v>
 <v t="yen.20170221100209.1"><vh>@edit 20170222.md</vh></v>
-<v t="yen.20170314213424.1" a="E"><vh>@clean 20170314.md</vh>
+<v t="yen.20170314213424.1"><vh>@clean 20170314.md</vh>
 <v t="yen.20170314213424.2"><vh>ex1 - for 迴圈</vh></v>
 <v t="yen.20170314213424.3"><vh>ex2 - input 與單位換算</vh></v>
 <v t="yen.20170314214818.1"><vh>ex3 - jansen 多連桿機構</vh></v>
 <v t="yen.20170314213424.4"><vh>filereader</vh></v>
 </v>
+<v t="yen.20170315204017.1"><vh>@edit 20170315.md</vh></v>
 <v t="yen.20170108171733.81"><vh>@path pages</vh>
 <v t="yen.20170108171733.82"><vh>@edit pages_1.md</vh></v>
 </v>
@@ -2125,8 +2126,8 @@ Brython 程式環境可以用來練習許多 Python3 的簡單語法, 也可以�
 &lt;script type="text/javascript" src="./../ace/FileSaver.min.js"&gt;&lt;/script&gt;
 &lt;script type="text/javascript" src="./../ace/filereader.js"&gt;&lt;/script&gt;
 
-&lt;!-- 導入最新版的 Brython 標準程式庫 --&gt;
-&lt;script type="text/javascript" src="https://cdn.rawgit.com/brython-dev/brython/master/www/src/brython_dist.js"&gt;
+&lt;!-- 導入最新版的 Brython 標準程式庫 3.3.1 --&gt;
+&lt;script type="text/javascript" src="./../data/brython_dist.js"&gt;
 &lt;/script&gt;
 
 

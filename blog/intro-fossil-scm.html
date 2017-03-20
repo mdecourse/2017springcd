@@ -171,12 +171,12 @@
 <h3>Fossil Concepts</h3>
 <p>check-in - 簽入版本: 對所開發的軟體進行改版後, 簽入倉儲的版本, 稱為簽入版本.</p>
 <p>repository - 倉儲: 包含開發專案歷程中, 所有簽入版本檔案的資料庫, 稱為倉儲.</p>
-<p>建立新倉儲</p>
+<h3>建立新倉儲</h3>
 <p>可以使用 <a href="http://fossil-scm.org/index.html/help?cmd=new">fossil new</a> 或 <a href="http://fossil-scm.org/index.html/help?cmd=init">fossil init</a></p>
-<p>fossil new foo.fossil</p>
-<p>or </p>
+<p>建議使用 fossil init 建立新倉儲:</p>
 <p>fossil init foo.fossil</p>
 <p>表示建立一個新的倉儲專案, 且倉儲檔案名稱為 foo.fossil, 在 fossil SCM 中建立新專案時, 登入用戶名稱會成為內定的倉儲管理者, 若要指定管理者名稱, 可以附加 -A USERNAME 或 --admin-user USERNAME, 新增的倉儲就會以 USERNAME 作為管理者名稱, 且指定對應的密碼 (有關 <a href="http://fossil-scm.org/xfer/doc/trunk/www/password.wiki">fossil 密碼管理</a>), 當使用者在近端以網際模式啟動該倉儲時 (以 <a href="http://fossil-scm.org/index.html/help?cmd=ui">fossil ui</a> 指令) fossil SCM 會直接以管理者身份登入, 無需輸入管理者密碼.</p>
+<h3>以 sqlite3 擷取 .fossil 檔案內容</h3>
 <p>由於 fossil SCM 的倉儲格式為 Sqlite3 資料庫檔案, 因此利用 fossil init foo.fossil 建立倉儲後, 可以利用 sqlite3 工具查驗資料庫中的欄位資料.</p>
 <p>首先以 sqlite3 工具指令開啟 foo.fossil 資料庫檔案, 進入 sql 指令環境:</p>
 <p>sqlite3 foo.fossil</p>
@@ -187,17 +187,32 @@ select login, pw, info from user;
 </pre>
 
 <p>其中可以發現 fossil SCM 已經使用 SHA1 hash 編碼使用者帳號對應的登入密碼, 但是當使用者 <a href="http://fossil-scm.org/index.html/help?cmd=clone">fossil clone</a> 遠端倉儲到近端時, fossil SCM 會自動以明碼設定倉儲原管理者對應的管理密碼, 且在 fossil clone 結束後, 直接顯示在命令列視窗中 .</p>
+<h3>以 fossil sql 指令擷取 .fossil 檔案內容</h3>
+<p>使用者以 fossil init foo.fossil 建立倉儲檔案後, 除了使用 sqlite3 命令檢視 fossil 倉儲內容外, 也可以利用 fossil 指令查驗倉儲資料庫檔案的內容.</p>
+<p>fossil sql -R foo.fossil</p>
+<p>進入 sqlite 指令環境後, 可以利用 .schema user 查驗 user 資料表的欄位設計.</p>
+<p>以 select login, pw, cap from user;</p>
+<p>可以查詢目前 foo.fossil 檔案中 user 資料表 login, pw 與 cap 等3個欄位的資料內容.</p>
+<p>若要更改特定 login 登入帳號的 pw 或 cap 可以使用下列 sqlite3 SQL 語法:</p>
+<p>update user set pw='mynewpassword' where login='myloginaccount';</p>
+<p>update user set cap='s' where login='myloginaccount';</p>
 <h3>clone</h3>
 <pre class="brush: jscript">
 $ fossil clone http://your_domain_name ~/fossils/yourdb.fossil
 $ fossil open ~/fossils/foo.fossil
 </pre>
 
+<p>上述 fossil 指令表示要從 http://your_domain_name fossil 伺服器中, clone 倉儲檔案, 然後存在近端的 ~/fossils/yourdb.fossil 檔案中.</p>
+<p>接下來則可以選擇適當的目錄, 以 fossil open 將 .fossil 檔案解開, 此所在目錄即為該 .fossil 倉儲的 近端工作目錄.</p>
 <h3>add a file</h3>
 <pre class="brush: jscript">
 $ fossil add yourfile.txt
 </pre>
 
+<p>在上述解開的 .fossil 倉儲對應工作目錄中, 一旦完成 yourfile.txt 的編輯, 可以利用 fossil add 將此檔案納入版次管理.</p>
+<p>另外, 使用者必須注意的是, Fossil SCM 設定中, 內定的 autosync 為 on, 表示使用者一旦在工作目錄中 fossil add 與 fossil commit 之後, Fossil 會自動執行後續 fossil push 的動作, 而且此一推送會同時將改版資料送到近端與工作目錄對應的 .fossil 檔案倉儲外, 也會同時將改版資料推送到 .fossil 對應的遠端倉儲中.</p>
+<p>換言之, Fossil SCM 針對從 fossil clone 開始的一連串指令執行, 會因為  settings 的差異而有不同的新增, 提交與推送流程, 假如 fossil clone 之後, 在近端以 fossil open 解開到近端工作目錄後, 並非以原 fossil 倉儲內建 autosync 綁定的使用者進行提交推送時, 必須透過 fossil remote-url off 切斷內建倉儲與工作目錄綁定的內建用戶資料, 然後在提交後, 以手動執行 fossil push.</p>
+<p>fossil push https://usesid@fossil_server_url</p>
 <p>git 分支流程模型</p>
 <p><a href="http://nvie.com/posts/a-successful-git-branching-model/">http://nvie.com/posts/a-successful-git-branching-model/</a></p>
 <p>Fossil SCM concept</p>
@@ -403,6 +418,56 @@ Exit
 <p>fossil push https://scrum1@mde2a2.kmol.info/cmsimfly</p>
 <p>輸入 scrum1 的對應密碼後完成版本推送.</p>
 <p>在 Fossil SCM 系統上的 <a href="https://mde2a2.kmol.info/cmsimfly/dir?ci=tip">CMSimfly 倉儲</a>.</p>
+<h2>實際操作範例</h2>
+<h3>從遠端 clone 倉儲</h3>
+<p>fossil clone https://userid:password@mde2a2.kmol.info/cmsimfly cmsimfly.fossil</p>
+<p>在當下目錄中解開最新的 cmsimfly.fossil 倉儲版本, fossil 仍會指定近端對應帳號的密碼</p>
+<h3>在近端建立工作目錄</h3>
+<p>fossil open cmsimfly.fossil</p>
+<p>對 cmsimfly 倉儲中的內容改版後, 納入所有的變更</p>
+<p>fossil add .</p>
+<p>若 autosync 仍為 on, 則 fossil commit -m 後, 會同時 fossil push</p>
+<p>fossil commit -m "message"</p>
+<p>假如近端工作目錄需要從 remote url 中取下近端沒有的改版內容, 使用 fossil update</p>
+<p>fossil update</p>
+<h3>fossil 改版工作流程</h3>
+<p>若以 fossil clone https://userid@mde2a2.kmol.info/cmsimfly cmsimfly.fossil</p>
+<p>輸入 userid 在 https://mde2a2.kmol.info/cmsimfly 倉儲中的對應密碼.</p>
+<p>則隨後都將以 userid 為主體進行改版, 若密碼存在近端, 則可以直接改版後 fossil commim -m, 讓 autosync 將內容 push 到遠端</p>
+<p>若在 fossil clone 時沒有指定帳號密碼, 則將取得第一個內建管理者帳號對應之工作環境, 若之後要採用其他帳號提交, 必須先以 fossil remote-url off 切斷目前的連結, 當 fossil commit --user-override another_userid -m 之後, 以手動進行 fossil push https://another_userid@mde2a2.kmol.info/cmsimfly</p>
+<p>輸入 another_userid 在 https://mde2a2.kmol.info/cmsimfly 倉儲中的對應密碼後, 即可完成改版推送.</p>
+<h3>fossil branch</h3>
+<p>[http://fossil-scm.org/xfer/doc/trunk/www/branching.wiki]</p>
+<h3>衝突處理</h3>
+<p>當使用者利用 autosync on 且以 fossil commit -m 進行改版提交時, fossil 會回復 would fork. "update first or use --alow-fork</p>
+<p>表示使用者有兩個選擇, 可以在提交後面加上 --alow-fork 從上一個版本長出另外一個 leaf, 也就是建立 fork 版本, 而讓原本產生衝突的版本成為另外一個 leaf.</p>
+<p>或者可以使用 fossil update 拉回遠端的版本. 接著 fossil 發現版本內容有衝突, 會顯示</p>
+<p>WARNing: 1 merge conflicts. 並且說明可以用 fossil undo 除去 fossil update 所拉回的版本內容.</p>
+<p>以下為 README.md 檔案中註記衝突的範例:</p>
+<pre class="brush:jscript">
+# cmsimfly
+CMSimfly is a simple CMS in Flask
+
+此一版本以 Fossil SCM 進行管理
+
+透過 Wiindows 7 進行改版
+<<<<<<< BEGIN MERGE CONFLICT: local copy shown first <<<<<<<<<<<<<<<
+
+故意造成衝突
+======= COMMON ANCESTOR content follows ============================
+======= MERGED IN content follows ==================================
+
+在 Windows 10 中改版>>>>>>> END MERGE CONFLICT >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+</pre>
+
+<p>操作者必須手動決定要保留兩個版本內容, 或者取其中一版的內容.</p>
+<p>因為衝突產生時, fossil update 拉回衝突內容時會同時新增 -original -baseline -merge 等3個檔案, 若希望使用 fossil add . 新增所有改版內容, 但不要納入某些目錄中的檔案, 可以在 web 介面中的 settings 中的 ignore-glob 中進行註記, 若設定 ignore-glob 後仍希望新增所有改版內容 (包括 ignore-glob 中的註記檔), 則使用 fossil add <em>.</em></p>
+<h2>Fossil SCM Server 基本設定</h2>
+<p>當在 Windows 中以 fossil server, Ubuntu 中以 fossil http 啟動伺服器之後, 首先要在網際介面中以管理者登入, 並在 Admin-Configuration 或 setup_config 中設定 Project Name.</p>
+<p>接著則在 Wiki 中建立與 Project Name 相同名稱的首頁 wiki.</p>
+<p>之後利用 Admin-Users 建立其他用戶.</p>
+<p>假如要修改 Fossil Server 的整體外觀, 利用  Admin-Skins, 可以透過其中的 Headers 增加客製化的內容連結表單.</p>
+<p>假如要在 Wiki 頁面中使用較為保守安全的超連結, 編輯時選用 Fossil Wiki 格式, 若要納入 iframe 標註, 則可以改用 Markdown 格式, 若確認各用戶對於網際架構安全有一定認知, 則可以透過 Admin-Configuration 中, 勾選 Use HTML as wiki markup language, 則可以支援全部的 html 語法內容, 包括各式的 Javascript 內容.</p>
             </div>
             <!-- /.entry-content -->
         </article>

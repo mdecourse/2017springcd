@@ -1,5 +1,189 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>2017Spring 協同產品設計實習 (虎尾科大MDE)</title><link href="./" rel="alternate"></link><link href="./feeds/course.atom.xml" rel="self"></link><id>./</id><updated>2017-03-15T11:00:00+08:00</updated><entry><title>網際平面機構模擬</title><link href="./brython-planar-linkage.html" rel="alternate"></link><published>2017-03-15T11:00:00+08:00</published><updated>2017-03-15T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-03-15:./brython-planar-linkage.html</id><summary type="html">&lt;p&gt;Brython 平面 quadratic bezier 曲線:&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>2017Spring 協同產品設計實習 (虎尾科大MDE)</title><link href="./" rel="alternate"></link><link href="./feeds/course.atom.xml" rel="self"></link><id>./</id><updated>2017-03-21T11:00:00+08:00</updated><entry><title>V-rep 平面機構運動模擬</title><link href="./vrep-planar-mechanism-simulation.html" rel="alternate"></link><published>2017-03-21T11:00:00+08:00</published><updated>2017-03-21T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-03-21:./vrep-planar-mechanism-simulation.html</id><summary type="html">&lt;p&gt;V-rep planar one-line and fourbar linkage simulation&lt;/p&gt;
+
+
+&lt;h2&gt;One-link Robot Velocity Control&lt;/h2&gt;
+&lt;p&gt;One-link manipulator Python3 remote API program:&lt;/p&gt;
+&lt;p&gt;Joint Properties - &lt;/p&gt;
+&lt;p&gt;Torque/Force Mode.&lt;/p&gt;
+&lt;p&gt;Moter enabled with Maximum torque setup and zero target velocity.&lt;/p&gt;
+&lt;p&gt;Joint ObjectName: Revolute_joint&lt;/p&gt;
+&lt;pre class="brush: python"&gt;
+import vrep
+import sys
+# child threaded script: 
+# 內建使用 port 19997 若要加入其他 port, 在  serve 端程式納入
+#simExtRemoteApiStart(19999)
+
+vrep.simxFinish(-1)
+
+clientID = vrep.simxStart('127.0.0.1', 19997, True, True, 5000, 5)
+
+if clientID!= -1:
+    print("Connected to remote server")
+else:
+    print('Connection not successful')
+    sys.exit('Could not connect')
+
+errorCode,Revolute_joint_handle=vrep.simxGetObjectHandle(clientID,'Revolute_joint',vrep.simx_opmode_oneshot_wait)
+
+if errorCode == -1:
+    print('Can not find left or right motor')
+    sys.exit()
+
+errorCode=vrep.simxSetJointTargetVelocity(clientID,Revolute_joint_handle,2, vrep.simx_opmode_oneshot_wait)
+
+while True:
+    choice = input("(e to exit, p to pause and enter to exec)&gt;")
+    if choice == "e":
+        print("exiting")
+        vrep.simxStopSimulation(clientID, vrep.simx_opmode_oneshot_wait)
+        break
+    elif choice == "p":
+        vrep.simxPauseSimulation(clientID, vrep.simx_opmode_oneshot_wait)
+    else:
+        vrep.simxStartSimulation(clientID, vrep.simx_opmode_oneshot_wait)
+&lt;/pre&gt;
+
+&lt;h2&gt;One-link Robot Position Control&lt;/h2&gt;
+&lt;p&gt;One-link manipulator Python3 remote API program:&lt;/p&gt;
+&lt;p&gt;Joint Properties - &lt;/p&gt;
+&lt;p&gt;Torque/Force Mode.&lt;/p&gt;
+&lt;p&gt;Moter enabled with Maximum torque setup and zero target velocity.&lt;/p&gt;
+&lt;p&gt;Joint ObjectName: Revolute_joint&lt;/p&gt;
+&lt;pre class="brush: python"&gt;
+import vrep
+import sys, math
+# child threaded script: 
+# 內建使用 port 19997 若要加入其他 port, 在  serve 端程式納入
+#simExtRemoteApiStart(19999)
+
+vrep.simxFinish(-1)
+
+clientID = vrep.simxStart('127.0.0.1', 19997, True, True, 5000, 5)
+
+if clientID!= -1:
+    print("Connected to remote server")
+else:
+    print('Connection not successful')
+    sys.exit('Could not connect')
+
+errorCode,Revolute_joint_handle=vrep.simxGetObjectHandle(clientID,'Revolute_joint',vrep.simx_opmode_oneshot_wait)
+
+if errorCode == -1:
+    print('Can not find left or right motor')
+    sys.exit()
+
+deg = math.pi/180
+
+#errorCode=vrep.simxSetJointTargetVelocity(clientID,Revolute_joint_handle,2, vrep.simx_opmode_oneshot_wait)
+
+def setJointPosition(incAngle, steps):
+    for i  in range(steps):
+        errorCode=vrep.simxSetJointPosition(clientID, Revolute_joint_handle, i*incAngle*deg, vrep.simx_opmode_oneshot_wait)
+
+# 每步 10 度, 轉兩圈
+setJointPosition(10, 72)
+# 每步 1 度, 轉兩圈
+#setJointPosition(1, 720)
+# 每步 0.1  度, 轉720 步
+#setJointPosition(0.1, 720)
+
+'''
+三軸同動時
+simxPauseCommunication(clientID,1);
+simxSetJointPosition(clientID,joint1Handle,joint1Value,simx_opmode_oneshot);
+simxSetJointPosition(clientID,joint2Handle,joint2Value,simx_opmode_oneshot);
+simxSetJointPosition(clientID,joint3Handle,joint3Value,simx_opmode_oneshot);
+simxPauseCommunication(clientID,0);
+'''
+&lt;/pre&gt;
+
+&lt;h2&gt;Fourbar Linkage Velocity Control&lt;/h2&gt;
+&lt;p&gt;the First Joint properties - &lt;/p&gt;
+&lt;p&gt;Torque/Force mode with motor enabled and target velocity 120 deg/s and maximum torque 50 N*m.&lt;/p&gt;
+&lt;p&gt;Joint ObjectName: Revolute_joint&lt;/p&gt;
+&lt;p&gt;All other joints with Torque/Force mode without motor enabled.&lt;/p&gt;
+&lt;pre class="brush:python"&gt;
+import vrep
+import sys
+# child threaded script: 
+# 內建使用 port 19997 若要加入其他 port, 在  serve 端程式納入
+#simExtRemoteApiStart(19999)
+
+vrep.simxFinish(-1)
+
+clientID = vrep.simxStart('127.0.0.1', 19997, True, True, 5000, 5)
+
+if clientID!= -1:
+    print("Connected to remote server")
+else:
+    print('Connection not successful')
+    sys.exit('Could not connect')
+
+errorCode,Revolute_joint_handle=vrep.simxGetObjectHandle(clientID,'Revolute_joint',vrep.simx_opmode_oneshot_wait)
+
+if errorCode == -1:
+    print('Can not find left or right motor')
+    sys.exit()
+
+errorCode=vrep.simxSetJointTargetVelocity(clientID,Revolute_joint_handle,2, vrep.simx_opmode_oneshot_wait)
+
+while True:
+    choice = input("(e to exit, p to pause and enter to exec)&gt;")
+    if choice == "e":
+        print("exiting")
+        vrep.simxStopSimulation(clientID, vrep.simx_opmode_oneshot_wait)
+        break
+    elif choice == "p":
+        vrep.simxPauseSimulation(clientID, vrep.simx_opmode_oneshot_wait)
+    else:
+        vrep.simxStartSimulation(clientID, vrep.simx_opmode_oneshot_wait)
+&lt;/pre&gt;
+
+&lt;h2&gt;Fourbar Linkage Position Control&lt;/h2&gt;
+&lt;p&gt;V-rep Fourbar linkage remote API program:&lt;/p&gt;
+&lt;p&gt;the First Joint properties - &lt;/p&gt;
+&lt;p&gt;Passive mode with Hybrid operation.&lt;/p&gt;
+&lt;p&gt;Position control (PID) with proportional parameter 0.1 without I and D controls.&lt;/p&gt;
+&lt;p&gt;Joint ObjectName: Revolute_joint&lt;/p&gt;
+&lt;p&gt;All other joints properties - &lt;/p&gt;
+&lt;p&gt;Inverse kinematics mode with Hybrid operation.&lt;/p&gt;
+&lt;p&gt;Position control (PID) with proportional parameter 0.1 without I and D controls.&lt;/p&gt;
+&lt;pre class="brush:python"&gt;
+import vrep, math
+import sys
+# child threaded script: 
+#simExtRemoteApiStart(19999)
+
+vrep.simxFinish(-1)
+
+clientID = vrep.simxStart('127.0.0.1', 19997, True, True, 5000, 5)
+
+
+if clientID!= -1:
+    print("Connected to remote server")
+else:
+    print('Connection not successful')
+    sys.exit('Could not connect')
+
+errorCode,Revolute_joint_handle=vrep.simxGetObjectHandle(clientID,'Revolute_joint',vrep.simx_opmode_oneshot_wait)
+
+deg = math.pi/180
+
+if errorCode == -1:
+    print('Can not find left or right motor')
+    sys.exit()
+
+#errorCode=vrep.simxSetJointTargetVelocity(clientID,Revolute_joint_handle,2, vrep.simx_opmode_oneshot_wait)
+
+def setJointPosition(incAngle, steps):
+    for i  in range(steps):
+        errorCode=vrep.simxSetJointPosition(clientID, Revolute_joint_handle, i*incAngle*deg, vrep.simx_opmode_oneshot_wait)
+
+# 每步 10 度, 轉兩圈
+setJointPosition(10,72)
+&lt;/pre&gt;</summary><category term="v-rep"></category><category term="w5"></category></entry><entry><title>網際平面機構模擬</title><link href="./brython-planar-linkage.html" rel="alternate"></link><published>2017-03-15T11:00:00+08:00</published><updated>2017-03-15T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-03-15:./brython-planar-linkage.html</id><summary type="html">&lt;p&gt;Brython 平面 quadratic bezier 曲線:&lt;/p&gt;
 
 
 &lt;!-- 導入 Brython 標準程式庫 3.3.1 --&gt;

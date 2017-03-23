@@ -1837,9 +1837,32 @@ REM 附加資料
 @echo key = %Disk%:\stunnel\config\localhost.key &gt;&gt; %Disk%:\stunnel\config\stunnel.conf
 REM 啟動 stunnel
 start /MIN stunnel.exe
+REM set proxy
+REG IMPORT setup_proxy.reg
 REM 以 chrome 連線到 https://%NetworkIP%:443
-chrome https://%NetworkIP%
+REM chrome  --proxy-server="140.130.17.17:3128" --proxy-bypass-list="192.168.1.*;*.edu.tw" https://%NetworkIP%
+chrome https://%NetworkIP% http://mde.tw https://vimeo.com/user24079973 http://mde.tw/2017springcd/blog/ http://mde.tw/2017springwcm/blog/ http://mde.tw/2017springvcp/blog/ http://service.mde.tw
 Exit
+&lt;/pre&gt;
+
+&lt;p&gt;setup_proxy.reg 設定  Windows proxy 組態檔案:&lt;/p&gt;
+&lt;pre class="brush: jscript"&gt;
+Windows Registry Editor Version 5.00
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings] 
+"MigrateProxy"=dword:00000001 
+"ProxyEnable"=dword:00000001 
+"ProxyHttp1.1"=dword:00000000 
+"ProxyServer"="http://140.130.17.17:3128" 
+"ProxyOverride"="192.168.1.*;*.edu.tw"
+&lt;/pre&gt;
+
+&lt;p&gt;disable_proxy.reg 去除 Windows proxy 設定組態檔案:&lt;/p&gt;
+&lt;pre class="brush: jscript"&gt;
+Windows Registry Editor Version 5.00
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings] 
+"ProxyEnable"=dword:00000000
 &lt;/pre&gt;
 
 &lt;h2&gt;編譯 sqlite3&lt;/h2&gt;

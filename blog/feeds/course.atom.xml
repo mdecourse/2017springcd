@@ -1788,6 +1788,7 @@ $ fossil close
 &lt;p&gt;&lt;a href="http://www.fredshack.com/docs/fossil.html"&gt;http://www.fredshack.com/docs/fossil.html&lt;/a&gt;&lt;/p&gt;
 &lt;h2&gt;Fossil SCM 與 Stunnel 啟動整合&lt;/h2&gt;
 &lt;p&gt;&lt;a href="http://service.mde.tw/public/tiny2017_1GB.7z"&gt;下載&lt;/a&gt; tiny2017 可攜程式系統之後, 可以利用下列 start.bat, 在 Windows 環境中自動擷取電腦連外 IP, 自動設定 stunnel.conf 後, 以 https 協定啟動 Fossil SCM 伺服器.&lt;/p&gt;
+&lt;p&gt;利用下列 start.bat 所啟動的 fossil server 位於 y:\tmp\fossil_repo\vcp.fossil 倉儲:&lt;/p&gt;
 &lt;pre class="brush: jscript"&gt;
 REM tiny2017 主要針對初學 Python3 與 C 學員所建立
 REM 近端使用 fossil 管理資料版本, 並且定時轉為 git 格式後上傳到 github
@@ -1841,7 +1842,7 @@ REM set proxy
 REG IMPORT setup_proxy.reg
 REM 以 chrome 連線到 https://%NetworkIP%:443
 REM chrome  --proxy-server="140.130.17.17:3128" --proxy-bypass-list="192.168.1.*;*.edu.tw" https://%NetworkIP%
-chrome https://%NetworkIP% http://mde.tw https://vimeo.com/user24079973 http://mde.tw/2017springcd/blog/ http://mde.tw/2017springwcm/blog/ http://mde.tw/2017springvcp/blog/ http://service.mde.tw
+chrome https://%NetworkIP% http://mde.tw https://mde2a1.kmol.info https://mde2a2.kmol.info https://vimeo.com/user24079973 http://mde.tw/2017springcd/blog/ http://mde.tw/2017springwcm/blog/ http://mde.tw/2017springvcp/blog/ http://service.mde.tw
 Exit
 &lt;/pre&gt;
 
@@ -1863,6 +1864,32 @@ Windows Registry Editor Version 5.00
 
 [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings] 
 "ProxyEnable"=dword:00000000
+&lt;/pre&gt;
+
+&lt;p&gt;與上述設定對應的 stop.bat:&lt;/p&gt;
+&lt;pre class="brush: jscript"&gt;
+@echo off
+set Disk=y
+REM 關閉 SciTE
+taskkill /IM SciTE.exe /F
+REM 關閉 python
+taskkill /IM python.exe /F
+REM 關閉 stunnel
+taskkill /IM stunnel.exe /F
+REM 關閉 fossil
+taskkill /IM fossil.exe /F
+REM 關閉 cmd 指令視窗
+taskkill /IM cmd.exe /F
+REM disable proxy
+%Disk%:
+REG IMPORT disable_proxy.reg
+REM 清除 log 資料
+path=%PATH%;
+REM del /Q /F  V:\tmp\*.*
+REM 終止虛擬硬碟與目錄的對應
+subst %Disk%: /D
+REM taskkill /IM mingw32 /F
+EXIT
 &lt;/pre&gt;
 
 &lt;h2&gt;編譯 sqlite3&lt;/h2&gt;

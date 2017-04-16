@@ -523,13 +523,14 @@ CMSimfly is a simple CMS in Flask
 <p>例如: ipv6.only.server domain 所屬的伺服器, 其操作系統僅啟用 IPv6 協定上網, 建立 Fossil Server 的模式與 IPv4 上網的伺服器相同, 但是, fossil clone 的指令則可採用 ssh 協定下的絕對倉儲路徑或相對倉儲路徑擷取遠端的倉儲檔案:</p>
 <p>以絕對倉儲路徑 fossil clone:</p>
 <p>假設 IPv6 主機上的 target.fossil 倉儲檔案位於 /home/account/repository/target.fossil, 則使用者可以利用:</p>
-<p>fossil clone https://account@your_ipv6_only_server_url//home/account/repository/target.fossil cloned.fossil</p>
+<p>fossil clone ssh://account@your_ipv6_only_server_url//home/account/repository/target.fossil cloned.fossil</p>
 <p>將遠端的 target.fossil 複製到近端存為 cloned.fossil 檔案, 其中特別注意到絕對路徑在 server_url 後面必須有兩個斜線.</p>
 <p>以相對倉儲路徑 fossil clone:</p>
 <p>此時假設 Fossil Server 是以 /home/account 用戶啟動, 則使用者可以利用:</p>
-<p>fossil clone https://account@your_ipv6_only_server_url/repository/target.fossil cloned.fossil</p>
+<p>fossil clone ssh://account@your_ipv6_only_server_url/repository/target.fossil cloned.fossil</p>
 <p>將遠端的 target.fossil 複製到近端存為 cloned.fossil 檔案, 其中特別注意到, 相對路徑除了在 server_url 後只需一個斜線, 且是以 /home/account 目錄作為相對目錄的根目錄, 使用者必須加入 /repository/target.fossil, 才能正確擷取到倉儲檔案.</p>
 <p>上述兩種 fossil clone 指令執行後, 系統會要求輸入與 account 用戶對應的 Fossil Server 密碼, 完成後就可以將遠端的倉儲檔複製到近端.</p>
+<p>附帶說明: 截至 fossil 2.2 版, 以 ssh 協定可以 fossil clone 遠端純 IPv6 主機上的倉儲, 但是卻無法以 fossil autosync 或 fossil push 將近端的版本提交推送到遠端. 因此目前的 Fossil Server 仍建議採用 IPv4/IPv6 並存的方式建立.</p>
             </div>
             <!-- /.entry-content -->
         </article>
@@ -544,6 +545,11 @@ CMSimfly is a simple CMS in Flask
 
             <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
                 <ul class="list-group" id="recentposts">
+                    <li class="list-group-item">
+                        <a href="./midterm-collaboration-evaluation.html">
+                            期中協同查驗與自評
+                        </a>
+                    </li>
                     <li class="list-group-item">
                         <a href="./vrep-planar-mechanism-simulation.html">
                             V-rep 平面機構運動模擬
@@ -562,11 +568,6 @@ CMSimfly is a simple CMS in Flask
                     <li class="list-group-item">
                         <a href="./brython-2d-drawing.html">
                             協同產品設計實習第1週任務
-                        </a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="./intro-fossil-scm.html">
-                            Fossil SCM 簡介
                         </a>
                     </li>
                 </ul>

@@ -73,6 +73,7 @@
 </v>
 <v t="yen.20170315204017.1"><vh>@edit 20170315.md</vh></v>
 <v t="yen.20170321092635.1"><vh>@edit 20170321.md</vh></v>
+<v t="yen.20170415223959.1"><vh>@edit 20170415.md</vh></v>
 <v t="yen.20170108171733.81"><vh>@path pages</vh>
 <v t="yen.20170108171733.82"><vh>@edit pages_1.md</vh></v>
 </v>

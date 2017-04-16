@@ -4,11 +4,11 @@
 
 &lt;h3&gt;(一) Fossil Server 實習查驗&lt;/h3&gt;
 &lt;p&gt;本實習查驗題目必須在期中考當天 0810-0900 時段中完成.&lt;/p&gt;
-&lt;p&gt;請各組利用電腦輔助設計室中得電腦, 重新建立一台以 https 為連結協定的 Fossil Server (起始 Timeline 必須為期中考當天日期與時間為準), 並以"[a or b]g[1 ~8] 期中報告" (例如: 甲班第1組為 ag1 期中報告, 依此類推) 為 server 標題, 每一組員以學號為帳號, 各組員分別在 Wiki 中以 [學號] 期中學習心得" (例如: 4012345 期中學習心得) 為 Wiki 頁面標題, 概述上課至今的心得與自評成績.&lt;/p&gt;
+&lt;p&gt;請各組利用電腦輔助設計室中的電腦, 重新建立一台以 https 為連結協定的 Fossil Server (起始 Timeline 必須為期中考當天日期與時間為準), 並以"[a or b]g[1 ~8] 期中報告" (例如: 甲班第1組為 ag1 期中報告, 依此類推) 為 server 標題, 每一組員以學號為帳號, 各組員分別在 Wiki 中以 [學號] 期中學習心得" (例如: 4012345 期中學習心得) 為 Wiki 頁面標題, 概述上課至今的心得與自評成績.&lt;/p&gt;
 &lt;p&gt;完成後, 請報上各組 Serve 的 ip 位址進行查驗.&lt;/p&gt;
 &lt;h3&gt;(二) 四連桿機構協同 Trace Point 查驗&lt;/h3&gt;
 &lt;p&gt;本實習查驗題目必須在期中考當天 0910-1000 時段中完成.&lt;/p&gt;
-&lt;p&gt;請參考 &lt;a href="http://mde.tw/2016fallcadp/blog/2016fall-ping-mian-ji-gou-mo-ni.html"&gt;電腦輔助設計實習第十週上課內容&lt;/a&gt;, 在各組網誌中, 以子模組的設定, 擷取各組員倉儲中的 T 點軌跡座標檔 (請以 midterm1.csv, midterm2.csv .... 依序命名) 後進行網際繪圖.&lt;/p&gt;
+&lt;p&gt;請參考 &lt;a href="http://mde.tw/2016fallcadp/blog/2016fall-ping-mian-ji-gou-mo-ni.html"&gt;電腦輔助設計實習第十週上課內容&lt;/a&gt;, 在各組網誌中, 以子模組 (&lt;a href="https://github.com/blog/2104-working-with-submodules"&gt;Github Submodule&lt;/a&gt;) 的設定, 擷取各組員倉儲中的 T 點軌跡座標檔 (請以 midterm1.csv, midterm2.csv .... 依序命名) 後進行網際協同繪圖.&lt;/p&gt;
 &lt;p&gt;各組組員請依學號遞增排序, 排序第1者負責分析 Length=50 的 T 點軌跡圖, 其餘組員則依序將 Length -5, 分別在各組網誌中列出所有組員所完成的四連桿 T 點運動軌跡圖. (例如: 第2位組員負責 Length=45 的四連桿分析, 第3位則負責 Length=40 ....)&lt;/p&gt;
 &lt;p&gt;&lt;img src="./../data/midterm_fourbar_linkage.png" width="800" /&gt;&lt;/p&gt;
 &lt;p&gt;(長 30 mm 的連桿為馬達輸入桿, Trace Point 為 T 點)&lt;/p&gt;

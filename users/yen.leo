@@ -18,16 +18,16 @@
 <v t="yen.20170108171733.2"><vh>@button pelican-blog</vh></v>
 <v t="yen.20170108171733.3"><vh>@edit README.md</vh></v>
 <v t="yen.20170108171733.4"><vh>@edit .gitignore</vh></v>
-<v t="yen.20170108171733.5" a="E"><vh>Pelican 設定</vh>
+<v t="yen.20170108171733.5"><vh>Pelican 設定</vh>
 <v t="yen.20170108171733.6"><vh>@edit local_publishconf.py</vh></v>
 <v t="yen.20170108171733.7"><vh>@edit pelicanconf.py</vh></v>
 </v>
-<v t="yen.20170215103217.1" a="E"><vh>編輯 template</vh>
+<v t="yen.20170215103217.1"><vh>編輯 template</vh>
 <v t="yen.20170215103228.1" a="E"><vh>@path theme/pelican-bootstrap3_local/templates</vh>
 <v t="yen.20170215103332.1"><vh>@edit base.html</vh></v>
 </v>
 </v>
-<v t="yen.20170120110024.1"><vh>@clean index.html</vh>
+<v t="yen.20170120110024.1" a="E"><vh>@clean index.html</vh>
 <v t="yen.20170120110024.2" a="E"><vh>html</vh>
 <v t="yen.20170120110024.3"><vh>head</vh></v>
 <v t="yen.20170120110024.4" a="E"><vh>body</vh>
@@ -83,7 +83,26 @@
 <v t="yen.20170108171930.1"><vh>@button https server</vh></v>
 <v t="yen.20170108171939.1"><vh>@button ipv6 https server</vh></v>
 <v t="yen.20170120212350.1" a="E"><vh>programs</vh>
-<v t="yen.20170210153828.1" a="E"><vh>v-rep rempte api</vh>
+<v t="leo.20170426085813.1" a="E"><vh>Brython</vh>
+<v t="leo.20170426085831.1" a="E"><vh>@path ../data/py</vh>
+<v t="leo.20170426085849.1"><vh>@clean script1.py</vh>
+<v t="leo.20170426085920.1"><vh>script1 declarations</vh></v>
+<v t="leo.20170426085920.2"><vh>reset_src</vh></v>
+<v t="leo.20170426085920.3"><vh>reset_src_area</vh></v>
+<v t="leo.20170426085920.4"><vh>class cOutput</vh>
+<v t="leo.20170426085920.5"><vh>__init__</vh></v>
+<v t="leo.20170426085920.6"><vh>write</vh></v>
+</v>
+<v t="leo.20170426085920.7"><vh>to_str</vh></v>
+<v t="leo.20170426085920.8"><vh>show_console</vh></v>
+<v t="leo.20170426085920.9"><vh>load_script</vh></v>
+<v t="leo.20170426085920.10"><vh>run</vh></v>
+<v t="leo.20170426085920.11"><vh>clear_console</vh></v>
+</v>
+<v t="leo.20170426085944.1"><vh>@edit fourbar.py</vh></v>
+</v>
+</v>
+<v t="yen.20170210153828.1"><vh>v-rep rempte api</vh>
 <v t="yen.20170210202015.1"><vh>Python remote API</vh></v>
 <v t="yen.20170210170248.1"><vh>line tracer</vh></v>
 <v t="yen.20170210222733.1"><vh>line tracer2</vh></v>
@@ -102,6 +121,135 @@
 <v t="yen.20170209024032.1"><vh>reference</vh></v>
 </vnodes>
 <tnodes>
+<t tx="leo.20170426085813.1"></t>
+<t tx="leo.20170426085831.1"></t>
+<t tx="leo.20170426085849.1">@language python
+@tabwidth -4
+@others
+doc['run'].bind('click',run)
+doc['show_console'].bind('click',show_console)
+doc['clear_console'].bind('click',clear_console)
+</t>
+<t tx="leo.20170426085920.1">import sys
+import time
+import traceback
+import javascript
+
+from browser import document as doc, window, alert
+
+has_ace = True
+try:
+    editor = window.ace.edit("editor")
+    session = editor.getSession()
+    session.setMode("ace/mode/python")
+
+    editor.setOptions({
+     'enableLiveAutocompletion': True,
+     'enableSnippets': True,
+     'highlightActiveLine': False,
+     'highlightSelectedWord': True
+    })
+except:
+    from browser import html
+    editor = html.TEXTAREA(rows=20, cols=70)
+    doc["editor"] &lt;= editor
+    def get_value(): return editor.value
+    def set_value(x):editor.value = x
+    editor.getValue = get_value
+    editor.setValue = set_value
+    has_ace = False
+
+if hasattr(window, 'localStorage'):
+    from browser.local_storage import storage
+else:
+    storage = None
+
+</t>
+<t tx="leo.20170426085920.10"># run a script, in global namespace if in_globals is True
+def run(*args):
+    global output
+    doc["console"].value = ''
+    src = editor.getValue()
+    if storage is not None:
+       storage["py_src"] = src
+
+    t0 = time.perf_counter()
+    try:
+        #ns = {'__name__':'__main__'}
+        ns = {'__name__':'editor'}
+        exec(src, ns)
+        state = 1
+    except Exception as exc:
+        traceback.print_exc(file=sys.stderr)
+        state = 0
+    output = doc["console"].value
+
+    print('&lt;completed in %6.2f ms&gt;' % ((time.perf_counter() - t0) * 1000.0))
+    return state
+
+</t>
+<t tx="leo.20170426085920.11">if has_ace:
+    reset_src()
+else:
+    reset_src_area()
+    
+def clear_console(ev):
+    doc["console"].value = ""
+
+</t>
+<t tx="leo.20170426085920.2">def reset_src():
+    if storage is not None and "py_src" in storage:
+        editor.setValue(storage["py_src"])
+    else:
+        editor.setValue('for i in range(10):\n\tprint(i)')
+    editor.scrollToRow(0)
+    editor.gotoLine(0)
+
+</t>
+<t tx="leo.20170426085920.3">def reset_src_area():
+    if storage and "py_src" in storage:
+        editor.value = storage["py_src"]
+    else:
+        editor.value = 'for i in range(10):\n\tprint(i)'
+
+</t>
+<t tx="leo.20170426085920.4">class cOutput:
+    @others
+</t>
+<t tx="leo.20170426085920.5">
+def __init__(self,target):
+    self.target = doc[target]
+</t>
+<t tx="leo.20170426085920.6">def write(self,data):
+    self.target.value += str(data)
+    
+
+</t>
+<t tx="leo.20170426085920.7">#if "console" in doc:
+sys.stdout = cOutput("console")
+sys.stderr = cOutput("console")
+
+def to_str(xx):
+    return str(xx)
+
+</t>
+<t tx="leo.20170426085920.8">info = sys.implementation.version
+doc['version'].text = 'Brython %s.%s.%s' % (info.major, info.minor, info.micro)
+
+output = ''
+
+def show_console(ev):
+    doc["console"].value = output
+    doc["console"].cols = 60
+    doc["console"].rows = 10
+
+</t>
+<t tx="leo.20170426085920.9"># load a Python script
+def load_script(evt):
+    _name = evt.target.value + '?foo=%s' % time.time()
+    editor.setValue(open(_name).read())
+
+</t>
 <t tx="yen.20170108171605.1"></t>
 <t tx="yen.20170108171605.2">QTreeWidget {
     /* These apply to the selected item, but not to editing items.*/

@@ -17,7 +17,11 @@
 &lt;p&gt;FeatureScript:&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://www.onshape.com/cad-blog/featurescript-its-so-easy-an-engineer-can-do-it"&gt;https://www.onshape.com/cad-blog/featurescript-its-so-easy-an-engineer-can-do-it&lt;/a&gt; (參考寫心得)&lt;/p&gt;
 &lt;p&gt;Spur Gear speed reducer design: &lt;a href="http://geargenerator.com"&gt;http://geargenerator.com&lt;/a&gt; (2D 靜態網際繪圖-3D 減速齒輪組動態模擬)&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://en.wikipedia.org/wiki/Leg_mechanism"&gt;https://en.wikipedia.org/wiki/Leg_mechanism&lt;/a&gt; Project (實作)&lt;/p&gt;</summary><category term="Onshape"></category><category term="w11"></category></entry><entry><title>W10</title><link href="./brython-programming.html" rel="alternate"></link><published>2017-04-27T11:00:00+08:00</published><updated>2017-04-27T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-04-27:./brython-programming.html</id><summary type="html">&lt;p&gt;brython&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://www.youtube.com/watch?v=mq_b58jUZAU"&gt;V-rep 齒輪組模擬&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.forum.coppeliarobotics.com/viewtopic.php?f=9&amp;t=3057"&gt;V-rep 齒輪組模擬參考&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://en.wikipedia.org/wiki/Leg_mechanism"&gt;https://en.wikipedia.org/wiki/Leg_mechanism&lt;/a&gt; Project (實作)&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://wikis.utexas.edu/display/RMD/Simulation"&gt;V-rep 行走機構模擬&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://tubestream.tv/view/5CfIpbY7N-s"&gt;多四連桿行走機構模擬&lt;/a&gt;&lt;/p&gt;</summary><category term="Onshape"></category><category term="w11"></category></entry><entry><title>W10</title><link href="./brython-programming.html" rel="alternate"></link><published>2017-04-27T11:00:00+08:00</published><updated>2017-04-27T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-04-27:./brython-programming.html</id><summary type="html">&lt;p&gt;brython&lt;/p&gt;
 
 
 &lt;p&gt;&lt;a href="https://github.com/mdecourse/cdw10"&gt;https://github.com/mdecourse/cdw10&lt;/a&gt; 為提供 .py 程式功能的倉儲, 而 &lt;a href="https://github.com/mdecourse/cdw10_task"&gt;https://github.com/mdecourse/cdw10_task&lt;/a&gt; 則是將 cdw10 倉儲設為子模組的主倉儲. 一旦 cdw10 納入作為 cdw10_task gh-pages 模式下的子模組, 使用者就可以透過 cdw10_task 直接 import cdw10 倉儲中的程式碼與連組件.&lt;/p&gt;

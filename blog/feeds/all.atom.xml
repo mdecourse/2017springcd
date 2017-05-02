@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>2017Spring 協同產品設計實習 (虎尾科大MDE)</title><link href="./" rel="alternate"></link><link href="./feeds/all.atom.xml" rel="self"></link><id>./</id><updated>2017-05-02T11:00:00+08:00</updated><entry><title>協同產品設計實習第十一週</title><link href="./onshape-taiwan.html" rel="alternate"></link><published>2017-05-02T11:00:00+08:00</published><updated>2017-05-02T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-05-02:./onshape-taiwan.html</id><summary type="html">&lt;p&gt;就在 Onshape 網站最底下, 您看到什麼?&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>2017Spring 協同產品設計實習 (虎尾科大MDE)</title><link href="./" rel="alternate"></link><link href="./feeds/all.atom.xml" rel="self"></link><id>./</id><updated>2017-05-02T11:00:00+08:00</updated><entry><title>協同產品設計實習第十一週</title><link href="./onshape-taiwan.html" rel="alternate"></link><updated>2017-05-02T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-05-02:./onshape-taiwan.html</id><summary type="html">&lt;p&gt;就在 Onshape 網站最底下, 您看到什麼?&lt;/p&gt;
 
 
 &lt;p&gt;&lt;img src="./../data/w11/buttomline_onshape.png" width="800" height="600" /&gt;&lt;/p&gt;
 &lt;p&gt;Two Ebooks:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;An Introduction to Agile Product Design – by Onshape.pdf (協同閱讀寫心得)&lt;/p&gt;
+&lt;p&gt;An Introduction to Agile Product Design – by Onshape.pdf (The Move To Agile Design.pdf) (協同閱讀寫心得)&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Onshape's Greatest Tech Tips– Volume 1.pdf  (協同閱讀寫心得)&lt;/p&gt;
@@ -14,7 +14,7 @@
 &lt;/ol&gt;
 &lt;p&gt;Designing Linkages in Context:&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://www.onshape.com/cad-blog/designing-linkages-in-context"&gt;https://www.onshape.com/cad-blog/designing-linkages-in-context&lt;/a&gt; (參考寫心得)&lt;/p&gt;
-&lt;p&gt;FeatureScript:&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://cad.onshape.com/FsDoc/"&gt;FeatureScript&lt;/a&gt;:&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://www.onshape.com/cad-blog/featurescript-its-so-easy-an-engineer-can-do-it"&gt;https://www.onshape.com/cad-blog/featurescript-its-so-easy-an-engineer-can-do-it&lt;/a&gt; (參考寫心得)&lt;/p&gt;
 &lt;p&gt;Spur Gear speed reducer design: &lt;a href="http://geargenerator.com"&gt;http://geargenerator.com&lt;/a&gt; (2D 靜態網際繪圖-3D 減速齒輪組動態模擬)&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://www.youtube.com/watch?v=mq_b58jUZAU"&gt;V-rep 齒輪組模擬&lt;/a&gt;&lt;/p&gt;
@@ -22,7 +22,7 @@
 &lt;p&gt;&lt;a href="https://en.wikipedia.org/wiki/Leg_mechanism"&gt;https://en.wikipedia.org/wiki/Leg_mechanism&lt;/a&gt; Project (實作)&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://wikis.utexas.edu/display/RMD/Simulation"&gt;V-rep 行走機構模擬&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://www.youtube.com/watch?v=5CfIpbY7N-s"&gt;多四連桿行走機構模擬&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href="http://galvanicloop.com/blog/post/7/quadruped-robot-5-simulation-on-v-rep"&gt;四足行走機構&lt;/a&gt;&lt;/p&gt;</summary><category term="Onshape"></category><category term="w11"></category></entry><entry><title>W10</title><link href="./brython-programming.html" rel="alternate"></link><published>2017-04-27T11:00:00+08:00</published><updated>2017-04-27T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-04-27:./brython-programming.html</id><summary type="html">&lt;p&gt;brython&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://galvanicloop.com/blog/post/7/quadruped-robot-5-simulation-on-v-rep"&gt;四足行走機構&lt;/a&gt;&lt;/p&gt;</summary><category term="Onshape"></category><category term="w11"></category></entry><entry><title>W10</title><link href="./brython-programming.html" rel="alternate"></link><updated>2017-04-27T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-04-27:./brython-programming.html</id><summary type="html">&lt;p&gt;brython&lt;/p&gt;
 
 
 &lt;p&gt;&lt;a href="https://github.com/mdecourse/cdw10"&gt;https://github.com/mdecourse/cdw10&lt;/a&gt; 為提供 .py 程式功能的倉儲, 而 &lt;a href="https://github.com/mdecourse/cdw10_task"&gt;https://github.com/mdecourse/cdw10_task&lt;/a&gt; 則是將 cdw10 倉儲設為子模組的主倉儲. 一旦 cdw10 納入作為 cdw10_task gh-pages 模式下的子模組, 使用者就可以透過 cdw10_task 直接 import cdw10 倉儲中的程式碼與連組件.&lt;/p&gt;
@@ -92,7 +92,7 @@ def button1(event):
 doc["button1"].bind("click", button1)
 &lt;/script&gt;
 &lt;button id="button1"&gt;按下取 a 值&lt;/button&gt;
-&lt;/pre&gt;</summary><category term="Brython"></category><category term="w10"></category></entry><entry><title>期中協同查驗與自評</title><link href="./midterm-collaboration-evaluation.html" rel="alternate"></link><published>2017-04-15T11:00:00+08:00</published><updated>2017-04-15T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-04-15:./midterm-collaboration-evaluation.html</id><summary type="html">&lt;p&gt;以下為協同產品設計實習 2017 Spring 期中考週的四個實習查驗題目. 完成後, 請各組員依照指示完成期中自評與互評.&lt;/p&gt;
+&lt;/pre&gt;</summary><category term="Brython"></category><category term="w10"></category></entry><entry><title>期中協同查驗與自評</title><link href="./midterm-collaboration-evaluation.html" rel="alternate"></link><updated>2017-04-15T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-04-15:./midterm-collaboration-evaluation.html</id><summary type="html">&lt;p&gt;以下為協同產品設計實習 2017 Spring 期中考週的四個實習查驗題目. 完成後, 請各組員依照指示完成期中自評與互評.&lt;/p&gt;
 
 
 &lt;h3&gt;(一) Fossil Server 實習查驗&lt;/h3&gt;
@@ -575,7 +575,7 @@ for j in range(10):
     ctx.stroke()
     ctx.closePath()
 &lt;/script&gt;
-&lt;pre&gt;</summary><category term="v-rep"></category><category term="w9"></category></entry><entry><title>V-rep 平面機構運動模擬</title><link href="./vrep-planar-mechanism-simulation.html" rel="alternate"></link><published>2017-03-21T11:00:00+08:00</published><updated>2017-03-21T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-03-21:./vrep-planar-mechanism-simulation.html</id><summary type="html">&lt;p&gt;V-rep planar one-line and fourbar linkage simulation&lt;/p&gt;
+&lt;pre&gt;</summary><category term="v-rep"></category><category term="w9"></category></entry><entry><title>V-rep 平面機構運動模擬</title><link href="./vrep-planar-mechanism-simulation.html" rel="alternate"></link><updated>2017-03-21T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-03-21:./vrep-planar-mechanism-simulation.html</id><summary type="html">&lt;p&gt;V-rep planar one-line and fourbar linkage simulation&lt;/p&gt;
 
 
 &lt;h2&gt;One-link Robot Velocity Control&lt;/h2&gt;
@@ -797,7 +797,7 @@ def setJointPosition(incAngle, steps):
 
 # 每步 10 度, 轉兩圈
 setJointPosition(10, 72)
-&lt;/pre&gt;</summary><category term="v-rep"></category><category term="w5"></category></entry><entry><title>網際平面機構模擬</title><link href="./brython-planar-linkage.html" rel="alternate"></link><published>2017-03-15T11:00:00+08:00</published><updated>2017-03-15T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-03-15:./brython-planar-linkage.html</id><summary type="html">&lt;p&gt;Brython 平面 quadratic bezier 曲線:&lt;/p&gt;
+&lt;/pre&gt;</summary><category term="v-rep"></category><category term="w5"></category></entry><entry><title>網際平面機構模擬</title><link href="./brython-planar-linkage.html" rel="alternate"></link><updated>2017-03-15T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-03-15:./brython-planar-linkage.html</id><summary type="html">&lt;p&gt;Brython 平面 quadratic bezier 曲線:&lt;/p&gt;
 
 
 &lt;!-- 導入 Brython 標準程式庫 3.3.1 --&gt;
@@ -1125,7 +1125,7 @@ cgo.playAnimation()
 &lt;p&gt;Cango3D Graphics Library:&lt;/p&gt;
 &lt;p&gt;&lt;a href="http://www.arc.id.au/Canvas3DGraphics.html"&gt;http://www.arc.id.au/Canvas3DGraphics.html&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Cango2D Graphics Library:&lt;/p&gt;
-&lt;p&gt;&lt;a href="http://www.arc.id.au/CanvasAnimation.html"&gt;http://www.arc.id.au/CanvasAnimation.html&lt;/a&gt;&lt;/p&gt;</summary><category term="brython"></category><category term="w4"></category></entry><entry><title>網際 Brython 3.3.1 程式執行環境</title><link href="./brython-editor-331.html" rel="alternate"></link><published>2017-03-14T11:00:00+08:00</published><updated>2017-03-14T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-03-14:./brython-editor-331.html</id><summary type="html">&lt;p&gt;Brython 程式環境可以用來練習許多 Python3 的簡單語法, 也可以納入 Javascript 程式庫, 利用 Ajax 模式結合網際瀏覽器與伺服器上的資源解決協同產品設計流程上的問題.&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.arc.id.au/CanvasAnimation.html"&gt;http://www.arc.id.au/CanvasAnimation.html&lt;/a&gt;&lt;/p&gt;</summary><category term="brython"></category><category term="w4"></category></entry><entry><title>網際 Brython 3.3.1 程式執行環境</title><link href="./brython-editor-331.html" rel="alternate"></link><updated>2017-03-14T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-03-14:./brython-editor-331.html</id><summary type="html">&lt;p&gt;Brython 程式環境可以用來練習許多 Python3 的簡單語法, 也可以納入 Javascript 程式庫, 利用 Ajax 模式結合網際瀏覽器與伺服器上的資源解決協同產品設計流程上的問題.&lt;/p&gt;
 
 
 &lt;!-- 導入 FileSaver 與 filereader --&gt;
@@ -1539,7 +1539,7 @@ document["jansen"].bind("click", jansen)
 
 &lt;p&gt;&lt;button id="get"&gt;for1.py&lt;/button&gt;&lt;button id="get_temp1"&gt;temp1.py&lt;/button&gt;&lt;button id="get_ver_and_kw"&gt;ver_and_kw.py&lt;/button&gt;&lt;button id="jansen"&gt;jansen.py&lt;/button&gt;&lt;/p&gt;
 &lt;p&gt;Jansen 多連桿機構尺寸圖:&lt;/p&gt;
-&lt;p&gt;&lt;img src="./../data/jansen_sympy.png" width="800" /&gt;&lt;/p&gt;</summary><category term="brython"></category><category term="w1"></category></entry><entry><title>協同產品設計實習第1週任務</title><link href="./brython-2d-drawing.html" rel="alternate"></link><published>2017-02-22T11:00:00+08:00</published><updated>2017-02-22T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-02-22:./brython-2d-drawing.html</id><summary type="html">&lt;p&gt;網際協同設計資料整合, 網際 2D 程式繪圖回顧&lt;/p&gt;
+&lt;p&gt;&lt;img src="./../data/jansen_sympy.png" width="800" /&gt;&lt;/p&gt;</summary><category term="brython"></category><category term="w1"></category></entry><entry><title>協同產品設計實習第1週任務</title><link href="./brython-2d-drawing.html" rel="alternate"></link><updated>2017-02-22T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-02-22:./brython-2d-drawing.html</id><summary type="html">&lt;p&gt;網際協同設計資料整合, 網際 2D 程式繪圖回顧&lt;/p&gt;
 
 
 &lt;h2&gt;網際協同設計資料整合&lt;/h2&gt;
@@ -2193,7 +2193,7 @@ hk = 49
 kg = 65.7
 kx, ky = pllp(hx, hy, hk, kg, gx, gy, cw=1)
 print("kx=", kx, "ky=", ky)
-&lt;/pre&gt;</summary><category term="brython"></category><category term="w1"></category></entry><entry><title>Fossil SCM 簡介</title><link href="./intro-fossil-scm.html" rel="alternate"></link><published>2017-02-17T11:00:00+08:00</published><updated>2017-02-17T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-02-17:./intro-fossil-scm.html</id><summary type="html">&lt;p&gt;Fossil SCM 是一套軟體配置管理 (Software Configuration Management) 系統, 其中包含分散式版次控管 (DVC, Distributed Version Control) 、&lt;a href="http://fossil-scm.org/xfer/doc/trunk/www/wikitheory.wiki"&gt;Wiki&lt;/a&gt; 、&lt;a href="http://fossil-scm.org/xfer/doc/trunk/www/bugtheory.wiki"&gt;Bug Tracking&lt;/a&gt; 與 &lt;a href="http://fossil-scm.org/xfer/doc/trunk/www/event.wiki"&gt;Technote&lt;/a&gt; 等功能, 可以用來控制及追蹤軟體開發專案, 並且紀錄專案開發歷程, 在協同產品設計實習課程中, 我們除了使用 git、github 與 bitbucket 之外, 將要在區域網路與系上主幹中, 配置每班兩台的 Fossil SCM 實習主機.&lt;/p&gt;
+&lt;/pre&gt;</summary><category term="brython"></category><category term="w1"></category></entry><entry><title>Fossil SCM 簡介</title><link href="./intro-fossil-scm.html" rel="alternate"></link><updated>2017-02-17T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-02-17:./intro-fossil-scm.html</id><summary type="html">&lt;p&gt;Fossil SCM 是一套軟體配置管理 (Software Configuration Management) 系統, 其中包含分散式版次控管 (DVC, Distributed Version Control) 、&lt;a href="http://fossil-scm.org/xfer/doc/trunk/www/wikitheory.wiki"&gt;Wiki&lt;/a&gt; 、&lt;a href="http://fossil-scm.org/xfer/doc/trunk/www/bugtheory.wiki"&gt;Bug Tracking&lt;/a&gt; 與 &lt;a href="http://fossil-scm.org/xfer/doc/trunk/www/event.wiki"&gt;Technote&lt;/a&gt; 等功能, 可以用來控制及追蹤軟體開發專案, 並且紀錄專案開發歷程, 在協同產品設計實習課程中, 我們除了使用 git、github 與 bitbucket 之外, 將要在區域網路與系上主幹中, 配置每班兩台的 Fossil SCM 實習主機.&lt;/p&gt;
 
 
 &lt;h2&gt;採用 git, github, bitbucket 與 fossil 原因&lt;/h2&gt;
@@ -2564,7 +2564,7 @@ CMSimfly is a simple CMS in Flask
 &lt;p&gt;fossil clone ssh://account@your_ipv6_only_server_url/repository/target.fossil cloned.fossil&lt;/p&gt;
 &lt;p&gt;將遠端的 target.fossil 複製到近端存為 cloned.fossil 檔案, 其中特別注意到, 相對路徑除了在 server_url 後只需一個斜線, 且是以 /home/account 目錄作為相對目錄的根目錄, 使用者必須加入 /repository/target.fossil, 才能正確擷取到倉儲檔案.&lt;/p&gt;
 &lt;p&gt;上述兩種 fossil clone 指令執行後, 系統會要求輸入與 account 用戶對應的 Fossil Server 密碼, 完成後就可以將遠端的倉儲檔複製到近端.&lt;/p&gt;
-&lt;p&gt;附帶說明: 截至 fossil 2.2 版, 以 ssh 協定可以 fossil clone 遠端純 IPv6 主機上的倉儲, 但是卻無法以 fossil autosync 或 fossil push 將近端的版本提交推送到遠端. 因此目前的 Fossil Server 仍建議採用 IPv4/IPv6 並存的方式建立.&lt;/p&gt;</summary><category term="fossil-scm"></category><category term="w2"></category></entry><entry><title>V-rep 簡介</title><link href="./vrep-introduction.html" rel="alternate"></link><published>2017-02-09T11:00:00+08:00</published><updated>2017-02-09T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-02-09:./vrep-introduction.html</id><summary type="html">&lt;p&gt;V-rep (Virtual robot experimentation platform)&lt;/p&gt;
+&lt;p&gt;附帶說明: 截至 fossil 2.2 版, 以 ssh 協定可以 fossil clone 遠端純 IPv6 主機上的倉儲, 但是卻無法以 fossil autosync 或 fossil push 將近端的版本提交推送到遠端. 因此目前的 Fossil Server 仍建議採用 IPv4/IPv6 並存的方式建立.&lt;/p&gt;</summary><category term="fossil-scm"></category><category term="w2"></category></entry><entry><title>V-rep 簡介</title><link href="./vrep-introduction.html" rel="alternate"></link><updated>2017-02-09T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-02-09:./vrep-introduction.html</id><summary type="html">&lt;p&gt;V-rep (Virtual robot experimentation platform)&lt;/p&gt;
 
 
 &lt;h2&gt;V-rep Overview&lt;/h2&gt;
@@ -3150,7 +3150,7 @@ end
 &lt;p&gt;Extra contributions:&lt;/p&gt;
 &lt;p&gt;&lt;a href="http://www.coppeliarobotics.com/contributions/"&gt;http://www.coppeliarobotics.com/contributions/&lt;/a&gt;&lt;/p&gt;
 &lt;h2&gt;V-rep Forum&lt;/h2&gt;
-&lt;p&gt;&lt;a href="http://www.forum.coppeliarobotics.com/"&gt;http://www.forum.coppeliarobotics.com/&lt;/a&gt;&lt;/p&gt;</summary><category term="v-rep"></category><category term="w2"></category></entry><entry><title>網際 Brython 程式執行環境</title><link href="./brython-editor.html" rel="alternate"></link><published>2017-02-07T11:00:00+08:00</published><updated>2017-02-07T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-02-07:./brython-editor.html</id><summary type="html">&lt;p&gt;Brython 程式環境可以用來練習許多 Python3 的簡單語法, 也可以納入 Javascript 程式庫, 利用 Ajax 模式結合網際瀏覽器與伺服器上的資源解決協同產品設計流程上的問題.&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.forum.coppeliarobotics.com/"&gt;http://www.forum.coppeliarobotics.com/&lt;/a&gt;&lt;/p&gt;</summary><category term="v-rep"></category><category term="w2"></category></entry><entry><title>網際 Brython 程式執行環境</title><link href="./brython-editor.html" rel="alternate"></link><updated>2017-02-07T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-02-07:./brython-editor.html</id><summary type="html">&lt;p&gt;Brython 程式環境可以用來練習許多 Python3 的簡單語法, 也可以納入 Javascript 程式庫, 利用 Ajax 模式結合網際瀏覽器與伺服器上的資源解決協同產品設計流程上的問題.&lt;/p&gt;
 
 
 &lt;!-- 導入 FileSaver 與 filereader --&gt;
@@ -3473,7 +3473,7 @@ def get_ver_and_kw(e):
 document["get_ver_and_kw"].bind("click", get_ver_and_kw)
 &lt;/script&gt;
 
-&lt;p&gt;&lt;button id="get"&gt;for1.py&lt;/button&gt;&lt;button id="get_temp1"&gt;temp1.py&lt;/button&gt;&lt;button id="get_ver_and_kw"&gt;ver_and_kw.py&lt;/button&gt;&lt;/p&gt;</summary><category term="brython"></category><category term="w1"></category></entry><entry><title>2017Spring 協同產品設計實習</title><link href="./2017spring-cd.html" rel="alternate"></link><published>2017-01-08T11:00:00+08:00</published><updated>2017-01-08T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-01-08:./2017spring-cd.html</id><summary type="html">&lt;p&gt;協同產品設計實習在銜接計算機程式、電腦輔助設計實習課程, 讓學員以分組協同的方式進行產品設計實習.&lt;/p&gt;
+&lt;p&gt;&lt;button id="get"&gt;for1.py&lt;/button&gt;&lt;button id="get_temp1"&gt;temp1.py&lt;/button&gt;&lt;button id="get_ver_and_kw"&gt;ver_and_kw.py&lt;/button&gt;&lt;/p&gt;</summary><category term="brython"></category><category term="w1"></category></entry><entry><title>2017Spring 協同產品設計實習</title><link href="./2017spring-cd.html" rel="alternate"></link><updated>2017-01-08T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-01-08:./2017spring-cd.html</id><summary type="html">&lt;p&gt;協同產品設計實習在銜接計算機程式、電腦輔助設計實習課程, 讓學員以分組協同的方式進行產品設計實習.&lt;/p&gt;
 
 
 &lt;h2&gt;歷年協同產品設計實習課程&lt;/h2&gt;

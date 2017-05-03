@@ -782,7 +782,9 @@ def fillet_line_arc(line, arc, fillet_radius):
 
 python -m pip install pelican
 python -m pip install bs4
-python -m pip install Markdown</t>
+python -m pip install Markdown
+
+加上 portable git</t>
 <t tx="yen.20170108171605.1"></t>
 <t tx="yen.20170108171605.2">QTreeWidget {
     /* These apply to the selected item, but not to editing items.*/

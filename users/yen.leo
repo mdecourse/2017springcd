@@ -27,7 +27,7 @@
 <v t="yen.20170215103332.1"><vh>@edit base.html</vh></v>
 </v>
 </v>
-<v t="yen.20170120110024.1" a="E"><vh>@clean index.html</vh>
+<v t="yen.20170120110024.1"><vh>@clean index.html</vh>
 <v t="yen.20170120110024.2" a="E"><vh>html</vh>
 <v t="yen.20170120110024.3"><vh>head</vh></v>
 <v t="yen.20170120110024.4" a="E"><vh>body</vh>
@@ -76,6 +76,7 @@
 <v t="yen.20170415223959.1"><vh>@edit 20170415.md</vh></v>
 <v t="leo.20170427102200.1"><vh>@edit 20170427.md</vh></v>
 <v t="yen.20170502163600.1"><vh>@edit 20170502.md</vh></v>
+<v t="leo.20170503094705.1"><vh>@edit 20170503.md</vh></v>
 <v t="yen.20170108171733.81"><vh>@path pages</vh>
 <v t="yen.20170108171733.82"><vh>@edit pages_1.md</vh></v>
 </v>
@@ -85,7 +86,12 @@
 <v t="yen.20170108171930.1"><vh>@button https server</vh></v>
 <v t="yen.20170108171939.1"><vh>@button ipv6 https server</vh></v>
 <v t="yen.20170120212350.1" a="E"><vh>programs</vh>
-<v t="leo.20170426085813.1" a="E"><vh>Brython</vh>
+<v t="leo.20170503093805.1" a="E"><vh>W11</vh>
+<v t="leo.20170503093813.1"><vh>spur</vh></v>
+<v t="leo.20170503094123.1"><vh>Cango javascript</vh></v>
+<v t="leo.20170503094328.1"><vh>fillet intersection</vh></v>
+</v>
+<v t="leo.20170426085813.1"><vh>Brython</vh>
 <v t="leo.20170426085831.1" a="E"><vh>@path ../data/py</vh>
 <v t="leo.20170426085849.1"><vh>@clean script1.py</vh>
 <v t="leo.20170426085920.1"><vh>script1 declarations</vh></v>
@@ -116,11 +122,12 @@
 <v t="yen.20170120232548.1"><vh>calendar example</vh></v>
 <v t="yen.20170123204227.1"><vh>印出月曆以及各課程上課日期</vh></v>
 <v t="yen.20170207092354.1"><vh>協同程式參考</vh></v>
-<v t="yen.20170124102405.1" a="E"><vh>chat</vh>
+<v t="yen.20170124102405.1"><vh>chat</vh>
 <v t="yen.20170124102433.1"><vh>index.html</vh></v>
 </v>
 </v>
 <v t="yen.20170209024032.1"><vh>reference</vh></v>
+<v t="leo.20170503103809.1"><vh>kmol2018</vh></v>
 </vnodes>
 <tnodes>
 <t tx="leo.20170426085813.1"></t>
@@ -252,6 +259,530 @@ def load_script(evt):
     editor.setValue(open(_name).read())
 
 </t>
+<t tx="leo.20170503093805.1"></t>
+<t tx="leo.20170503093813.1">&lt;canvas id='gear2' width='800' height='700'&gt;&lt;/canvas&gt;
+ 
+&lt;script type="text/python3"&gt;
+# 導入 browser 模組中的 document, 並設為 doc 變數
+from browser import document as doc
+import math
+# deg 為角度轉為徑度的轉換因子
+deg = math.pi/180.
+# 定義 Spur 類別
+class Spur(object):
+    def __init__(self, ctx):
+        self.ctx = ctx
+ 
+    def create_line(self, x1, y1, x2, y2, width=3, fill="red"):
+        self.ctx.beginPath()
+        self.ctx.lineWidth = width
+        self.ctx.moveTo(x1, y1)
+        self.ctx.lineTo(x2, y2)
+        self.ctx.strokeStyle = fill
+        self.ctx.stroke()
+    #
+    # 定義一個繪正齒輪的繪圖函式
+    # midx 為齒輪圓心 x 座標
+    # midy 為齒輪圓心 y 座標
+    # rp 為節圓半徑, n 為齒數
+    # pa 為壓力角 (deg)
+    # rot 為旋轉角 (deg)
+    # 已經針對 n 大於等於 52 齒時的繪圖錯誤修正, 因為 base circle 與齒根圓大小必須進行判斷
+    def Gear(self, midx, midy, rp, n=20, pa=20, color="black"):
+        # 齒輪漸開線分成 15 線段繪製
+        imax = 15
+        # 在輸入的畫布上繪製直線, 由圓心到節圓 y 軸頂點畫一直線
+        self.create_line(midx, midy, midx, midy-rp)
+        # 畫出 rp 圓, 畫圓函式尚未定義
+        #create_oval(midx-rp, midy-rp, midx+rp, midy+rp, width=2)
+        # a 為模數 (代表公制中齒的大小), 模數為節圓直徑(稱為節徑)除以齒數
+        # 模數也就是齒冠大小
+        a=2*rp/n
+        # d 為齒根大小, 為模數的 1.157 或 1.25倍, 這裡採 1.25 倍
+        d=2.5*rp/n
+        # ra 為齒輪的外圍半徑
+        ra=rp+a
+        # 畫出 ra 圓, 畫圓函式尚未定義
+        #create_oval(midx-ra, midy-ra, midx+ra, midy+ra, width=1)
+        # rb 則為齒輪的基圓半徑
+        # 基圓為漸開線長齒之基準圓
+        rb=rp*math.cos(pa*deg)
+        # 畫出 rb 圓 (基圓), 畫圓函式尚未定義
+        #create_oval(midx-rb, midy-rb, midx+rb, midy+rb, width=1)
+        # rd 為齒根圓半徑
+        rd=rp-d
+        # 當 rd 大於 rb 時, 漸開線並非畫至 rb, 而是 rd
+        # 畫出 rd 圓 (齒根圓), 畫圓函式尚未定義
+        #create_oval(midx-rd, midy-rd, midx+rd, midy+rd, width=1)
+        # dr 則為基圓到齒頂圓半徑分成 imax 段後的每段半徑增量大小
+        # 將圓弧分成 imax 段來繪製漸開線
+        # 當 rd 大於 rb 時, 漸開線並非畫至 rb, 而是 rd
+        if rd&gt;rb:
+            dr = (ra-rd)/imax
+        else:
+            dr=(ra-rb)/imax
+        # tan(pa*deg)-pa*deg 為漸開線函數
+        sigma=math.pi/(2*n)+math.tan(pa*deg)-pa*deg
+        for j in range(n):
+            ang=-2.*j*math.pi/n+sigma
+            ang2=2.*j*math.pi/n+sigma
+            lxd=midx+rd*math.sin(ang2-2.*math.pi/n)
+            lyd=midy-rd*math.cos(ang2-2.*math.pi/n)
+            for i in range(imax+1):
+                # 當 rd 大於 rb 時, 漸開線並非畫至 rb, 而是 rd
+                if rd&gt;rb:
+                    r=rd+i*dr
+                else:
+                    r=rb+i*dr
+                theta=math.sqrt((r*r)/(rb*rb)-1.)
+                alpha=theta-math.atan(theta)
+                xpt=r*math.sin(alpha-ang)
+                ypt=r*math.cos(alpha-ang)
+                xd=rd*math.sin(-ang)
+                yd=rd*math.cos(-ang)
+                # i=0 時, 繪線起點由齒根圓上的點, 作為起點
+                if(i==0):
+                    last_x = midx+xd
+                    last_y = midy-yd
+                # 由左側齒根圓作為起點, 除第一點 (xd,yd) 齒根圓上的起點外, 其餘的 (xpt,ypt)則為漸開線上的分段點
+                self.create_line((midx+xpt),(midy-ypt),(last_x),(last_y),fill=color)
+                # 最後一點, 則為齒頂圓
+                if(i==imax):
+                    lfx=midx+xpt
+                    lfy=midy-ypt
+                last_x = midx+xpt
+                last_y = midy-ypt
+            # the line from last end of dedendum point to the recent
+            # end of dedendum point
+            # lxd 為齒根圓上的左側 x 座標, lyd 則為 y 座標
+            # 下列為齒根圓上用來近似圓弧的直線
+            self.create_line((lxd),(lyd),(midx+xd),(midy-yd),fill=color)
+            for i in range(imax+1):
+                # 當 rd 大於 rb 時, 漸開線並非畫至 rb, 而是 rd
+                if rd&gt;rb:
+                    r=rd+i*dr
+                else:
+                    r=rb+i*dr
+                theta=math.sqrt((r*r)/(rb*rb)-1.)
+                alpha=theta-math.atan(theta)
+                xpt=r*math.sin(ang2-alpha)
+                ypt=r*math.cos(ang2-alpha)
+                xd=rd*math.sin(ang2)
+                yd=rd*math.cos(ang2)
+                # i=0 時, 繪線起點由齒根圓上的點, 作為起點
+                if(i==0):
+                    last_x = midx+xd
+                    last_y = midy-yd
+                # 由右側齒根圓作為起點, 除第一點 (xd,yd) 齒根圓上的起點外, 其餘的 (xpt,ypt)則為漸開線上的分段點
+                self.create_line((midx+xpt),(midy-ypt),(last_x),(last_y),fill=color)
+                # 最後一點, 則為齒頂圓
+                if(i==imax):
+                    rfx=midx+xpt
+                    rfy=midy-ypt
+                last_x = midx+xpt
+                last_y = midy-ypt
+            # lfx 為齒頂圓上的左側 x 座標, lfy 則為 y 座標
+            # 下列為齒頂圓上用來近似圓弧的直線
+            self.create_line(lfx,lfy,rfx,rfy,fill=color)
+ 
+# 準備在 id="gear2" 的 canvas 中繪圖
+canvas = doc["gear2"]
+ctx = canvas.getContext("2d")
+x = (canvas.width)/2
+y = (canvas.height)/2
+r = 0.8*(canvas.width/2)
+# 齒數
+n = 53
+# 壓力角
+pa = 20
+Spur(ctx).Gear(x, y, r, n, pa, "blue")
+&lt;/script&gt;</t>
+<t tx="leo.20170503094123.1">&lt;canvas id='gear1' width='800' height='750'&gt;&lt;/canvas&gt;
+ 
+&lt;script type="text/python"&gt;
+# 將 導入的 document 設為 doc 主要原因在於與舊程式碼相容
+from browser import document as doc
+# 由於 Python3 與 Javascript 程式碼已經不再混用, 因此來自 Javascript 的變數, 必須居中透過 window 物件轉換
+from browser import window
+# 針對 Javascript 既有的物件, 則必須透過 JSConstructor 轉換
+from javascript import JSConstructor
+import math
+ 
+# 主要用來取得畫布大小
+canvas = doc["gear1"]
+# 此程式採用 Cango Javascript 程式庫繪圖, 因此無需 ctx
+#ctx = canvas.getContext("2d")
+# 針對類別的轉換, 將 Cango.js 中的 Cango 物件轉為 Python cango 物件
+cango = JSConstructor(window.Cango)
+# 針對變數的轉換, shapeDefs 在 Cango 中資料型別為變數, 可以透過 window 轉換
+shapedefs = window.shapeDefs
+# 目前 Cango 結合 Animation 在 Brython 尚無法運作, 此刻只能繪製靜態圖形
+# in CangoAnimation.js
+#interpolate1 = window.interpolate
+# Cobi 與 createGearTooth 都是 Cango Javascript 程式庫中的物件
+cobj = JSConstructor(window.Cobj)
+creategeartooth = JSConstructor(window.createGearTooth)
+ 
+# 經由 Cango 轉換成 Brython 的 cango, 指定將圖畫在 id="plotarea" 的 canvas 上
+cgo = cango("gear1")
+ 
+######################################
+# 畫正齒輪輪廓
+#####################################
+# n 為齒數
+n = 17
+# pa 為壓力角
+pa = 25
+# m 為模數, 根據畫布的寬度, 計算適合的模數大小
+# Module = mm of pitch diameter per tooth
+m = 0.8*canvas.width/n
+# pr 為節圓半徑
+pr = n*m/2 # gear Pitch radius
+# generate gear
+data = creategeartooth(m, n, pa)
+# Brython 程式中的 print 會將資料印在 Browser 的 console 區
+#print(data)
+gearTooth = cobj(data, "SHAPE", {
+        "fillColor":"#ddd0dd",
+        "border": True,
+        "strokeColor": "#606060" })
+gearTooth.rotate(180/n) # rotate gear 1/2 tooth to mesh
+# 單齒的齒形資料經過旋轉後, 將資料複製到 gear 物件中
+gear = gearTooth.dup()
+# gear 為單一齒的輪廓資料
+#cgo.render(gearTooth)
+ 
+# 利用單齒輪廓旋轉, 產生整個正齒輪外形
+for i in range(1, n):
+    # 將 gearTooth 中的資料複製到 newTooth
+    newTooth = gearTooth.dup()
+    # 配合迴圈, newTooth 的齒形資料進行旋轉, 然後利用 appendPath 方法, 將資料併入 gear
+    newTooth.rotate(360*i/n)
+    # appendPath 為 Cango 程式庫中的方法, 第二個變數為 True, 表示要刪除最前頭的 Move to SVG Path 標註符號
+    gear.appendPath(newTooth, True) # trim move command = True
+ 
+# 建立軸孔
+# add axle hole, hr 為 hole radius
+hr = 0.6*pr # diameter of gear shaft
+shaft = cobj(shapedefs.circle(hr), "PATH")
+shaft.revWinding()
+gear.appendPath(shaft) # retain the 'moveTo' command for shaft sub path
+cx = canvas.width/2
+cy = canvas.height/2
+gear.translate(cx, cy)
+# render 繪出靜態正齒輪輪廓
+cgo.render(gear)
+&lt;/script&gt;</t>
+<t tx="leo.20170503094328.1">#https://github.com/utlco/tcnc/blob/master/tcnc/geom/fillet.py
+#-----------------------------------------------------------------------------
+# Copyright 2012-2016 Claude Zervas
+# email: claude@utlco.com
+#-----------------------------------------------------------------------------
+"""
+Connect Line/Arc segments with a fillet arc.
+"""
+# Python 3 compatibility boilerplate
+from __future__ import (absolute_import, division,
+                        print_function, unicode_literals)
+from future_builtins import *
+
+import math
+
+# For debugging:
+import logging
+logger = logging.getLogger(__name__)
+
+from . import debug
+from . import const
+from .line import Line
+from .arc import Arc
+
+
+
+def fillet_path(path, radius, fillet_close=True):
+    """Attempt to insert a circular arc of the specified radius
+    to connect adjacent path segments.
+
+    Args:
+        path: A list of Line or Arc segments.
+        radius: The radius of the fillet arc.
+        fillet_close: If True and the path is closed then
+            add a terminating fillet. Default is False.
+
+    Returns:
+        A new path with fillet arcs. If no fillets are created then
+        the original path will be returned.
+    """
+    if radius &lt; const.EPSILON or len(path) &lt; 2:
+        return path
+    new_path = []
+    seg1 = path[0]
+    for seg2 in path[1:]:
+        new_segs = insert_fillet(seg1, seg2, radius)
+        if new_segs:
+            new_path.extend(new_segs[:-1])
+            seg2 = new_segs[-1]
+        else:
+            new_path.append(seg1)
+        seg1 = seg2
+    new_path.append(seg1)
+    # Close the path with a fillet
+    if fillet_close and len(path) &gt; 2 and path[0].p1 == path[-1].p2:
+        new_segs = insert_fillet(new_path[-1], new_path[0], radius)
+        if new_segs:
+            new_path[-1] = new_segs[0]
+            new_path.append(new_segs[1])
+            new_path[0] = new_segs[2]
+    # Discard the path copy if no fillets were created...
+    return new_path if len(new_path) &gt; len(path) else path
+
+
+def fillet_polygon(poly, radius, fillet_close=True):
+    """Attempt to insert a circular arc of the specified radius
+    connecting adjacent polygon segments.
+
+    Args:
+        poly: A list of polygon vertices.
+        radius: The radius of the fillet arc.
+        fillet_close: If True and the path is closed then
+            add a terminating fillet. Default is True.
+
+    Returns:
+        A new path with fillet arcs as a list of Line and Arc segments.
+        If no fillets are created then the original path will be returned.
+    """
+    if len(poly) &lt; 2:
+        return ()
+    seg1 = Line(poly[0], poly[1])
+    if len(poly) == 2:
+        return (seg1,)
+    path = []
+    for p in poly[2:]:
+        seg2 = Line(seg1.p2, p)
+        new_segs = insert_fillet(seg1, seg2, radius)
+        if new_segs:
+            path.append(new_segs[0])
+            path.append(new_segs[1])
+            seg1 = new_segs[2]
+        else:
+            path.append(seg1)
+            seg1 = seg2
+    path.append(seg1)
+    if fillet_close and len(path) &gt; 2 and path[0].p1 == path[-1].p2:
+        new_segs = insert_fillet(path[-1], path[0], radius)
+        if new_segs:
+            path[-1] = new_segs[0]
+            path.append(new_segs[1])
+            path[0] = new_segs[2]
+    return path
+
+
+def insert_fillet(seg1, seg2, radius):
+    """Try to create a fillet between two segments.
+    Any GCode rendering hints attached to the segments will
+    be preserved.
+
+    Args:
+        seg1: First segment, an Arc or a Line.
+        seg2: Second segment, an Arc or a Line.
+        radius: Fillet radius.
+
+    Returns:
+        A tuple containing the adjusted segments and fillet arc:
+        (seg1, fillet_arc, seg2)
+        Returns an empty tuple if the segments cannot be connected
+        with a fillet arc (either they are too small
+        or somehow degenerate.)
+    """
+    farc = create_fillet_arc(seg1, seg2, radius)
+    if farc is None:
+        return ()
+    return connect_fillet(seg1, farc, seg2)
+
+
+def connect_fillet(seg1, farc, seg2):
+    """Connect two segments with a fillet arc.
+    This will adjust the lengths of the segments to
+    accommodate the fillet."""
+    if isinstance(seg1, Line):
+        new_seg1 = Line(seg1.p1, farc.p1)
+        if isinstance(seg2, Line):
+            # Connect Line-&gt;Fillet-&gt;Line
+            new_seg2 = Line(farc.p2, seg2.p2)
+        else:
+            # Connect Line-&gt;Fillet-&gt;Arc
+            new_angle = seg2.angle - seg2.center.angle2(seg2.p1, farc.p2)
+            new_seg2 = Arc(farc.p2, seg2.p2, seg2.radius, new_angle,
+                                seg2.center)
+    else:
+        new_angle = seg1.angle - seg1.center.angle2(farc.p1, seg1.p2)
+        new_seg1 = Arc(seg1.p1, farc.p1, seg1.radius, new_angle,
+                            seg1.center)
+        if isinstance(seg2, Line):
+            # Connect Arc-&gt;Fillet-&gt;Line
+            new_seg2 = Line(farc.p2, seg2.p2)
+        else:
+            # Connect Arc-&gt;Fillet-&gt;Arc
+            new_angle = seg2.angle - seg2.center.angle2(seg2.p1, farc.p2)
+            new_seg2 = Arc(farc.p2, seg2.p2, seg2.radius, new_angle,
+                                seg2.center)
+    return (new_seg1, farc, new_seg2)
+
+
+def create_fillet_arc(seg1, seg2, radius):
+    """Try to create a fillet between two segments.
+
+    Args:
+        seg1: First segment, an Arc or a Line.
+        seg2: Second segment, an Arc or a Line.
+        radius: Fillet radius.
+
+    Returns:
+        A fillet arc or None if the segments cannot be connected
+        with a fillet arc (either they are too small, already G1
+        continuous, or are somehow degenerate.)
+    """
+    farc = None
+    if isinstance(seg1, Line):
+        if isinstance(seg2, Line):
+            farc = fillet_line_line(seg1, seg2, radius)
+        elif isinstance(seg2, Arc):
+            farc = fillet_line_arc(seg1, seg2, radius)
+    elif isinstance(seg1, Arc):
+        if isinstance(seg2, Line):
+            farc = fillet_line_arc(seg2, seg1, radius)
+        elif isinstance(seg2, Arc):
+            farc = fillet_arc_arc(seg1, seg2, radius)
+    return farc
+
+
+def fillet_line_line(line1, line2, fillet_radius):
+    """Create a fillet arc between two line segments.
+
+    Args:
+        line1: A Line.
+        line2: A Line connected to line1.
+        fillet_radius: The radius of the fillet.
+
+    Returns:
+        An Arc, or None if the fillet radius is too big to fit or
+        if the two segments are not connected.
+    """
+    fillet_arc = None # default return value
+    lineside = line1.which_side(line2.p2)
+    offset = fillet_radius * lineside
+    offset_line1 = line1.offset(offset)
+    offset_line2 = line2.offset(offset)
+    fillet_center = offset_line1.intersection(offset_line2)
+    if fillet_center is not None:
+        fp1 = line1.normal_projection_point(fillet_center, segment=True)
+        fp2 = line2.normal_projection_point(fillet_center, segment=True)
+        # Test for fillet fit
+        if (fp1 is not None and fp2 is not None and fp1 != fp2
+                and const.float_eq(fp1.distance(fillet_center), fillet_radius)
+                and const.float_eq(fp2.distance(fillet_center), fillet_radius)):
+            fillet_arc = Arc.from_two_points_and_center(fp1, fp2,
+                                                       fillet_center)
+    return fillet_arc
+
+
+def fillet_arc_arc(arc1, arc2, fillet_radius):
+    """Create a fillet arc between two connected arcs.
+
+    Args:
+        arc1: First arc.
+        arc2: Second arc.
+        fillet_radius: The radius of the fillet.
+
+    Returns:
+        An Arc,
+        or None if the fillet radius is too big to fit or
+        if the two segments are not connected.
+    """
+    fillet_arc = None # default return value
+    arc2_side = arc1.which_side_angle(arc2.start_tangent_angle())
+    cw1 = 1 if arc1.is_clockwise() else -1
+    cw2 = 1 if arc2.is_clockwise() else -1
+    offset_arc1 = arc1.offset(fillet_radius * arc2_side * cw1)
+    offset_arc2 = arc2.offset(fillet_radius * arc2_side * cw2)
+    # The intersection of the two offset arcs is the fillet arc center.
+    offset_intersections = offset_arc1.intersect_arc(offset_arc2, on_arc=True)
+    if offset_intersections:
+        fillet_center = offset_intersections[0]
+        # Find points normal from fillet center to arc segments
+        fline1 = Line(fillet_center, arc1.center)
+        fline2 = Line(fillet_center, arc2.center)
+        ix1 = arc1.intersect_line(fline1, on_arc=True)
+        ix2 = arc2.intersect_line(fline2, on_arc=True)
+        if ix1 and ix2:
+            fillet_arc = Arc.from_two_points_and_center(ix1[0], ix2[0],
+                                                        fillet_center)
+    return fillet_arc
+
+
+def fillet_line_arc(line, arc, fillet_radius):
+    """Create a fillet arc between a line segment and a connected arc.
+    The fillet arc end point order will match the line-arc order.
+
+    Args:
+        line: A Line.
+        arc: An Arc.
+        fillet_radius: The radius of the fillet.
+
+    Returns:
+        An Arc,
+        or None if the fillet radius is too big to fit or
+        if the two segments are not connected.
+    """
+    debug.draw_arc(arc, verbose=True)
+    # TODO: Maybe replace this novel approach with the more usual
+    # offset intersection method..
+    fillet_arc = None # default return value
+
+    # If the direction is arc-&gt;line then reverse both
+    # to make things simpler.
+    is_reversed = False
+    if const.float_eq(arc.p2, line.p1):
+        # The two segments are connected but in reverse order.
+        line = line.reversed()
+        arc = arc.reversed()
+        is_reversed = True
+
+    arc_side = line.which_side_angle(arc.start_tangent_angle())
+    if ((arc_side &gt; 0 and arc.is_clockwise()) or
+        (arc_side &lt; 0 and not arc.is_clockwise())):
+        h = arc.radius + fillet_radius
+        alpha1 = line.angle() + math.pi
+    else:
+        h = arc.radius - fillet_radius
+        alpha1 = line.angle()
+    line3 = line.offset(fillet_radius * arc_side)
+    p5 = line3.normal_projection_point(arc.center)
+    b = p5.distance(arc.center)
+    a2 = h*h - b*b
+    if a2 &lt; 0:
+        return
+    a = math.sqrt(a2)
+    line4 = Line.from_polar(p5, a, alpha1)
+    fillet_center = line4.p2
+    alpha2 = abs(arc.center.angle2(arc.p1, fillet_center))
+    fp1 = line.normal_projection_point(fillet_center, segment=True)
+    fp2 = arc.point_at_angle(alpha2, segment=True)
+    if (fp1 is not None and fp2 is not None and fp1 != fp2 and
+        const.float_eq(fillet_center.distance(fp1),
+                      fillet_center.distance(fp2))):
+        if is_reversed:
+            fillet_arc = Arc.from_two_points_and_center(fp2, fp1,
+                                                             fillet_center)
+        else:
+            fillet_arc = Arc.from_two_points_and_center(fp1, fp2,
+                                                             fillet_center)
+    return fillet_arc</t>
+<t tx="leo.20170503103809.1">在基本的 Python 3.6.1 與 PyQt5 環境下, 需要安裝 pelican, Markdown 與 bs4 才能使用 pelican-blog 按鈕
+
+python -m pip install pelican
+python -m pip install bs4
+python -m pip install Markdown</t>
 <t tx="yen.20170108171605.1"></t>
 <t tx="yen.20170108171605.2">QTreeWidget {
     /* These apply to the selected item, but not to editing items.*/

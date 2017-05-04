@@ -58,3 +58,4 @@ MARKDOWN = {
 PAGE_URL = 'pages/{slug}/'
 PAGE_SAVE_AS = 'pages/{slug}/index.html'
 SHOW_ARTICLE_AUTHOR = True
+DISPLAY_PAGES_ON_MENU = True

@@ -248,7 +248,9 @@ def drawSpiral(cvsID):
 
 drawSpiral("cango_canvas2")
 &lt;/script&gt;
-&lt;/pre&gt;</summary><category term="Brython"></category><category term="svg"></category></entry><entry><title>協同 2D 正齒輪傳動繪圖 (二)</title><link href="./brython-2d-spur-gear-matching-2.html" rel="alternate"></link><published>2017-05-03T12:00:00+08:00</published><updated>2017-05-03T12:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-05-03:./brython-2d-spur-gear-matching-2.html</id><summary type="html">&lt;p&gt;採用最新的 &lt;a href="https://github.com/brython-dev/brython/releases/tag/3.3.1"&gt;Brython 3.3.1&lt;/a&gt; 與 Cango Javascript 程式庫 (&lt;a href="./../data/w11/cango/Cango-9v05.js"&gt;Cango-9v05.js&lt;/a&gt;), 從單一 2D 正齒輪繪圖到齒輪組嚙合&lt;/p&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;目前正透過 &lt;a href="https://github.com/mdecourse/kmol2018"&gt;https://github.com/mdecourse/kmol2018&lt;/a&gt; 測試 Windows 64 位元可攜 Python3.6.1 與 Brython 3.3.1 的應用, 已經發現 Pelican DISPLAY_PAGES_ON_MENU 無法運作, 且 Brython 3.3.1 在 Windows 環境中無法正確擷取字串值.&lt;/p&gt;</summary><category term="Brython"></category><category term="svg"></category></entry><entry><title>協同 2D 正齒輪傳動繪圖 (二)</title><link href="./brython-2d-spur-gear-matching-2.html" rel="alternate"></link><published>2017-05-03T12:00:00+08:00</published><updated>2017-05-03T12:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-05-03:./brython-2d-spur-gear-matching-2.html</id><summary type="html">&lt;p&gt;採用最新的 &lt;a href="https://github.com/brython-dev/brython/releases/tag/3.3.1"&gt;Brython 3.3.1&lt;/a&gt; 與 Cango Javascript 程式庫 (&lt;a href="./../data/w11/cango/Cango-9v05.js"&gt;Cango-9v05.js&lt;/a&gt;), 從單一 2D 正齒輪繪圖到齒輪組嚙合&lt;/p&gt;
 
 
 &lt;p&gt;利用漸開線原理, 以 Brython 繪製單一正齒輪廓:&lt;/p&gt;

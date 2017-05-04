@@ -500,8 +500,6 @@ from . import const
 from .line import Line
 from .arc import Arc
 
-
-
 def fillet_path(path, radius, fillet_close=True):
     """Attempt to insert a circular arc of the specified radius
     to connect adjacent path segments.

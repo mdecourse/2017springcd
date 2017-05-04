@@ -9,7 +9,7 @@
 <preferences/>
 <find_panel_settings/>
 <vnodes>
-<v t="yen.20170108171605.1" a="E"><vh>@settings</vh>
+<v t="yen.20170108171605.1"><vh>@settings</vh>
 <v t="yen.20170108171605.2"><vh>@data qt-gui-plugin-style-sheet</vh></v>
 <v t="yen.20170108171605.3"><vh>@string initial_split_orientation = horizontal</vh></v>
 </v>
@@ -18,35 +18,35 @@
 <v t="yen.20170108171733.2"><vh>@button pelican-blog</vh></v>
 <v t="yen.20170108171733.3"><vh>@edit README.md</vh></v>
 <v t="yen.20170108171733.4"><vh>@edit .gitignore</vh></v>
-<v t="yen.20170108171733.5"><vh>Pelican 設定</vh>
+<v t="yen.20170108171733.5" a="E"><vh>Pelican 設定</vh>
 <v t="yen.20170108171733.6"><vh>@edit local_publishconf.py</vh></v>
 <v t="yen.20170108171733.7"><vh>@edit pelicanconf.py</vh></v>
 </v>
 <v t="yen.20170215103217.1"><vh>編輯 template</vh>
-<v t="yen.20170215103228.1" a="E"><vh>@path theme/pelican-bootstrap3_local/templates</vh>
+<v t="yen.20170215103228.1"><vh>@path theme/pelican-bootstrap3_local/templates</vh>
 <v t="yen.20170215103332.1"><vh>@edit base.html</vh></v>
 </v>
 </v>
 <v t="yen.20170120110024.1"><vh>@clean index.html</vh>
-<v t="yen.20170120110024.2" a="E"><vh>html</vh>
+<v t="yen.20170120110024.2"><vh>html</vh>
 <v t="yen.20170120110024.3"><vh>head</vh></v>
-<v t="yen.20170120110024.4" a="E"><vh>body</vh>
-<v t="yen.20170120110024.5" a="E"><vh>reveal div</vh>
-<v t="yen.20170120110024.6" a="E"><vh>slides div</vh>
-<v t="yen.20170120110024.7" a="E"><vh>封面投影片</vh>
+<v t="yen.20170120110024.4"><vh>body</vh>
+<v t="yen.20170120110024.5"><vh>reveal div</vh>
+<v t="yen.20170120110024.6"><vh>slides div</vh>
+<v t="yen.20170120110024.7"><vh>封面投影片</vh>
 <v t="yen.20170120110024.8"><vh>封面投影片內容</vh></v>
 </v>
-<v t="yen.20170120110024.9" a="E"><vh>快捷鍵</vh>
+<v t="yen.20170120110024.9"><vh>快捷鍵</vh>
 <v t="yen.20170120110024.10"><vh>投影片快捷鍵</vh></v>
 </v>
 <v t="yen.20170120110024.11"><vh>各式內容引用範例</vh>
-<v t="yen.20170120110024.12" a="E"><vh>導入數學符號與方程式</vh>
+<v t="yen.20170120110024.12"><vh>導入數學符號與方程式</vh>
 <v t="yen.20170120110024.13"><vh>LaTeX 格式方程式</vh></v>
 </v>
-<v t="yen.20170120110024.14" a="E"><vh>導入縮排程式碼</vh>
+<v t="yen.20170120110024.14"><vh>導入縮排程式碼</vh>
 <v t="yen.20170120110024.15"><vh>引用程式碼</vh></v>
 </v>
-<v t="yen.20170120110024.16" a="E"><vh>導入影片</vh>
+<v t="yen.20170120110024.16"><vh>導入影片</vh>
 <v t="yen.20170120110024.17"><vh>iframe 導入影片</vh></v>
 </v>
 </v>
@@ -55,9 +55,9 @@
 </v>
 </v>
 </v>
-<v t="yen.20170108171733.71" a="E"><vh>@path content</vh>
+<v t="yen.20170108171733.71"><vh>@path content</vh>
 <v t="yen.20170123225841.1"><vh>@edit 20170108.md</vh></v>
-<v t="yen.20170207091131.1" a="E"><vh>@clean 20170207.md</vh>
+<v t="yen.20170207091131.1"><vh>@clean 20170207.md</vh>
 <v t="yen.20170207091131.2"><vh>ex1 - for 迴圈</vh></v>
 <v t="yen.20170207091131.3"><vh>ex2 - input 與單位換算</vh></v>
 <v t="yen.20170207091131.4"><vh>filereader</vh></v>
@@ -65,7 +65,7 @@
 <v t="yen.20170209092319.1"><vh>@edit 20170209.md</vh></v>
 <v t="yen.20170314213339.1"><vh>@edit 20170217.md</vh></v>
 <v t="yen.20170221100209.1"><vh>@edit 20170222.md</vh></v>
-<v t="yen.20170314213424.1" a="E"><vh>@clean 20170314.md</vh>
+<v t="yen.20170314213424.1"><vh>@clean 20170314.md</vh>
 <v t="yen.20170314213424.2"><vh>ex1 - for 迴圈</vh></v>
 <v t="yen.20170314213424.3"><vh>ex2 - input 與單位換算</vh></v>
 <v t="yen.20170314214818.1"><vh>ex3 - jansen 多連桿機構</vh></v>
@@ -86,8 +86,8 @@
 </v>
 <v t="yen.20170108171930.1"><vh>@button https server</vh></v>
 <v t="yen.20170108171939.1"><vh>@button ipv6 https server</vh></v>
-<v t="yen.20170120212350.1" a="E"><vh>programs</vh>
-<v t="leo.20170503093805.1" a="E"><vh>W11</vh>
+<v t="yen.20170120212350.1"><vh>programs</vh>
+<v t="leo.20170503093805.1"><vh>W11</vh>
 <v t="leo.20170503093813.1"><vh>spur</vh></v>
 <v t="leo.20170503094123.1"><vh>Cango javascript</vh></v>
 <v t="leo.20170503094328.1"><vh>fillet intersection</vh></v>
@@ -95,7 +95,7 @@
 <v t="yen.20170503210042.1"><vh>animation script</vh></v>
 </v>
 <v t="leo.20170426085813.1"><vh>Brython</vh>
-<v t="leo.20170426085831.1" a="E"><vh>@path ../data/py</vh>
+<v t="leo.20170426085831.1"><vh>@path ../data/py</vh>
 <v t="leo.20170426085849.1"><vh>@clean script1.py</vh>
 <v t="leo.20170426085920.1"><vh>script1 declarations</vh></v>
 <v t="leo.20170426085920.2"><vh>reset_src</vh></v>
@@ -130,7 +130,9 @@
 </v>
 </v>
 <v t="yen.20170209024032.1"><vh>reference</vh></v>
-<v t="leo.20170503103809.1"><vh>kmol2018</vh></v>
+<v t="leo.20170503103809.1" a="E"><vh>kmol2018</vh>
+<v t="leo.20170504105248.1"><vh>問題</vh></v>
+</v>
 </vnodes>
 <tnodes>
 <t tx="leo.20170426085813.1"></t>
@@ -786,6 +788,11 @@ python -m pip install bs4
 python -m pip install Markdown
 
 加上 portable git</t>
+<t tx="leo.20170504105248.1">確定在 Python 3.6.1 才會發生下列錯誤:
+
+DISPLAY_PAGES_ON_MENU 無法運作
+
+Brython Windows 無法正確判斷字串</t>
 <t tx="yen.20170108171605.1"></t>
 <t tx="yen.20170108171605.2">QTreeWidget {
     /* These apply to the selected item, but not to editing items.*/

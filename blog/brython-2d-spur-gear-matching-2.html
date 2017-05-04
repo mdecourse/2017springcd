@@ -103,6 +103,9 @@
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
+                         <li><a href="./pages/about/">
+                             About
+                          </a></li>
                         <li class="active">
                             <a href="./category/course.html">Course</a>
                         </li>
@@ -322,6 +325,7 @@ student = data.split("\n")[2:]
 student1 = data1.split("\n")[2:]
 for i in range(len(student)):
     each = student[i].split("\t")
+    # 請注意, Brython 在 Windows 環境無法正確判定字串, 原因不明
     if each[1] != "出席":
         count = count + 1
 for i in range(len(student1)):

@@ -1,5 +1,254 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>2017Spring 協同產品設計實習 (虎尾科大MDE)</title><link href="./" rel="alternate"></link><link href="./feeds/all.atom.xml" rel="self"></link><id>./</id><updated>2017-05-03T12:00:00+08:00</updated><entry><title>協同 2D 正齒輪傳動繪圖 (二)</title><link href="./brython-2d-spur-gear-matching-2.html" rel="alternate"></link><published>2017-05-03T12:00:00+08:00</published><updated>2017-05-03T12:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-05-03:./brython-2d-spur-gear-matching-2.html</id><summary type="html">&lt;p&gt;採用最新的 &lt;a href="https://github.com/brython-dev/brython/releases/tag/3.3.1"&gt;Brython 3.3.1&lt;/a&gt; 與 Cango Javascript 程式庫 (&lt;a href="./../data/w11/cango/Cango-9v05.js"&gt;Cango-9v05.js&lt;/a&gt;), 從單一 2D 正齒輪繪圖到齒輪組嚙合&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>2017Spring 協同產品設計實習 (虎尾科大MDE)</title><link href="./" rel="alternate"></link><link href="./feeds/all.atom.xml" rel="self"></link><id>./</id><updated>2017-05-04T11:00:00+08:00</updated><entry><title>網際 SVG 繪圖</title><link href="./brython-2d-svg-canvas.html" rel="alternate"></link><published>2017-05-04T11:00:00+08:00</published><updated>2017-05-04T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-05-04:./brython-2d-svg-canvas.html</id><summary type="html">&lt;p&gt;結合 &lt;a href="https://github.com/brython-dev/brython/releases/tag/3.3.1"&gt;Brython 3.3.1&lt;/a&gt; 與 &lt;a href="./../data/w11/cango/Cango-9v05.js"&gt;Cango-9v05.js&lt;/a&gt; 繪圖, 將 &lt;a href="http://www.arc.id.au/CanvasGraphics.html"&gt;Cango Canvas 繪圖範例&lt;/a&gt;轉為 Brython.&lt;/p&gt;
+
+
+&lt;!-- 導入 Brython 標準程式庫 --&gt;
+
+&lt;script src="./../data/Brython-3.3.1/brython.js"&gt;&lt;/script&gt;
+
+&lt;script src="./../data/Brython-3.3.1/brython_stdlib.js"&gt;&lt;/script&gt;
+
+&lt;!-- Cango 程式庫 --&gt;
+
+&lt;script type="text/javascript" src="./../data/w11/cango
+/Cango-9v05-min.js"&gt;&lt;/script&gt;
+
+&lt;script type="text/javascript" src="./../data/w11/cango
+/CangoAxes-2v09.js"&gt;&lt;/script&gt;
+
+&lt;script type="text/javascript" src="./../data/w11/cango
+/CangoAnimation-5v00.js"&gt;&lt;/script&gt;
+
+&lt;!-- 啟動 Brython --&gt;
+
+&lt;script&gt;
+window.onload=function(){
+// 設定 data/py 為共用程式路徑
+brython({debug:1, pythonpath:['./../data/py']});
+}
+&lt;/script&gt;
+
+&lt;!-- 以下實際利用  Brython 繪圖--&gt;
+
+&lt;canvas id="cango_canvas" width="800" height="60"&gt;&lt;/canvas&gt;
+
+&lt;div id="cango_div" width="800" height="20"&gt;&lt;/div&gt;
+
+&lt;script type="text/python3"&gt;
+from browser import document as doc
+from browser import window
+import math
+# 利用 window 擷取 Cango 物件, 然後以 new 方法轉為 Brython 物件
+cango = window.Cango.new
+# 利用 browser 中的 document 擷取 id = "cango_div" 的標註
+cango_div = doc["cango_div"]
+def sayHullo(cvsID):
+    # create a graphics context
+    cgo = cango(cvsID) 
+    # use RH Cartesian on full canvas
+    cgo.setGridboxRHC() 
+    # Different X and Y scale
+    cgo.setWorldCoords(-10, -5, 20, 10)
+    cgo.drawText("以 Cango 顯示中文", {
+        'fillColor': "blue",
+        'fontSize': 58,
+        'lorg':5 })
+sayHullo("cango_canvas")
+cango_div &lt;= "以 Brython 顯示中文"
+&lt;/script&gt;
+
+&lt;p&gt;&lt;br /&gt;
+上述 Cango 與 Brython 文字列印程式碼:&lt;/p&gt;
+&lt;pre class="brush: python"&gt;
+&lt;!-- 導入 Brython 標準程式庫 --&gt;
+
+&lt;script src="./../data/Brython-3.3.1/brython.js"&gt;&lt;/script&gt;
+&lt;script src="./../data/Brython-3.3.1/brython_stdlib.js"&gt;&lt;/script&gt;
+
+&lt;!-- Cango 程式庫 --&gt;
+
+&lt;script type="text/javascript" src="./../data/w11/cango
+/Cango-9v05-min.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="./../data/w11/cango
+/CangoAxes-2v09.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="./../data/w11/cango
+/CangoAnimation-5v00.js"&gt;&lt;/script&gt;
+
+&lt;!-- 啟動 Brython --&gt;
+
+&lt;script&gt;
+window.onload=function(){
+// 設定 data/py 為共用程式路徑
+brython({debug:1, pythonpath:['./../data/py']});
+}
+&lt;/script&gt;
+
+&lt;!-- 以下實際利用  Brython 繪圖--&gt;
+
+&lt;canvas id="cango_canvas" width="800" height="60"&gt;&lt;/canvas&gt;
+&lt;div id="cango_div" width="800" height="20"&gt;&lt;/div&gt;
+
+&lt;script type="text/python3"&gt;
+from browser import document as doc
+from browser import window
+import math
+# 利用 window 擷取 Cango 物件, 然後以 new 方法轉為 Brython 物件
+cango = window.Cango.new
+# 利用 browser 中的 document 擷取 id = "cango_div" 的標註
+cango_div = doc["cango_div"]
+def sayHullo(cvsID):
+    # create a graphics context
+    cgo = cango(cvsID) 
+    # use RH Cartesian on full canvas
+    cgo.setGridboxRHC() 
+    # Different X and Y scale
+    cgo.setWorldCoords(-10, -5, 20, 10)
+    cgo.drawText("以 Cango 顯示中文", {
+        'fillColor': "blue",
+        'fontSize': 58,
+        'lorg':5 })
+sayHullo("cango_canvas")
+cango_div &lt;= "以 Brython 顯示中文"
+&lt;/script&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;Cango drawPath 範例:&lt;/p&gt;
+&lt;canvas id="cango_canvas1" width="800" height="600"&gt;&lt;/canvas&gt;
+
+&lt;script type="text/python3"&gt;
+from browser import document as doc
+from browser import window
+import math
+# 利用 window 擷取 Cango 物件, 然後以 new 方法轉為 Brython 物件
+cango = window.Cango.new
+
+def plotSine(cvsID):
+    data = []
+    g = cango(cvsID)
+    g.setGridboxRHC(10, 10, 80, 60)
+    g.setWorldCoords(0, -50, 2*math.pi, 100)
+    g.drawAxes(0, 6.5, -50, 50, {
+    'xOrigin':0, 'yOrigin':0,
+    'fontSize':10,
+    'strokeColor':'gray'})
+    for i in range(int(2*math.pi/0.03)):
+        #[0, 0.03, 0.06 ... 3.14159]
+        i = i * 0.03
+        # 特別注意在 Javascript 採用 data.push(i, 50*math.sin(i)), 但是 Python 必須分為兩段 append
+        data.append(i)
+        data.append(50*math.sin(i))
+    g.drawPath(data, {'strokeColor':'red'})
+plotSine("cango_canvas1")
+&lt;/script&gt;
+
+&lt;p&gt;以上繪圖程式碼:&lt;/p&gt;
+&lt;pre class="brush: python"&gt;
+&lt;canvas id="cango_canvas1" width="800" height="600"&gt;&lt;/canvas&gt;
+
+&lt;script type="text/python3"&gt;
+from browser import document as doc
+from browser import window
+import math
+# 利用 window 擷取 Cango 物件, 然後以 new 方法轉為 Brython 物件
+cango = window.Cango.new
+
+def plotSine(cvsID):
+    data = []
+    g = cango(cvsID)
+    g.setGridboxRHC(10, 10, 80, 60)
+    g.setWorldCoords(0, -50, 2*math.pi, 100)
+    g.drawAxes(0, 6.5, -50, 50, {
+    'xOrigin':0, 'yOrigin':0,
+    'fontSize':10,
+    'strokeColor':'gray'})
+    for i in range(int(2*math.pi/0.03)):
+        #[0, 0.03, 0.06 ... 3.14159]
+        i = i * 0.03
+        # 特別注意在 Javascript 採用 data.push(i, 50*math.sin(i)), 但是 Python 必須分為兩段 append
+        data.append(i)
+        data.append(50*math.sin(i))
+    g.drawPath(data, {'strokeColor':'red'})
+plotSine("cango_canvas1")
+&lt;/script&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;重用 Cango 繪圖物件:&lt;/p&gt;
+&lt;canvas id="cango_canvas2" width="800" height="800"&gt;&lt;/canvas&gt;
+
+&lt;script type="text/python3"&gt;
+from browser import document as doc
+from browser import window
+import math
+# 利用 window 擷取 Cango 物件, 然後以 new 方法轉為 Brython 物件
+cango = window.Cango.new
+shape = window.Shape.new
+shapedefs = window.shapeDefs
+
+def drawSpiral(cvsID):
+    g = cango(cvsID)
+    chamber = ['M',289.16,447.14,
+                 'C',233.33,399.03, 267.47,290.34, 364.53,265.28,
+                     408.88,269.91, 448.14,282.58, 483.22,303.79,
+                     391.79,287.12, 292.99,369.50, 331.90,451.11,
+                     318.79,447.43, 302.35,446.61, 289.16,447.14, 'z']
+    cobj = shape(chamber, {
+        'fillColor':"lightyellow",
+        'strokeColor':"tan",
+        'lineWidthWC':4,
+        'border':True })
+    cobj.translate(-287, -536)
+    g.setGridboxSVG()
+    g.setWorldCoords(-250, -320, 500)
+    # draw the spiral center dot
+    g.drawShape(shapedefs.circle(8), {'fillColor':"tan"})
+    # draw the 50 spiral segments
+    scale = 1
+    for i in range(50):
+        scale = scale/1.08
+        g.render(cobj, {'scl':scale, 'degs':i*24.5})
+
+drawSpiral("cango_canvas2")
+&lt;/script&gt;
+
+&lt;p&gt;上述繪圖程式碼:&lt;/p&gt;
+&lt;pre class="brush: python"&gt;
+&lt;canvas id="cango_canvas2" width="800" height="800"&gt;&lt;/canvas&gt;
+
+&lt;script type="text/python3"&gt;
+from browser import document as doc
+from browser import window
+import math
+# 利用 window 擷取 Cango 物件, 然後以 new 方法轉為 Brython 物件
+cango = window.Cango.new
+shape = window.Shape.new
+shapedefs = window.shapeDefs
+
+def drawSpiral(cvsID):
+    g = cango(cvsID)
+    chamber = ['M',289.16,447.14,
+                 'C',233.33,399.03, 267.47,290.34, 364.53,265.28,
+                     408.88,269.91, 448.14,282.58, 483.22,303.79,
+                     391.79,287.12, 292.99,369.50, 331.90,451.11,
+                     318.79,447.43, 302.35,446.61, 289.16,447.14, 'z']
+    cobj = shape(chamber, {
+        'fillColor':"lightyellow",
+        'strokeColor':"tan",
+        'lineWidthWC':4,
+        'border':True })
+    cobj.translate(-287, -536)
+    g.setGridboxSVG()
+    g.setWorldCoords(-250, -320, 500)
+    # draw the spiral center dot
+    g.drawShape(shapedefs.circle(8), {'fillColor':"tan"})
+    # draw the 50 spiral segments
+    scale = 1
+    for i in range(50):
+        scale = scale/1.08
+        g.render(cobj, {'scl':scale, 'degs':i*24.5})
+
+drawSpiral("cango_canvas2")
+&lt;/script&gt;
+&lt;/pre&gt;</summary><category term="Brython"></category><category term="svg"></category></entry><entry><title>協同 2D 正齒輪傳動繪圖 (二)</title><link href="./brython-2d-spur-gear-matching-2.html" rel="alternate"></link><published>2017-05-03T12:00:00+08:00</published><updated>2017-05-03T12:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-05-03:./brython-2d-spur-gear-matching-2.html</id><summary type="html">&lt;p&gt;採用最新的 &lt;a href="https://github.com/brython-dev/brython/releases/tag/3.3.1"&gt;Brython 3.3.1&lt;/a&gt; 與 Cango Javascript 程式庫 (&lt;a href="./../data/w11/cango/Cango-9v05.js"&gt;Cango-9v05.js&lt;/a&gt;), 從單一 2D 正齒輪繪圖到齒輪組嚙合&lt;/p&gt;
 
 
 &lt;p&gt;利用漸開線原理, 以 Brython 繪製單一正齒輪廓:&lt;/p&gt;

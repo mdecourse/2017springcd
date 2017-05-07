@@ -79,6 +79,7 @@
 <v t="leo.20170503094705.1"><vh>@edit 20170503.md</vh></v>
 <v t="yen.20170503182604.1"><vh>@edit 20170503-1.md</vh></v>
 <v t="yen.20170504200728.1"><vh>@edit 20170504.md </vh></v>
+<v t="yen.20170507171712.1"><vh>@edit 20170507.md</vh></v>
 <v t="yen.20170108171733.81"><vh>@path pages</vh>
 <v t="yen.20170108171733.82"><vh>@edit pages_1.md</vh></v>
 </v>
@@ -87,7 +88,7 @@
 </v>
 <v t="yen.20170108171930.1"><vh>@button https server</vh></v>
 <v t="yen.20170108171939.1"><vh>@button ipv6 https server</vh></v>
-<v t="yen.20170120212350.1"><vh>programs</vh>
+<v t="yen.20170120212350.1" a="E"><vh>programs</vh>
 <v t="leo.20170503093805.1"><vh>W11</vh>
 <v t="leo.20170503093813.1"><vh>spur</vh></v>
 <v t="leo.20170503094123.1"><vh>Cango javascript</vh></v>

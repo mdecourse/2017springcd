@@ -55,6 +55,78 @@
 </v>
 </v>
 </v>
+<v t="yen.20170508001342.1"><vh>@path data</vh>
+<v t="yen.20170508001351.1" a="E"><vh>@path py</vh>
+<v t="yen.20170508001359.1" a="E"><vh>@clean plt.py</vh>
+<v t="yen.20170508011028.1"><vh>Declarations</vh></v>
+<v t="yen.20170508011028.2"><vh>class Coord</vh>
+<v t="yen.20170508011028.3"><vh>__init__</vh></v>
+<v t="yen.20170508011028.4"><vh>__sub__</vh></v>
+<v t="yen.20170508011028.5"><vh>__repr__</vh></v>
+<v t="yen.20170508011028.6"><vh>length</vh></v>
+<v t="yen.20170508011028.7"><vh>angle</vh></v>
+</v>
+<v t="yen.20170508011028.8"><vh>normalize</vh></v>
+<v t="yen.20170508011028.9"><vh>perpendicular</vh></v>
+<v t="yen.20170508011028.10"><vh>class Point</vh>
+<v t="yen.20170508011028.11"><vh>__init__</vh></v>
+<v t="yen.20170508011028.12"><vh>drawMe</vh></v>
+<v t="yen.20170508011028.13"><vh>Eq</vh></v>
+<v t="yen.20170508011028.14"><vh>setPoint</vh></v>
+<v t="yen.20170508011028.15"><vh>distance</vh></v>
+<v t="yen.20170508011028.16"><vh>tag</vh></v>
+</v>
+<v t="yen.20170508011028.17"><vh>class Line</vh>
+<v t="yen.20170508011028.18"><vh>__init__</vh></v>
+<v t="yen.20170508011028.19"><vh>setPP</vh></v>
+<v t="yen.20170508011028.20"><vh>setRT</vh></v>
+<v t="yen.20170508011028.21"><vh>getR</vh></v>
+<v t="yen.20170508011028.22"><vh>getT</vh></v>
+<v t="yen.20170508011028.23"><vh>setTail</vh></v>
+<v t="yen.20170508011028.24"><vh>getHead</vh></v>
+<v t="yen.20170508011028.25"><vh>getTail</vh></v>
+<v t="yen.20170508011028.26"><vh>drawMe</vh></v>
+<v t="yen.20170508011028.27"><vh>test</vh></v>
+</v>
+<v t="yen.20170508011028.28"><vh>class Link</vh>
+<v t="yen.20170508011028.29"><vh>__init__</vh></v>
+<v t="yen.20170508011028.30"><vh>drawMe</vh></v>
+</v>
+<v t="yen.20170508011028.31"><vh>class Triangle</vh>
+<v t="yen.20170508011028.32"><vh>__init__</vh></v>
+<v t="yen.20170508011028.33"><vh>getLenp3</vh></v>
+<v t="yen.20170508011028.34"><vh>getLenp1</vh></v>
+<v t="yen.20170508011028.35"><vh>getLenp2</vh></v>
+<v t="yen.20170508011028.36"><vh>getAp1</vh></v>
+<v t="yen.20170508011028.37"><vh>getAp2</vh></v>
+<v t="yen.20170508011028.38"><vh>getAp3</vh></v>
+<v t="yen.20170508011028.39"><vh>drawMe</vh></v>
+<v t="yen.20170508011028.40"><vh>setSSS</vh></v>
+<v t="yen.20170508011028.41"><vh>setSAS</vh></v>
+<v t="yen.20170508011028.42"><vh>setSaSS</vh></v>
+<v t="yen.20170508011028.43"><vh>getSSS</vh></v>
+<v t="yen.20170508011028.44"><vh>getAAA</vh></v>
+<v t="yen.20170508011028.45"><vh>getASASAS</vh></v>
+<v t="yen.20170508011028.46"><vh>setPPSS</vh></v>
+</v>
+</v>
+<v t="yen.20170508010952.1" a="E"><vh>@clean fourbar.py</vh>
+<v t="yen.20170508011005.1"><vh>Declarations</vh></v>
+<v t="yen.20170508011005.2"><vh>plap</vh></v>
+<v t="yen.20170508011005.3"><vh>pllp</vh></v>
+<v t="yen.20170508011005.4" a="E"><vh>class fourbar</vh>
+<v t="yen.20170508011005.5"><vh>__init__</vh></v>
+<v t="yen.20170508011005.6"><vh>cx</vh></v>
+<v t="yen.20170508011005.7"><vh>cy</vh></v>
+<v t="yen.20170508011005.8"><vh>dx</vh></v>
+<v t="yen.20170508011005.9"><vh>dy</vh></v>
+<v t="yen.20170508011005.10"><vh>ex</vh></v>
+<v t="yen.20170508011005.11"><vh>ey</vh></v>
+</v>
+</v>
+<v t="yen.20170508011515.1"><vh>@edit gcs.py</vh></v>
+</v>
+</v>
 <v t="yen.20170108171733.71" a="E"><vh>@path content</vh>
 <v t="yen.20170123225841.1"><vh>@edit 20170108.md</vh></v>
 <v t="yen.20170207091131.1"><vh>@clean 20170207.md</vh>
@@ -115,7 +187,7 @@
 <v t="leo.20170426085944.1"><vh>@edit fourbar.py</vh></v>
 </v>
 </v>
-<v t="yen.20170210153828.1"><vh>v-rep rempte api</vh>
+<v t="yen.20170210153828.1" a="E"><vh>v-rep rempte api</vh>
 <v t="yen.20170210202015.1"><vh>Python remote API</vh></v>
 <v t="yen.20170210170248.1"><vh>line tracer</vh></v>
 <v t="yen.20170210222733.1"><vh>line tracer2</vh></v>
@@ -134,6 +206,7 @@
 <v t="yen.20170209024032.1"><vh>reference</vh></v>
 <v t="leo.20170503103809.1" a="E"><vh>kmol2018</vh>
 <v t="leo.20170504105248.1"><vh>問題</vh></v>
+<v t="yen.20170508020303.1"><vh>draw</vh></v>
 </v>
 </vnodes>
 <tnodes>
@@ -4548,5 +4621,508 @@ Cango = (function(CangoCore)  // Cango must be declared a global before this fil
 
 }(Cango));     // Take the existing Cango object and add animation methods
 </t>
+<t tx="yen.20170508001342.1"></t>
+<t tx="yen.20170508001351.1"></t>
+<t tx="yen.20170508001359.1">@others
+@language python
+@tabwidth -4
+</t>
+<t tx="yen.20170508010952.1">@others
+@language python
+@tabwidth -4
+</t>
+<t tx="yen.20170508011005.1">from math import pi, cos, sin, sqrt, acos
+ 
+radian = 180/pi
+degree = pi/180
+
+#PLAP
+</t>
+<t tx="yen.20170508011005.10">@property
+def ex(self):
+    return pllp(self.cx, self.cy, self.ce, self.ed, self.dx, self.dy, pos=0)[0]
+
+</t>
+<t tx="yen.20170508011005.11">@property
+def ey(self):
+    return pllp(self.cx, self.cy, self.ce, self.ed, self.dx, self.dy, pos=0)[1]
+
+</t>
+<t tx="yen.20170508011005.2">def plap(ax, ay, ac, bac, bx, by, pos):
+    if pos == 0:
+        cx= ac*cos(bac - acos((ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2 + abs(ax - bx)**2 - abs(ay - by)**2)/(2*sqrt(ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2)*abs(ax - bx)))) + ax 
+        cy= ac*sin(bac - acos((ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2 + abs(ax - bx)**2 - abs(ay - by)**2)/(2*sqrt(ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2)*abs(ax - bx)))) + ay
+    else:
+        cx= ac*cos(bac + acos((ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2 + abs(ax - bx)**2 - abs(ay - by)**2)/(2*sqrt(ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2)*abs(ax - bx)))) + ax 
+        cy= ac*sin(bac + acos((ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2 + abs(ax - bx)**2 - abs(ay - by)**2)/(2*sqrt(ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2)*abs(ax - bx)))) + ay
+    return cx, cy
+    
+#PLLP
+</t>
+<t tx="yen.20170508011005.3">def pllp(ax, ay, ac, cb, bx, by, pos):
+    if pos == 0:
+        cx =  -((ay - by)*(-ac**2*ay + ac**2*by + ax**2*ay + ax**2*by - 2*ax*ay*bx - 2*ax*bx*by + ay**3 - ay**2*by + ay*bx**2 - ay*by**2 + ay*cb**2 + bx**2*by + by**3 - by*cb**2 - sqrt((-ac**2 + 2*ac*cb + ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2 - cb**2)*(ac**2 + 2*ac*cb - ax**2 + 2*ax*bx - ay**2 + 2*ay*by - bx**2 - by**2 + cb**2))*(ax - bx)) + (ac**2 - ax**2 - ay**2 + bx**2 + by**2 - cb**2)*(ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2))/(2*(ax - bx)*(ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2))
+        cy =  (-ac**2*ay + ac**2*by + ax**2*ay + ax**2*by - 2*ax*ay*bx - 2*ax*bx*by + ay**3 - ay**2*by + ay*bx**2 - ay*by**2 + ay*cb**2 + bx**2*by + by**3 - by*cb**2 + sqrt((-ac**2 + 2*ac*cb + ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2 - cb**2)*(ac**2 + 2*ac*cb - ax**2 + 2*ax*bx - ay**2 + 2*ay*by - bx**2 - by**2 + cb**2))*(-ax + bx))/(2*(ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2))
+    else:
+        cx =  -((ay - by)*(-ac**2*ay + ac**2*by + ax**2*ay + ax**2*by - 2*ax*ay*bx - 2*ax*bx*by + ay**3 - ay**2*by + ay*bx**2 - ay*by**2 + ay*cb**2 + bx**2*by + by**3 - by*cb**2 + sqrt((-ac**2 + 2*ac*cb + ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2 - cb**2)*(ac**2 + 2*ac*cb - ax**2 + 2*ax*bx - ay**2 + 2*ay*by - bx**2 - by**2 + cb**2))*(ax - bx)) + (ac**2 - ax**2 - ay**2 + bx**2 + by**2 - cb**2)*(ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2))/(2*(ax - bx)*(ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2))
+        cy =  (-ac**2*ay + ac**2*by + ax**2*ay + ax**2*by - 2*ax*ay*bx - 2*ax*bx*by + ay**3 - ay**2*by + ay*bx**2 - ay*by**2 + ay*cb**2 + bx**2*by + by**3 - by*cb**2 + sqrt((-ac**2 + 2*ac*cb + ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2 - cb**2)*(ac**2 + 2*ac*cb - ax**2 + 2*ax*bx - ay**2 + 2*ay*by - bx**2 - by**2 + cb**2))*(ax - bx))/(2*(ax**2 - 2*ax*bx + ay**2 - 2*ay*by + bx**2 + by**2))
+    return cx, cy
+    
+</t>
+<t tx="yen.20170508011005.4">class fourbar(object):
+
+    '''
+    (ax, ay) motor coord
+    (bx, by) rocker base coord
+    bac motor angle
+    ac link1 length
+    cd link2 length
+    db link3 length
+    ce triangle side1
+    ed triangle side2
+    '''
+    @others
+'''    
+# 利用 fourbar 物件建立案例
+f = fourbar(ax = -60, ay = 0, bx = 0, by = 0, bac = 50*degree, ac = 30, cd = 50, db = 60, ce = 50, ed = 50)
+
+# 利用 fourbar 物件案例的方法求各點座標
+#f.cx, f.cy 為 C 點座標
+#f.dx, f.dy 為 D 點座標
+#f.ex, f.ey 為 E 點座標
+'''
+</t>
+<t tx="yen.20170508011005.5">def __init__(self, ax, ay, bx, by, bac, ac, cd, db, ce, ed):
+
+    self.ax = ax
+    self.ay = ay
+    self.bx = bx
+    self.by = by
+    self.bac = bac
+    self.ac = ac
+    self.cd = cd
+    self.db = db
+    self.ce = ce
+    self.ed = ed
+    
+</t>
+<t tx="yen.20170508011005.6">@property
+def cx(self):
+    return plap(self.ax, self.ay, self.ac, self.bac, self.bx, self.by, pos=0)[0]
+
+</t>
+<t tx="yen.20170508011005.7">@property
+def cy(self):
+    return plap(self.ax, self.ay, self.ac, self.bac, self.bx, self.by, pos=0)[1]
+
+</t>
+<t tx="yen.20170508011005.8">@property
+def dx(self):
+    return pllp(self.cx, self.cy, self.cd, self.db, self.bx, self.by, pos=0)[0]
+
+</t>
+<t tx="yen.20170508011005.9">@property
+def dy(self):
+    return pllp(self.cx, self.cy, self.cd, self.db, self.bx, self.by, pos=0)[1]
+    
+</t>
+<t tx="yen.20170508011028.1">import math
+
+</t>
+<t tx="yen.20170508011028.10">class Point(object):
+    # 起始方法
+    @others
+# Line 類別物件
+</t>
+<t tx="yen.20170508011028.11">def __init__(self, x, y):
+    self.x = x
+    self.y = y
+
+# 繪製方法
+</t>
+<t tx="yen.20170508011028.12">def drawMe(self, g, r):
+    self.g = g
+    self.r = r
+    self.g.save()
+    self.g.moveTo(self.x,self.y)
+    self.g.beginPath()
+    # 根據 r 半徑繪製一個圓代表點的所在位置
+    self.g.arc(self.x, self.y, self.r, 0, 2*math.pi, True)
+    self.g.moveTo(self.x,self.y)
+    self.g.lineTo(self.x+self.r, self.y)
+    self.g.moveTo(self.x, self.y)
+    self.g.lineTo(self.x-self.r, self.y)
+    self.g.moveTo(self.x, self.y)
+    self.g.lineTo(self.x, self.y+self.r)
+    self.g.moveTo(self.x, self.y)
+    self.g.lineTo(self.x, self.y-self.r)
+    self.g.restore()
+    self.g.stroke()
+
+# 加入 Eq 方法
+</t>
+<t tx="yen.20170508011028.13">def Eq(self, pt):
+    self.x = pt.x
+    self.y = pt.y
+
+# 加入 setPoint 方法
+</t>
+<t tx="yen.20170508011028.14">def setPoint(self, px, py):
+    self.x = px
+    self.y = py
+
+# 加上 distance(pt) 方法, 計算點到 pt 的距離
+</t>
+<t tx="yen.20170508011028.15">def distance(self, pt):
+    self.pt = pt
+    x = self.x - self.pt.x
+    y = self.y - self.pt.y
+    return math.sqrt(x * x + y * y)
+
+# 利用文字標示點的座標位置
+</t>
+<t tx="yen.20170508011028.16">def tag(self, g):
+    self.g = g
+    self.g.beginPath()
+    self.g.fillText("%d, %d"%(self.x, self.y),self.x, self.y)
+    self.g.stroke()
+
+
+</t>
+<t tx="yen.20170508011028.17">class Line(object):
+
+    # 起始方法
+    @others
+</t>
+<t tx="yen.20170508011028.18">def __init__(self, p1, p2):
+    self.p1 = p1
+    self.p2 = p2
+    # 直線的第一點, 設為線尾
+    self.Tail = self.p1
+    # 直線組成的第二點, 設為線頭
+    self.Head = self.p2
+    # 直線的長度屬性
+    self.length = math.sqrt(math.pow(self.p2.x-self.p1.x, 2)+math.pow(self.p2.y-self.p1.y,2))
+
+# setPP 以指定頭尾座標點來定義直線
+</t>
+<t tx="yen.20170508011028.19">def setPP(self, p1, p2):
+    self.p1 = p1
+    self.p2 = p2
+    self.Tail = self.p1
+    self.Head = self.p2
+    self.length = math.sqrt(math.pow(self.p2.x-self.p1.x, 2)+math.pow(self.p2.y-self.p1.y,2))
+
+# setRT 方法 for Line, 應該已經確定 Tail 點, 然後以 r, t 作為設定 Head 的參考
+</t>
+<t tx="yen.20170508011028.2">class Coord(object):
+    @others
+</t>
+<t tx="yen.20170508011028.20">def setRT(self, r, t):
+    self.r = r
+    self.t = t
+    x = self.r * math.cos(self.t)
+    y = self.r * math.sin(self.t)
+    self.Tail.Eq(self.p1)
+    self.Head.setPoint(self.Tail.x + x,self.Tail.y + y)
+
+# getR 方法 for Line
+</t>
+<t tx="yen.20170508011028.21">def getR(self):
+    # x 分量與 y 分量
+    x = self.p1.x - self.p2.x
+    y = self.p1.y - self.p2.y
+    return math.sqrt(x * x + y * y)
+
+# 根據定義 atan2(y,x), 表示 (x,y) 與 正 x 軸之間的夾角, 介於 pi 與 -pi 間
+</t>
+<t tx="yen.20170508011028.22">def getT(self):
+    x = self.p2.x - self.p1.x
+    y = self.p2.y - self.p1.y
+    if (math.fabs(x) &lt; math.pow(10,-100)):
+        if(y &lt; 0.0):
+            return (-math.pi/2)
+        else:
+            return (math.pi/2)
+    else:
+        return math.atan2(y, x)
+
+# setTail 方法 for Line
+</t>
+<t tx="yen.20170508011028.23">def setTail(self, pt):
+    self.pt = pt
+    self.Tail.Eq(pt)
+    self.Head.setPoint(self.pt.x + self.x, self.pt.y + self.y)
+
+# getHead 方法 for Line
+</t>
+<t tx="yen.20170508011028.24">def getHead(self):
+    return self.Head
+
+</t>
+<t tx="yen.20170508011028.25">def getTail(self):
+    return self.Tail
+
+</t>
+<t tx="yen.20170508011028.26">def drawMe(self, g):
+    self.g = g
+    self.g.beginPath()
+    self.g.moveTo(self.p1.x,self.p1.y)
+    self.g.lineTo(self.p2.x,self.p2.y)
+    self.g.stroke()
+
+</t>
+<t tx="yen.20170508011028.27">def test(self):
+    return ("this is pure test to Inherit")
+
+
+</t>
+<t tx="yen.20170508011028.28">class Link(Line):
+    @others
+</t>
+<t tx="yen.20170508011028.29">def __init__(self, p1, p2):
+    self.p1 = p1
+    self.p2 = p2
+    self.length = math.sqrt(math.pow((self.p2.x - self.p1.x), 2) + math.pow((self.p2.y - self.p1.y), 2))
+
+#g context
+</t>
+<t tx="yen.20170508011028.3">def __init__(self,x,y):
+    self.x = x
+    self.y = y
+
+</t>
+<t tx="yen.20170508011028.30">def drawMe(self, g):
+    self.g = g
+    hole = 5
+    radius = 10
+    length = self.getR()
+    # alert(length)
+    # 儲存先前的繪圖狀態
+    self.g.save()
+    self.g.translate(self.p1.x,self.p1.y)
+    #alert(str(self.p1.x)+","+str(self.p1.y))
+    #self.g.rotate(-((math.pi/2)-self.getT()))
+    self.g.rotate(-math.pi*0.5 + self.getT())
+    #alert(str(self.getT()))
+    #self.g.rotate(10*math.pi/180)
+    #this.g.rotate(-(Math.PI/2-this.getT()));
+    # 必須配合畫在 y 軸上的 Link, 進行座標轉換, 也可以改為畫在 x 軸上...
+    self.g.beginPath()
+    self.g.moveTo(0,0)
+    self.g.arc(0, 0, hole, 0, 2*math.pi, True)
+    self.g.stroke()
+    self.g.moveTo(0,length)
+    self.g.beginPath()
+    self.g.arc(0,length, hole, 0, 2*math.pi, True)
+    self.g.stroke()
+    self.g.moveTo(0,0)
+    self.g.beginPath()
+    self.g.arc(0,0, radius, 0, math.pi, True)
+    self.g.moveTo(0+radius,0)
+    self.g.lineTo(0+radius,0+length)
+    self.g.stroke()
+    self.g.moveTo(0,0+length)
+    self.g.beginPath()
+    self.g.arc(0, 0+length, radius, math.pi, 0, True)
+    self.g.moveTo(0-radius,0+length)
+    self.g.lineTo(0-radius,0)
+    self.g.stroke()
+    self.g.restore()
+    '''
+    self.g.beginPath()
+    self.g.fillStyle = "red"
+    self.g.font = "bold 18px sans-serif"
+    self.g.fillText("%d, %d"%(self.p2.x, self.p2.y),self.p2.x, self.p2.y)
+    self.g.stroke()
+    '''
+
+
+</t>
+<t tx="yen.20170508011028.31">class Triangle(object):
+    @others
+</t>
+<t tx="yen.20170508011028.32">def __init__(self, p1, p2, p3):
+    self.p1 = p1
+    self.p2 = p2
+    self.p3 = p3
+
+</t>
+<t tx="yen.20170508011028.33">def getLenp3(self):
+    p1 = self.p1
+    ret = p1.distance(self.p2)
+    return ret
+
+</t>
+<t tx="yen.20170508011028.34">def getLenp1(self):
+    p2 = self.p2
+    ret = p2.distance(self.p3)
+    return ret
+
+</t>
+<t tx="yen.20170508011028.35">def getLenp2(self):
+    p1 = self.p1
+    ret = p1.distance(self.p3)
+    return ret
+
+# 角度
+</t>
+<t tx="yen.20170508011028.36">def getAp1(self):
+    ret = math.acos(((self.getLenp2() * self.getLenp2() + self.getLenp3() * self.getLenp3()) - self.getLenp1() * self.getLenp1()) / (2* self.getLenp2() * self.getLenp3()))
+    return ret
+
+#
+</t>
+<t tx="yen.20170508011028.37">def getAp2(self):
+    ret =math.acos(((self.getLenp1() * self.getLenp1() + self.getLenp3() * self.getLenp3()) - self.getLenp2() * self.getLenp2()) / (2* self.getLenp1() * self.getLenp3()))
+    return ret
+
+</t>
+<t tx="yen.20170508011028.38">def getAp3(self):
+    ret = math.acos(((self.getLenp1() * self.getLenp1() + self.getLenp2() * self.getLenp2()) - self.getLenp3() * self.getLenp3()) / (2* self.getLenp1() * self.getLenp2()))
+    return ret
+
+</t>
+<t tx="yen.20170508011028.39">def drawMe(self, g):
+    self.g = g
+    r = 5
+    # 繪出三個頂點
+    self.p1.drawMe(self.g,r)
+    self.p2.drawMe(self.g,r)
+    self.p3.drawMe(self.g,r)
+    line1 = Line(self.p1,self.p2)
+    line2 = Line(self.p1,self.p3)
+    line3 = Line(self.p2,self.p3)
+    # 繪出三邊線
+    line1.drawMe(self.g)
+    line2.drawMe(self.g)
+    line3.drawMe(self.g)
+
+# ends Triangle def
+# 透過三個邊長定義三角形
+</t>
+<t tx="yen.20170508011028.4">def __sub__(self,other):
+    # This allows you to substract vectors
+    return Coord(self.x-other.x,self.y-other.y)
+
+</t>
+<t tx="yen.20170508011028.40">def setSSS(self, lenp3, lenp1, lenp2):
+    self.lenp3 = lenp3
+    self.lenp1 = lenp1
+    self.lenp2 = lenp2
+    self.ap1 = math.acos(((self.lenp2 * self.lenp2 + self.lenp3 * self.lenp3) - self.lenp1 * self.lenp1) / (2* self.lenp2 * self.lenp3))
+    self.ap2 = math.acos(((self.lenp1 * self.lenp1 + self.lenp3 * self.lenp3) - self.lenp2 * self.lenp2) / (2* self.lenp1 * self.lenp3))
+    self.ap3 = math.acos(((self.lenp1 * self.lenp1 + self.lenp2 * self.lenp2) - self.lenp3 * self.lenp3) / (2* self.lenp1 * self.lenp2))
+
+# 透過兩個邊長與夾角定義三角形
+</t>
+<t tx="yen.20170508011028.41">def setSAS(self, lenp3, ap2, lenp1):
+    self.lenp3 = lenp3
+    self.ap2 = ap2
+    self.lenp1 = lenp1
+    self.lenp2 = math.sqrt((self.lenp3 * self.lenp3 + self.lenp1 * self.lenp1) - 2* self.lenp3 * self.lenp1 * math.cos(self.ap2))
+    #等於 SSS(AB, BC, CA)
+
+</t>
+<t tx="yen.20170508011028.42">def setSaSS(self, lenp2, lenp3, lenp1):
+    self.lenp2 = lenp2
+    self.lenp3 = lenp3
+    self.lenp1 = lenp1
+    if(self.lenp1 &gt; (self.lenp2 + self.lenp3)):
+    #&lt;CAB 夾角為 180 度, 三點共線且 A 介於 BC 之間
+        ret = math.pi
+    else :
+        # &lt;CAB 夾角為 0, 三點共線且 A 不在 BC 之間
+        if((self.lenp1 &lt; (self.lenp2 - self.lenp3)) or (self.lenp1 &lt; (self.lenp3 - self.lenp2))):
+            ret = 0.0
+        else :
+        # 透過餘絃定理求出夾角 &lt;CAB 
+            ret = math.acos(((self.lenp2 * self.lenp2 + self.lenp3 * self.lenp3) - self.lenp1 * self.lenp1) / (2 * self.lenp2 * self.lenp3))
+    return ret
+
+# 取得三角形的三個邊長值
+</t>
+<t tx="yen.20170508011028.43">def getSSS(self):
+    temp = []
+    temp.append( self.getLenp1() )
+    temp.append( self.getLenp2() )
+    temp.append( self.getLenp3() )
+    return temp
+
+# 取得三角形的三個角度值
+</t>
+<t tx="yen.20170508011028.44">def getAAA(self):
+    temp = []
+    temp.append( self.getAp1() )
+    temp.append( self.getAp2() )
+    temp.append( self.getAp3() )
+    return temp
+
+# 取得三角形的三個角度與三個邊長
+</t>
+<t tx="yen.20170508011028.45">def getASASAS(self):
+    temp = []
+    temp.append(self.getAp1())
+    temp.append(self.getLenp1())
+    temp.append(self.getAp2())
+    temp.append(self.getLenp2())
+    temp.append(self.getAp3())
+    temp.append(self.getLenp3())
+    return temp
+#2P 2L return mid P
+</t>
+<t tx="yen.20170508011028.46">def setPPSS(self, p1, p3, lenp1, lenp3):
+    temp = []
+    self.p1 = p1
+    self.p3 = p3
+    self.lenp1 = lenp1
+    self.lenp3 = lenp3
+
+    #bp3 is the angle beside p3 point, cp3 is the angle for line23, p2 is the output
+    line31 = Line(p3, p1)
+    self.lenp2 = line31.getR()
+    #self.lenp2 = self.p3.distance(self.p1)
+    #這裡是求角3
+    ap3 = math.acos(((self.lenp1 * self.lenp1 + self.lenp2 * self.lenp2) - self.lenp3 * self.lenp3) / (2 * self.lenp1 * self.lenp2))
+    #ap3 = math.acos(((self.lenp1 * self.lenp1 + self.lenp3 * self.lenp3) - self.lenp2 * self.lenp2) / (2 * self.lenp1 * self.lenp3))
+    bp3 = line31.getT()
+    cp3 = bp3 - ap3
+    temp.append(p3.x + self.lenp1*math.cos(cp3))#p2.x
+    temp.append(p3.y + self.lenp1*math.sin(cp3))#p2.y
+    return temp
+</t>
+<t tx="yen.20170508011028.5">def __repr__(self):
+    # Used to get human readable coordinates when printing
+    return "Coord(%f,%f)"%(self.x,self.y)
+
+</t>
+<t tx="yen.20170508011028.6">def length(self):
+    # Returns the length of the vector
+    return math.sqrt(self.x**2 + self.y**2)
+
+</t>
+<t tx="yen.20170508011028.7">def angle(self):
+    # Returns the vector's angle
+    return math.atan2(self.y,self.x)
+
+</t>
+<t tx="yen.20170508011028.8">def normalize(coord):
+    return Coord(
+        coord.x/coord.length(),
+        coord.y/coord.length()
+        )
+
+</t>
+<t tx="yen.20170508011028.9">def perpendicular(coord):
+    # Shifts the angle by pi/2 and calculate the coordinates
+    # using the original vector length
+    return Coord(
+        coord.length()*math.cos(coord.angle()+math.pi/2),
+        coord.length()*math.sin(coord.angle()+math.pi/2)
+        )
+
+# 點類別
+</t>
+<t tx="yen.20170508020303.1">https://www.brython.info/gallery/draw.html</t>
 </tnodes>
 </leo_file>

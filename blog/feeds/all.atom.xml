@@ -2,6 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom"><title>2017Spring 協同產品設計實習 (虎尾科大MDE)</title><link href="./" rel="alternate"></link><link href="./feeds/all.atom.xml" rel="self"></link><id>./</id><updated>2017-05-07T13:00:00+08:00</updated><entry><title>網際平面四連桿運動模擬</title><link href="./brython-2d-canvas-fourbar.html" rel="alternate"></link><published>2017-05-07T13:00:00+08:00</published><updated>2017-05-07T13:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-05-07:./brython-2d-canvas-fourbar.html</id><summary type="html">&lt;p&gt;利用 &lt;a href="https://github.com/brython-dev/brython/releases/tag/3.3.1"&gt;Brython 3.3.1&lt;/a&gt; 執行四連桿運動模擬.&lt;/p&gt;
 
 
+&lt;p&gt;直接在網頁中編寫 Brython 模擬程式:&lt;/p&gt;
 &lt;!-- 導入 Brython 標準程式庫 --&gt;
 
 &lt;script src="./../data/Brython-3.3.1/brython.js"&gt;&lt;/script&gt;
@@ -292,7 +293,7 @@ class Triangle(object):
     # ends Triangle def
     # 透過三個邊長定義三角形
     def setSSS(self, lenp3, lenp1, lenp2):
-        self.lenp3 = lenp3
+        self.lenp3 = lenmidpt = Point(0, 0)
         self.lenp1 = lenp1
         self.lenp2 = lenp2
         self.ap1 = math.acos(((self.lenp2 * self.lenp2 + self.lenp3 * self.lenp3) - self.lenp1 * self.lenp1) / (2* self.lenp2 * self.lenp3))
@@ -460,6 +461,107 @@ context.scale(1,-1)
 #以間隔 20 micro seconds 重複呼叫 draw()
 timer.set_interval(draw,20)
 #timer.set_interval(draw,10)
+&lt;/script&gt;
+
+&lt;p&gt;將四連桿模擬程式庫存在 ./../data/py 子目錄, 然後以 import 導入方式執行運算:&lt;/p&gt;
+&lt;canvas id="plotarea2" width="600" height="450"&gt;&lt;/canvas&gt;
+
+&lt;script type="text/python3"&gt;
+# import point-line-triangle module
+import plt
+import math
+from browser import document
+from browser import timer
+
+midpt = plt.Point(0, 0)
+tippt = plt.Point(0, 0)
+contour = []
+# 執行繪圖流程, 注意 x, y 為 global variables
+def draw():
+    global theta, midpt, oldpt
+    context.clearRect(0, 0, canvas.width, canvas.height)
+    line1.drawMe(context)
+    line2.drawMe(context)
+    line3.drawMe(context)
+    line4.drawMe(context)
+    #triangle1.drawMe(context)
+    #triangle2.drawMe(context)
+    theta += dx
+    #PLAP
+    p2.x = p1.x + line1.length*math.cos(theta*degree)
+    p2.y = p1.y - line1.length*math.sin(theta*degree)
+    #PLLP
+    p3.x, p3.y = triangle2.setPPSS(p2,p4,line2.length,line3.length)
+    # 計算垂直單位向量
+    a = plt.Coord(p3.x, p3.y)
+    b = plt.Coord(p2.x, p2.y)
+    normal = plt.perpendicular(plt.normalize(a-b))
+    midpt.x = (p2.x + p3.x)/2
+    midpt.y = (p2.y + p3.y)/2
+    tippt.x = midpt.x + 150*normal.x
+    tippt.y = midpt.y + 150*normal.y
+    if theta &lt; 360:
+        contour.append((tippt.x, tippt.y))
+    context.beginPath()
+    context.moveTo(midpt.x, midpt.y)
+    context.lineTo(tippt.x, tippt.y)
+    # 利用 fillRect 繪製一個長寬各 1 單位的正方形
+    for i in range(len(contour)):
+        context.fillRect(contour[i][0], contour[i][1], 1, 1)
+    context.stroke()
+    #p1.tag(context)
+
+
+# 以上為相關函式物件的定義區
+# 全域變數
+# 幾何位置輸入變數
+x=10
+y=10
+r=10
+
+# 畫布與繪圖內容
+# 其他輸入變數
+theta = 0
+degree = math.pi/180.0
+dx = 2
+dy = 4
+
+#set p1.p2.p3.p4 position
+lift = 10
+# 各起始座標點必須精確
+p1 =  plt.Point(150,100+lift)
+p2 =  plt.Point(150,200+lift)
+p3 =  plt.Point(300,300+lift)
+p4 =  plt.Point(350,100+lift)
+#共有五條線
+line1 =  plt.Link(p1,p2)
+line2 =  plt.Link(p2,p3)
+line3 =  plt.Link(p3,p4)
+line4 =  plt.Link(p1,p4)
+line5 =  plt.Link(p2,p4)
+
+#link2_len = p2.distance(p3)
+#link3_len = p3.distance(p4)
+
+#link2_len = line1.getR()
+#link3_len = line3.getR()
+#alert(str(link2_len)+','+str(link3_len))
+
+triangle1 =  plt.Triangle(p1,p2,p4)
+triangle2 =  plt.Triangle(p2,p3,p4)
+
+# 視窗載入時執行內容
+# 繪圖畫布設定
+
+canvas = document["plotarea2"]
+context = canvas.getContext("2d")
+
+# 座標轉換, 移動 canvas.height 並且 y 座標變號, 也就是將原點座標移到畫面左下角
+context.translate(0,canvas.height)
+context.scale(1,-1)
+
+#以間隔 20 micro seconds 重複呼叫 draw()
+timer.set_interval(draw,20)
 &lt;/script&gt;</summary><category term="Brython"></category><category term="fourbar"></category></entry><entry><title>網際 SVG 繪圖</title><link href="./brython-2d-svg-canvas.html" rel="alternate"></link><published>2017-05-04T13:00:00+08:00</published><updated>2017-05-04T13:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-05-04:./brython-2d-svg-canvas.html</id><summary type="html">&lt;p&gt;結合 &lt;a href="https://github.com/brython-dev/brython/releases/tag/3.3.1"&gt;Brython 3.3.1&lt;/a&gt; 與 &lt;a href="./../data/w11/cango/Cango-9v05.js"&gt;Cango-9v05.js&lt;/a&gt; 繪圖, 將 &lt;a href="http://www.arc.id.au/CanvasGraphics.html"&gt;Cango Canvas 繪圖範例&lt;/a&gt;轉為 Brython.&lt;/p&gt;
 
 

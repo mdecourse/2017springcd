@@ -153,6 +153,7 @@
 <v t="yen.20170504200728.1"><vh>@edit 20170504.md </vh></v>
 <v t="yen.20170507171712.1"><vh>@edit 20170507.md</vh></v>
 <v t="yen.20170511155847.1"><vh>@edit 20170511.md</vh></v>
+<v t="yen.20170529225045.1"><vh>@edit 20170530.md</vh></v>
 <v t="yen.20170108171733.81"><vh>@path pages</vh>
 <v t="yen.20170108171733.82"><vh>@edit pages_1.md</vh></v>
 </v>
@@ -1002,7 +1003,7 @@ class HTTPServerV6(http.server.HTTPServer):
 def domake():
     # build directory
     os.chdir("./../")
-    ipv6_address = '2001:288:6004:17:3004::808'
+    ipv6_address = '::1'
     server_address = (ipv6_address, 6443)
     #httpd = http.server.HTTPServer(server_address, http.server.SimpleHTTPRequestHandler)
     httpd = HTTPServerV6(server_address, http.server.SimpleHTTPRequestHandler)

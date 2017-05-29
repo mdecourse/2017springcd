@@ -1,5 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>2017Spring 協同產品設計實習 (虎尾科大MDE)</title><link href="./" rel="alternate"></link><link href="./feeds/all.atom.xml" rel="self"></link><id>./</id><updated>2017-05-11T12:00:00+08:00</updated><entry><title>網際正齒輪組傳動繪圖</title><link href="./brython-spur-gears.html" rel="alternate"></link><published>2017-05-11T12:00:00+08:00</published><updated>2017-05-11T12:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-05-11:./brython-spur-gears.html</id><summary type="html">&lt;p&gt;利用 &lt;a href="https://github.com/brython-dev/brython/releases/tag/3.3.1"&gt;Brython 3.3.1&lt;/a&gt; 執行 3 個正齒輪傳動繪圖.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>2017Spring 協同產品設計實習 (虎尾科大MDE)</title><link href="./" rel="alternate"></link><link href="./feeds/all.atom.xml" rel="self"></link><id>./</id><updated>2017-05-30T12:00:00+08:00</updated><entry><title>Fabric.js 範例</title><link href="./brython-fabric-canvas.html" rel="alternate"></link><published>2017-05-30T12:00:00+08:00</published><updated>2017-05-30T12:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-05-30:./brython-fabric-canvas.html</id><summary type="html">&lt;p&gt;結合 Brython 與 Fabric.js 繪圖.&lt;/p&gt;
+
+
+&lt;p&gt;&lt;a href="http://fabricjs.com/fabric-intro-part-1"&gt;http://fabricjs.com/fabric-intro-part-1&lt;/a&gt;&lt;/p&gt;
+&lt;!-- 導入 Brython 標準程式庫 --&gt;
+
+&lt;script src="./../data/Brython-3.3.1/brython.js"&gt;&lt;/script&gt;
+
+&lt;script src="./../data/Brython-3.3.1/brython_stdlib.js"&gt;&lt;/script&gt;
+
+&lt;script src="./../data/Fabric-1.7.11/fabric.min.js"&gt;&lt;/script&gt;
+
+&lt;!-- 啟動 Brython --&gt;
+
+&lt;script&gt;
+window.onload=function(){
+// 設定 data/py 為共用程式路徑
+brython({debug:1, pythonpath:['./../data/py']});
+}
+&lt;/script&gt;
+
+&lt;canvas id="c" width="800" height="600"&gt;&lt;/canvas&gt;
+
+&lt;script type="text/python3"&gt;
+from browser import window, document
+from browser.timer import set_interval
+# 透過 window 將 Javascript 的 fabric 函式轉為 brython fab 物件
+fab = window.fabric
+# 特別注意要使用 new 方法建立新 Canvas 物件
+canvas = fab.Canvas.new("c")
+
+# 以下各 fabric 物件都採用 new 方法轉換為 brython 物件
+rect = fab.Rect.new({
+  'left': 100,
+  'top': 100,
+  'fill': 'red',
+  'width': 80,
+  'height': 80,
+  'angle': 45
+})
+
+line1 = fab.Line.new([0, 0, 0, 100], {
+'left': 20,
+'top': 20,
+'stroke': 'red'
+})
+
+line2 = fab.Line.new([0, 0, 100, 0], {
+'left': 20,
+'top': 20,
+'stroke': 'blue'
+})
+
+circle = fab.Circle.new({
+  'radius': 20, 'fill': 'green', 'left': 100, 'top': 100
+})
+triangle = fab.Triangle.new({
+  'width': 20, 'height': 30, 'fill': 'blue', 'left': 50, 'top': 50
+})
+text = fab.Text.new("使用 fabric.js 畫出中文", {
+  'fontFamily': 'Comic Sans'
+})
+
+def showImg(img):
+    canvas.backgroundImage = img
+    canvas.backgroundImage.width = 200
+    canvas.backgroundImage.height = 200
+    img.set({ 'left': 150, 'top': 170 })
+    canvas.add(img)
+
+fab.Image.fromURL('./../data/eight_bar_solvespace_vrep_1.png', showImg)
+
+canvas.add(rect, circle, triangle, text, line1, line2)
+text.set({ 'left': 100, 'top': 50 })
+text.set({'angle': 15})
+# 利用各物件的 set 方法, 可以固定物件位置
+rect.set({ 'left': 20, 'top': 50 })
+
+rect.set('fill', 'red')
+rect.set({ 'strokeWidth': 5, 'stroke': 'rgba(100,200,200,0.5)' })
+# 特別注意 brython 中必須使用 True 而非 Javascript 的 true
+rect.set('angle', 60).set('flipY', True)
+def test(e):
+    print("circle selected")
+circle.on('selected', test)
+
+#canvas.renderAll()
+rect.animate('left', 500, {
+  'onChange': canvas.renderAll.bind(canvas),
+  'duration': 1000,
+  'easing': fab.util.ease.easeOutBounce
+})
+
+def draw():
+    # 旋轉 text, 為 add 物件序號 3
+    curAngle = canvas.item(3).getAngle()
+    canvas.item(3).setAngle(curAngle+36)
+
+#set_interval(draw, 100)
+&lt;/script&gt;
+
+&lt;p&gt;&lt;a href="http://fabricjs.com/fabric-intro-part-2"&gt;http://fabricjs.com/fabric-intro-part-2&lt;/a&gt;&lt;/p&gt;</summary><category term="Brython"></category><category term="fabric"></category></entry><entry><title>網際正齒輪組傳動繪圖</title><link href="./brython-spur-gears.html" rel="alternate"></link><published>2017-05-11T12:00:00+08:00</published><updated>2017-05-11T12:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-05-11:./brython-spur-gears.html</id><summary type="html">&lt;p&gt;利用 &lt;a href="https://github.com/brython-dev/brython/releases/tag/3.3.1"&gt;Brython 3.3.1&lt;/a&gt; 執行 3 個正齒輪傳動繪圖.&lt;/p&gt;
 
 
 &lt;!-- 導入 Brython 標準程式庫 --&gt;

@@ -22,6 +22,8 @@ brython({debug:1, pythonpath:['./../data/py']});
 
 &lt;canvas id="c" width="800" height="600"&gt;&lt;/canvas&gt;
 
+&lt;p&gt;&lt;input id="part1" value="./../data/eight_bar_solvespace_vrep_1.png"&gt;&lt;/input&gt;&lt;br /&gt;
+&lt;button id="button"&gt;Get Part&lt;/button&gt;&lt;/p&gt;
 &lt;script type="text/python3"&gt;
 from browser import window, document
 from browser.timer import set_interval
@@ -69,7 +71,11 @@ def showImg(img):
     img.set({ 'left': 150, 'top': 170 })
     canvas.add(img)
 
-fab.Image.fromURL('./../data/eight_bar_solvespace_vrep_1.png', showImg)
+def seturl(e):
+    if document["part1"].value:
+        fab.Image.fromURL(document["part1"].value, showImg)
+    else:
+        fab.Image.fromURL('./../data/eight_bar_solvespace_vrep_1.png', showImg)
 
 canvas.add(rect, circle, triangle, text, line1, line2)
 text.set({ 'left': 100, 'top': 50 })
@@ -98,6 +104,7 @@ def draw():
     canvas.item(3).setAngle(curAngle+36)
 
 #set_interval(draw, 100)
+document['button'].bind('click',seturl)
 &lt;/script&gt;
 
 &lt;p&gt;&lt;a href="http://fabricjs.com/fabric-intro-part-2"&gt;http://fabricjs.com/fabric-intro-part-2&lt;/a&gt;&lt;/p&gt;</summary><category term="Brython"></category><category term="fabric"></category></entry><entry><title>網際正齒輪組傳動繪圖</title><link href="./brython-spur-gears.html" rel="alternate"></link><published>2017-05-11T12:00:00+08:00</published><updated>2017-05-11T12:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-05-11:./brython-spur-gears.html</id><summary type="html">&lt;p&gt;利用 &lt;a href="https://github.com/brython-dev/brython/releases/tag/3.3.1"&gt;Brython 3.3.1&lt;/a&gt; 執行 3 個正齒輪傳動繪圖.&lt;/p&gt;

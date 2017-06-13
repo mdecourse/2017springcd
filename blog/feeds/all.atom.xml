@@ -25,7 +25,23 @@
 &lt;li&gt;
 &lt;p&gt;各組以協同方式整合各組組員所完成的倉儲, 網誌與操作影片後, 以學號名稱當作子目錄, 其中放入各組員上述各題所完成的操作影片後, 上傳到各組在系上的 Fossil SCM 倉儲, 並設法用各組的 Github Pages 進行分組簡報.&lt;/p&gt;
 &lt;/li&gt;
-&lt;/ol&gt;</summary><category term="solvespace"></category><category term="v-rep"></category><category term="w17"></category></entry><entry><title>Fabric.js 範例</title><link href="./brython-fabric-canvas.html" rel="alternate"></link><published>2017-05-30T12:00:00+08:00</published><updated>2017-05-30T12:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-05-30:./brython-fabric-canvas.html</id><summary type="html">&lt;p&gt;結合 Brython 與 Fabric.js 繪圖.&lt;/p&gt;
+&lt;/ol&gt;
+&lt;p&gt;參考資料: &lt;/p&gt;
+&lt;p&gt;&lt;img src="./../data/final/passive_walker1.png" width="600" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="./../data/final/passive_walker2.png" width="600" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="./../data/final/TheSimplestWalkingModelStabilityComplexity_and_Scaling.pdf"&gt;TheSimplestWalkingModelStabilityComplexity_and_Scaling.pdf&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="./../data/final/Actuating_a_Simple_3D_Passive_Dynamic_Walker.pdf"&gt;Actuating_a_Simple_3D_Passive_Dynamic_Walker.pdf&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="./../data/final/DESIGN_OF_PASSIVE_DYNAMIC_WALKING_ROBOTS.pdf"&gt;DESIGN_OF_PASSIVE_DYNAMIC_WALKING_ROBOTS.pdf&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="./../data/final/Adding _an_Upper_Body_to_Passive_Dynamic_Walking.pdf"&gt;Adding _an_Upper_Body_to_Passive_Dynamic_Walking.pdf&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="./../data/final/Learning_to_Walk_in_20_Minutes.pdf"&gt;Learning_to_Walk_in_20_Minutes.pdf&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="./../data/A_Three-Dimensional_walker.pdf"&gt;A_Three-Dimensional_walker.pdf&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="./../data/final/Underactuated_Robotics.pdf"&gt;Underactuated_Robotics.pdf&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="./../data/final/Design_Construction_and_Experiments_compass_gait_robot.pdf"&gt;Design_Construction_and_Experiments_compass_gait_robot.pdf&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="./../data/final/Compass-Like Biped Robot Part I  Stability and.pdf"&gt;Compass-Like Biped Robot Part I  Stability and.pdf&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="./../data/final/HEXAPOD_robot.pdf"&gt;HEXAPOD_robot.pdf&lt;/a&gt;&lt;/p&gt;
+&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/N64KOQkbyiI" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;p&gt;&lt;a href="http://www.forum.coppeliarobotics.com/viewtopic.php?f=9&amp;t=1137"&gt;http://www.forum.coppeliarobotics.com/viewtopic.php?f=9&amp;amp;t=1137&lt;/a&gt;&lt;/p&gt;</summary><category term="solvespace"></category><category term="v-rep"></category><category term="w17"></category></entry><entry><title>Fabric.js 範例</title><link href="./brython-fabric-canvas.html" rel="alternate"></link><published>2017-05-30T12:00:00+08:00</published><updated>2017-05-30T12:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-05-30:./brython-fabric-canvas.html</id><summary type="html">&lt;p&gt;結合 Brython 與 Fabric.js 繪圖.&lt;/p&gt;
 
 
 &lt;p&gt;&lt;a href="http://fabricjs.com/fabric-intro-part-1"&gt;http://fabricjs.com/fabric-intro-part-1&lt;/a&gt;&lt;/p&gt;

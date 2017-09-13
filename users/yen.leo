@@ -18,7 +18,7 @@
 <v t="yen.20170108171733.2"><vh>@button pelican-blog</vh></v>
 <v t="yen.20170108171733.3"><vh>@edit README.md</vh></v>
 <v t="yen.20170108171733.4"><vh>@edit .gitignore</vh></v>
-<v t="yen.20170108171733.5" a="E"><vh>Pelican 設定</vh>
+<v t="yen.20170108171733.5"><vh>Pelican 設定</vh>
 <v t="yen.20170108171733.6"><vh>@edit local_publishconf.py</vh></v>
 <v t="yen.20170108171733.7"><vh>@edit pelicanconf.py</vh></v>
 </v>
@@ -56,8 +56,8 @@
 </v>
 </v>
 <v t="yen.20170508001342.1"><vh>@path data</vh>
-<v t="yen.20170508001351.1" a="E"><vh>@path py</vh>
-<v t="yen.20170508001359.1" a="E"><vh>@clean plt.py</vh>
+<v t="yen.20170508001351.1"><vh>@path py</vh>
+<v t="yen.20170508001359.1"><vh>@clean plt.py</vh>
 <v t="yen.20170508011028.1"><vh>Declarations</vh></v>
 <v t="yen.20170508011028.2"><vh>class Coord</vh>
 <v t="yen.20170508011028.3"><vh>__init__</vh></v>
@@ -110,11 +110,11 @@
 <v t="yen.20170508011028.46"><vh>setPPSS</vh></v>
 </v>
 </v>
-<v t="yen.20170508010952.1" a="E"><vh>@clean fourbar.py</vh>
+<v t="yen.20170508010952.1"><vh>@clean fourbar.py</vh>
 <v t="yen.20170508011005.1"><vh>Declarations</vh></v>
 <v t="yen.20170508011005.2"><vh>plap</vh></v>
 <v t="yen.20170508011005.3"><vh>pllp</vh></v>
-<v t="yen.20170508011005.4" a="E"><vh>class fourbar</vh>
+<v t="yen.20170508011005.4"><vh>class fourbar</vh>
 <v t="yen.20170508011005.5"><vh>__init__</vh></v>
 <v t="yen.20170508011005.6"><vh>cx</vh></v>
 <v t="yen.20170508011005.7"><vh>cy</vh></v>
@@ -165,7 +165,7 @@
 </v>
 <v t="yen.20170108171930.1"><vh>@button https server</vh></v>
 <v t="yen.20170108171939.1"><vh>@button ipv6 https server</vh></v>
-<v t="yen.20170120212350.1" a="E"><vh>programs</vh>
+<v t="yen.20170120212350.1"><vh>programs</vh>
 <v t="leo.20170503093805.1"><vh>W11</vh>
 <v t="leo.20170503093813.1"><vh>spur</vh></v>
 <v t="leo.20170503094123.1"><vh>Cango javascript</vh></v>
@@ -192,7 +192,7 @@
 <v t="leo.20170426085944.1"><vh>@edit fourbar.py</vh></v>
 </v>
 </v>
-<v t="yen.20170210153828.1" a="E"><vh>v-rep rempte api</vh>
+<v t="yen.20170210153828.1"><vh>v-rep rempte api</vh>
 <v t="yen.20170210202015.1"><vh>Python remote API</vh></v>
 <v t="yen.20170210170248.1"><vh>line tracer</vh></v>
 <v t="yen.20170210222733.1"><vh>line tracer2</vh></v>
@@ -209,7 +209,7 @@
 </v>
 </v>
 <v t="yen.20170209024032.1"><vh>reference</vh></v>
-<v t="leo.20170503103809.1" a="E"><vh>kmol2018</vh>
+<v t="leo.20170503103809.1"><vh>kmol2018</vh>
 <v t="leo.20170504105248.1"><vh>問題</vh></v>
 <v t="yen.20170508020303.1"><vh>draw</vh></v>
 </v>
